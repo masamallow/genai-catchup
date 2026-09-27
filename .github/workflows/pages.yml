@@ -39,7 +39,8 @@ jobs:
           node-version: 24
           cache: pnpm
 
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.2.0
+        # setup-uv publishes no moving major tags since v8, so name the full version
         with:
           enable-cache: true
 
