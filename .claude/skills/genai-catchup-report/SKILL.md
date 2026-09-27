@@ -36,6 +36,8 @@ Follow [AGENTS.md](../../../AGENTS.md) for scope, languages, citations, section 
     - Drop items outside the scope in AGENTS.md.
     - Group items that describe the same event into one theme.
       Name each theme as one concrete sentence, and check that the anchoring event happened inside the window; an in-window recap of an older event only qualifies if the in-window development stands on its own.
+    - The window covers the previous run's date again, so compare the themes with `themes` in the front matter of the previous note.
+      An event selected there is not selected again; a new development on it becomes a theme with the continuation section of step 5.
     - Score impact and potential (0–2 each) as defined in AGENTS.md.
       A single item from a reliability-B practitioner source gets one WebSearch to check momentum before it is scored.
     - Sort by the sum, then by primary-source presence, then by the number of independent sources.

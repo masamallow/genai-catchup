@@ -16,8 +16,10 @@ Usage:
 The window starts at the date of the previous run, taken from the newest note under
 content/*/research/ in any language (a run every Tuesday, Thursday and Saturday
 therefore collects "since the last run"). `--since` or `--days` override it; with no notes at all the run is a
-bootstrap and covers the last 14 days. Items already recorded in state/seen.json
-are dropped, so overlapping windows do not repeat items.
+bootstrap and covers the last 14 days. A window always starts at local midnight of a
+date, never at a time of day: the previous run's date is fetched again in full, whatever
+time that run fetched, so no item falls between two windows. Items already recorded in
+state/seen.json are dropped, and the agent judges the rest against the previous note.
 
 `fetch` never writes to state/: it only produces work/candidates.json and
 work/candidates.md. Run `mark-seen` after the research note is written, so a
@@ -33,7 +35,7 @@ import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -126,17 +128,23 @@ def previous_run_date() -> date | None:
     return max(dates) if dates else None
 
 
+def local_midnight(day: date) -> datetime:
+    """Start of `day` in the local timezone, the one `date +%F` uses to name the notes."""
+    return datetime.combine(day, time.min).astimezone()
+
+
 def resolve_window(args: argparse.Namespace, now: datetime) -> tuple[datetime, str]:
-    """Return the window start and a short explanation of how it was chosen."""
+    """Return the window start (local midnight of a date) and how it was chosen."""
+    today = now.astimezone().date()
     if args.since:
         day = date.fromisoformat(args.since)
-        return datetime(day.year, day.month, day.day, tzinfo=timezone.utc), f"--since {day}"
+        return local_midnight(day), f"--since {day}"
     if args.days:
-        return now - timedelta(days=args.days), f"--days {args.days}"
+        return local_midnight(today - timedelta(days=args.days)), f"--days {args.days}"
     prev = previous_run_date()
     if prev:
-        return datetime(prev.year, prev.month, prev.day, tzinfo=timezone.utc), f"previous run {prev}"
-    return now - timedelta(days=BOOTSTRAP_DAYS), f"bootstrap, no previous note: {BOOTSTRAP_DAYS} days"
+        return local_midnight(prev), f"previous run {prev}, whole day included"
+    return local_midnight(today - timedelta(days=BOOTSTRAP_DAYS)), f"bootstrap, no previous note: {BOOTSTRAP_DAYS} days"
 
 
 def load_seen() -> dict:
@@ -177,7 +185,8 @@ def fetch_one(src: dict, client: httpx.Client, since: datetime, seen: dict):
             continue
         items.append(Item(
             source_id=src["id"], title=title, link=link,
-            published=published.isoformat(timespec="minutes") if published else None,
+            # local time, so the dates in candidates.md are on the same calendar as the window
+            published=published.astimezone().isoformat(timespec="minutes") if published else None,
             summary=summary, tier=int(src["tier"]), kind=src["kind"],
             reliability=src["reliability"], track=src["track"], role=src.get("role", ""),
         ))
@@ -294,8 +303,8 @@ def main(argv: list[str] | None = None) -> int:
 
     fetch = sub.add_parser("fetch", help="fetch feeds and write work/candidates.{json,md}")
     window = fetch.add_mutually_exclusive_group()
-    window.add_argument("--since", metavar="YYYY-MM-DD", help="window start (default: date of the previous research note)")
-    window.add_argument("--days", type=int, help="look back N days instead of using the previous note")
+    window.add_argument("--since", metavar="YYYY-MM-DD", help="first day of the window (default: date of the previous research note)")
+    window.add_argument("--days", type=int, help="start the window N days before today instead of at the previous note")
     fetch.add_argument("--out", default="work", help="output directory relative to the repo root")
     fetch.add_argument("--include-disabled", action="store_true", help="also fetch sources with enabled: false")
     fetch.add_argument("--source", action="append", metavar="ID", help="fetch only these source ids (repeatable)")

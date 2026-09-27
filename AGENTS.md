@@ -82,6 +82,9 @@ Report (`templates/<lang>/report.md`):
 ## Theme rules
 
 - The window runs from the previous run's date (the newest note under `content/*/research/`) to now; the fetcher derives it and prints it.
+    - It starts at local midnight of that date, so the previous run's date is fetched again in full whatever time that run fetched: seeing an item twice is better than missing it.
+    - Items the previous run already offered are dropped by `state/seen.json`.
+      An event the previous note already selected is not selected again; only a new development on it can anchor a theme.
 - A theme is one concrete event: a release, an announcement, a paper, an incident, a decision, or a new tool that practitioners have started to adopt.
   It is described in one sentence, never as a bare keyword such as "MCP" or "agents".
 - The event that anchors a theme must have happened inside the window, and the candidates-and-selection section records that anchor date for every selected theme.
