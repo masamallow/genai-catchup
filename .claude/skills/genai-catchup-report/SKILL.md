@@ -77,7 +77,7 @@ Follow [AGENTS.md](../../../AGENTS.md) for scope, languages, citations, section 
       The lint's R3 rule keeps theme slides inside the frame; if it complains, cut words rather than sections.
 9. Mark candidates as seen: `mise run mark-seen`.
 10. Commit and stop.
-    - `git add content state && git commit -m "docs: add catch-up report <date>"`.
+    - `git add content state && git commit -m "docs(content): add <date> catch-up"`.
     - Do not push.
 11. Print the completion message: the selected themes with their impact and potential scores, the dropped candidates, the file paths per language, failed sources, and any suggested change to `sources.yaml` (new source found during research, or a source that produced only noise).
 
