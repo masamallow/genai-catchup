@@ -75,11 +75,15 @@ class Item:
 
 
 def normalize_url(url: str) -> str:
-    """Drop tracking parameters and fragments so the same article dedupes across feeds."""
+    """Drop tracking parameters so the same article dedupes across feeds.
+
+    The fragment is kept: changelog and release-note feeds link every entry as
+    `page#entry`, and dropping it would mark all future entries of the page as seen.
+    """
     parts = urlsplit(url.strip())
     query = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if k.lower() not in TRACKING_PARAMS]
     path = parts.path.rstrip("/") or "/"
-    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, urlencode(query), ""))
+    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, urlencode(query), parts.fragment))
 
 
 def strip_html(text: str) -> str:
