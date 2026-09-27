@@ -15,8 +15,8 @@ Usage:
 
 The window starts at the date of the previous run, taken from the newest note under
 content/*/research/ in any language (a run every Tuesday, Thursday and Saturday
-therefore collects "since the last run"). `--since` or `--days` override it; with no notes at all the run is a
-bootstrap and covers the last 14 days. A window always starts at local midnight of a
+therefore collects "since the last run"). `--since` or `--days` override it, and are
+required when there is no note. A window always starts at local midnight of a
 date, never at a time of day: the previous run's date is fetched again in full, whatever
 time that run fetched, so no item falls between two windows. Items already recorded in
 state/seen.json are dropped, and the agent judges the rest against the previous note.
@@ -47,7 +47,6 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES_FILE = ROOT / "sources.yaml"
 SEEN_FILE = ROOT / "state" / "seen.json"
 CONTENT_DIR = ROOT / "content"
-BOOTSTRAP_DAYS = 14  # first run without any note: cover the two weeks the reader has not been told about
 NOTE_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 USER_AGENT = "genai-catchup/1.0 (personal feed reader)"
 ACCEPT = "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"
@@ -146,9 +145,9 @@ def resolve_window(args: argparse.Namespace, now: datetime) -> tuple[datetime, s
     if args.days:
         return local_midnight(today - timedelta(days=args.days)), f"--days {args.days}"
     prev = previous_run_date()
-    if prev:
-        return local_midnight(prev), f"previous run {prev}, whole day included"
-    return local_midnight(today - timedelta(days=BOOTSTRAP_DAYS)), f"bootstrap, no previous note: {BOOTSTRAP_DAYS} days"
+    if prev is None:
+        raise SystemExit("no research note under content/*/research/: give the window with --since or --days")
+    return local_midnight(prev), f"previous run {prev}, whole day included"
 
 
 def load_seen() -> dict:
