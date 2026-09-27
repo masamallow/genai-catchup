@@ -49,7 +49,7 @@ TEMPLATES = ROOT / "templates"
 # Strings of the site chrome come from templates/<lang>/site.yaml; these are the fallbacks.
 DEFAULT_UI = {
     "name": "",
-    "tagline": "Generative AI engineering and AI coding tools, three times a week. Newest first.",
+    "tagline": "A regular watch on generative AI engineering and AI coding tools. Newest first.",
     "note": "📝 Research note",
     "slides": "🖥️ Slides",
     "index": "← Index",
