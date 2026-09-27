@@ -28,7 +28,7 @@ Follow [AGENTS.md](../../../AGENTS.md) for scope, languages, citations, section 
     - `git status --short` must be clean apart from `work/`; if not, stop and report.
 2. Fetch candidates.
     - Run `mise run fetch`.
-      The window starts at the date of the newest note under `content/*/research/` (the previous run) and the header of `work/candidates.md` states it; use `--since` or `--days` only when asked to.
+      The window starts at the previous scheduled run from `schedule.yaml`, or at the newest note under `content/*/research/` when that is older, and the header of `work/candidates.md` states it; use `--since` or `--days` only when asked to.
     - Read `work/candidates.md` in full.
       Note the window and the failed sources for the note's header.
     - If there are no new items, print `no candidates` and stop without writing files.
@@ -87,5 +87,5 @@ Follow [AGENTS.md](../../../AGENTS.md) for scope, languages, citations, section 
 
 - A source that failed to fetch is listed in the note header and otherwise ignored.
 - If WebFetch fails on a primary source, try once more; if it still fails, cite the search result and mark the facts unverified.
-- If the run happens as a late catch-up (the machine was asleep), still use the actual current date and widen `--days` to cover the gap.
+- If the run happens late (the machine was asleep), still use the actual current date; the window already reaches back to the previous run, so do not pass `--days`.
 - If fewer than 3 themes have real substance, write the report with the themes that do; never pad with weak items.

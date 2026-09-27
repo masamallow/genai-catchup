@@ -2,7 +2,7 @@
 
 A personal routine for staying current with generative AI: LLM application engineering and AI coding tools.
 
-Three times a week a scheduled Claude Code task fetches a curated set of feeds, keeps the few events that matter, deepens each one with several sources, and writes two files per language:
+On the days set in [schedule.yaml](./schedule.yaml), a scheduled Claude Code task fetches a curated set of feeds, keeps the few events that matter, deepens each one with several sources, and writes two files per language:
 
 - `content/<lang>/research/YYYY-MM-DD.md` — the source of truth: a dossier per theme (every source read, with its numbers and wording), notes, and ideas for hands-on practice.
 - `content/<lang>/reports/YYYY-MM-DD.md` — a Marp slide deck: one summary slide, then one slide per theme (key points, perspectives and debates, technical details, a diagram when it helps; practice ideas stay in the note).
@@ -16,6 +16,7 @@ Only Markdown is committed; the site is a build artifact.
 ```mermaid
 flowchart LR
     S[sources.yaml] --> F["fetch_feeds.py<br/>(uv run)"]
+    SCH[schedule.yaml] --> F
     F --> C["work/candidates.md<br/>(ignored)"]
     C --> A["Claude Code<br/>skill: genai-catchup-report"]
     W[(WebSearch / WebFetch)] --> A
@@ -27,7 +28,7 @@ flowchart LR
     CI --> PAGES["GitHub Pages<br/>dist/LANG/"]
 ```
 
-- Feeds are the discovery layer: deterministic, deduplicated, capped per source, and windowed from the previous run (the newest note under `content/*/research/`).
+- Feeds are the discovery layer: deterministic, deduplicated, capped per source, and windowed from the previous scheduled run (or from the newest note under `content/*/research/` when a scheduled run left none).
 - Web search is the deepening layer: used only for the selected themes, to add independent perspectives.
 - The human reads the report, decides whether to publish (`git push`), and picks up the ideas in their own notes.
 
@@ -41,6 +42,7 @@ flowchart LR
 ├── package.json              # @marp-team/marp-cli, @marp-team/marp-core 5, beautiful-mermaid (pnpm)
 ├── marp.config.mjs           # Marp Core 5 engine + Mermaid plugin, html on, themeSet ./themes
 ├── sources.yaml              # curated feeds with tier / reliability / track
+├── schedule.yaml             # canonical schedule (cron): the scheduled task and the fetch window follow it
 ├── scripts/
 │   ├── fetch_feeds.py        # feeds -> work/candidates.{json,md}; mark-seen -> state/seen.json
 │   ├── lint_md.py            # semantic line break and slide density rules

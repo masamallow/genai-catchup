@@ -1,0 +1,5 @@
+# Canonical schedule of the catch-up routine (local time).
+# The Desktop scheduled task is created from this cron (docs/scheduled-task.md), and
+# scripts/fetch_feeds.py derives the feed window from its day-of-week field.
+# Only weekly schedules are supported: day of month and month stay "*".
+cron: "0 10 * * 2,4,6"

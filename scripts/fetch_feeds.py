@@ -13,13 +13,15 @@ Usage:
     uv run scripts/fetch_feeds.py fetch [--since YYYY-MM-DD | --days N] [--out work] [--include-disabled] [--source ID ...]
     uv run scripts/fetch_feeds.py mark-seen [--candidates work/candidates.json]
 
-The window starts at the date of the previous run, taken from the newest note under
-content/*/research/ in any language (a run every Tuesday, Thursday and Saturday
-therefore collects "since the last run"). `--since` or `--days` override it, and are
-required when there is no note. A window always starts at local midnight of a
-date, never at a time of day: the previous run's date is fetched again in full, whatever
-time that run fetched, so no item falls between two windows. Items already recorded in
-state/seen.json are dropped, and the agent judges the rest against the previous note.
+The window starts at the previous scheduled run. The cron in schedule.yaml, the
+canonical schedule, gives the scheduled days; the latest one on or before today is the
+current run, and the window starts at the one before it. When the newest note under
+content/*/research/ is older than that day, a scheduled run left no note, and the
+window starts at the note's date instead. `--since` or `--days` override both.
+A window always starts at local midnight of a date, never at a time of day: the
+previous run's day is fetched again in full, whatever time that run fetched, so no item
+falls between two windows. Items already recorded in state/seen.json are dropped, and
+the agent judges the rest against the previous note.
 
 `fetch` never writes to state/: it only produces work/candidates.json and
 work/candidates.md. Run `mark-seen` after the research note is written, so a
@@ -45,9 +47,11 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES_FILE = ROOT / "sources.yaml"
+SCHEDULE_FILE = ROOT / "schedule.yaml"
 SEEN_FILE = ROOT / "state" / "seen.json"
 CONTENT_DIR = ROOT / "content"
 NOTE_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
+CRON_DAY_NAMES = {"sun": 0, "mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6}
 USER_AGENT = "genai-catchup/1.0 (personal feed reader)"
 ACCEPT = "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"
 TRACKING_PARAMS = {
@@ -131,6 +135,41 @@ def previous_run_date() -> date | None:
     return max(dates) if dates else None
 
 
+def cron_day(token: str) -> int:
+    """One cron day of week: 0 to 7 (0 and 7 are Sunday) or a three-letter name."""
+    number = CRON_DAY_NAMES.get(token.lower()) if token.isalpha() else int(token) if token.isdigit() else None
+    if number is None or not 0 <= number <= 7:
+        raise SystemExit(f"{SCHEDULE_FILE.name}: bad day of week {token!r}")
+    return number
+
+
+def scheduled_weekdays() -> set[int]:
+    """Weekdays (Monday is 0) of the cron in schedule.yaml."""
+    cron = str(yaml.safe_load(SCHEDULE_FILE.read_text(encoding="utf-8"))["cron"])
+    fields = cron.split()
+    if len(fields) != 5 or fields[2] != "*" or fields[3] != "*":
+        raise SystemExit(f"{SCHEDULE_FILE.name}: expected a weekly cron, with day of month and month set to '*', got {cron!r}")
+    weekdays: set[int] = set()
+    for part in fields[4].split(","):
+        base, _, step = part.partition("/")
+        if base == "*":
+            first, last = 0, 6
+        elif "-" in base:
+            first, last = (cron_day(t) for t in base.split("-", 1))
+        else:
+            first = last = cron_day(base)
+        weekdays.update((d - 1) % 7 for d in range(first, last + 1, int(step or 1)))
+    if not weekdays:
+        raise SystemExit(f"{SCHEDULE_FILE.name}: no day of week in {cron!r}")
+    return weekdays
+
+
+def previous_scheduled_day(today: date, weekdays: set[int]) -> date:
+    """The scheduled day before the current run, the latest scheduled day on or before today."""
+    current = next(today - timedelta(days=n) for n in range(7) if (today - timedelta(days=n)).weekday() in weekdays)
+    return next(current - timedelta(days=n) for n in range(1, 8) if (current - timedelta(days=n)).weekday() in weekdays)
+
+
 def local_midnight(day: date) -> datetime:
     """Start of `day` in the local timezone, the one `date +%F` uses to name the notes."""
     return datetime.combine(day, time.min).astimezone()
@@ -144,10 +183,11 @@ def resolve_window(args: argparse.Namespace, now: datetime) -> tuple[datetime, s
         return local_midnight(day), f"--since {day}"
     if args.days:
         return local_midnight(today - timedelta(days=args.days)), f"--days {args.days}"
+    scheduled = previous_scheduled_day(today, scheduled_weekdays())
     prev = previous_run_date()
-    if prev is None:
-        raise SystemExit("no research note under content/*/research/: give the window with --since or --days")
-    return local_midnight(prev), f"previous run {prev}, whole day included"
+    if prev is not None and prev < scheduled:
+        return local_midnight(prev), f"newest note {prev}, older than the previous scheduled run {scheduled:%a %Y-%m-%d}"
+    return local_midnight(scheduled), f"previous scheduled run {scheduled:%a %Y-%m-%d} ({SCHEDULE_FILE.name})"
 
 
 def load_seen() -> dict:

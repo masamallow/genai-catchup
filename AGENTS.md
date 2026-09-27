@@ -22,7 +22,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
    A prose line that continues on the next prose line ends with two spaces.
 5. Commit, do not push.
    Publishing to the site is a human decision (`mise run publish`).
-6. During a routine run do not edit `sources.yaml`, `themes/`, `scripts/` or `templates/`.
+6. During a routine run do not edit `sources.yaml`, `schedule.yaml`, `themes/`, `scripts/` or `templates/`.
    Put suggested changes in the completion summary instead.
 
 ## Scope
@@ -43,6 +43,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 | `state/seen.json` | script | URLs already offered as candidates (180-day TTL) |
 | `work/` | script | Per-run scratch, ignored by git |
 | `sources.yaml` | human | Curated feeds. The agent proposes edits, the human applies them |
+| `schedule.yaml` | human | The canonical schedule (cron): the Desktop scheduled task and the fetch window follow it |
 | `dist/` | build | Generated site, one tree per language under `dist/<lang>/`, ignored by git, deployed by GitHub Actions |
 
 ## Languages and editions
@@ -81,8 +82,8 @@ Report (`templates/<lang>/report.md`):
 
 ## Theme rules
 
-- The window runs from the previous run's date (the newest note under `content/*/research/`) to now; the fetcher derives it and prints it.
-    - It starts at local midnight of that date, so the previous run's date is fetched again in full whatever time that run fetched: seeing an item twice is better than missing it.
+- The window runs from the previous scheduled run to now; the fetcher derives it from [schedule.yaml](./schedule.yaml) and prints it.
+    - It starts at local midnight of the scheduled day before the latest one on or before today, or of the newest note's date under `content/*/research/` when that is older because a scheduled run left no note: the previous run's day is fetched again in full, and seeing an item twice is better than missing it.
     - Items the previous run already offered are dropped by `state/seen.json`.
       An event the previous note already selected is not selected again; only a new development on it can anchor a theme.
 - A theme is one concrete event: a release, an announcement, a paper, an incident, a decision, or a new tool that practitioners have started to adopt.
