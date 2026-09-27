@@ -1,0 +1,12 @@
+# build output (deployed by GitHub Actions, never committed)
+dist/
+
+# per-run scratch (candidates from the feed fetcher)
+work/
+
+node_modules/
+.venv/
+__pycache__/
+.DS_Store
+.idea/
+.vscode/

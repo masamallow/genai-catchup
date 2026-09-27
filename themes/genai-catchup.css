@@ -1,0 +1,295 @@
+/*
+ * @theme genai-catchup
+ * @auto-scaling fittingHeader,code
+ * @size 16:9 1280px 720px
+ *
+ * White, quiet report theme for the AI catch-up slides.
+ * Slide classes: `summary` (one-page overview grid) and `theme` (one topic, two columns).
+ */
+@import 'default';
+
+:root {
+  --ink: #1f2933;
+  --muted: #5f6b7a;
+  --line: #e5e9ef;
+  --accent: #2f6fed;
+  --accent-soft: #eaf1ff;
+  --card: #f7f9fc;
+  --good: #1b7f4b;
+  --good-soft: #e8f6ee;
+  --warn: #9a5b00;
+  --warn-soft: #fff4e0;
+}
+
+section {
+  width: 1280px;
+  height: 720px;
+  padding: 52px 64px 64px;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 21px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  /* the default theme centers block content with align-content; reports read top-down */
+  align-content: start;
+  justify-content: flex-start;
+}
+
+section h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 12px 0 4px;
+}
+
+section h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+section p {
+  margin: 0 0 8px;
+}
+
+section a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+section ul,
+section ol {
+  margin: 0 0 6px;
+  padding-left: 1.25em;
+}
+
+section li {
+  margin: 1px 0;
+}
+
+section li > ul,
+section li > ol {
+  margin: 0;
+}
+
+section code {
+  font-size: 0.88em;
+  background: var(--card);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+section table {
+  font-size: 17px;
+  margin: 4px 0 8px;
+}
+
+section th,
+section td {
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+}
+
+section th {
+  background: var(--card);
+}
+
+section blockquote {
+  border-left: 4px solid var(--accent-soft);
+  color: var(--muted);
+  padding: 2px 14px;
+  margin: 4px 0 8px;
+}
+
+section img.emoji {
+  height: 1em;
+  width: 1em;
+  vertical-align: -0.15em;
+}
+
+section header,
+section footer {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  padding: 0;
+}
+
+section header {
+  top: 20px;
+}
+
+section footer {
+  bottom: 20px;
+}
+
+section::after {
+  position: absolute;
+  right: 64px;
+  bottom: 20px;
+  font-size: 14px;
+  color: var(--muted);
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  padding: 0;
+}
+
+/* ---- tags ------------------------------------------------------------- */
+
+.tag {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-right: 6px;
+}
+
+.tag.high {
+  background: var(--good-soft);
+  color: var(--good);
+}
+
+.tag.mid {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* ---- summary slide ---------------------------------------------------- */
+
+section.summary h1 {
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+
+section.summary .date {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 22px;
+  margin-left: 12px;
+}
+
+section.summary .lead {
+  color: var(--muted);
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+
+section.summary .grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+
+section.summary .grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+section.summary .card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+section.summary .card h3 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+section.summary .card p {
+  margin: 0;
+}
+
+section.summary .card .tags {
+  margin-top: 8px;
+}
+
+/* ---- theme slide ------------------------------------------------------ */
+
+section.theme {
+  font-size: 17px;
+  line-height: 1.42;
+  padding-bottom: 92px; /* keeps the columns clear of the sources line */
+}
+
+section.theme h1 {
+  font-size: 28px;
+  margin-bottom: 2px;
+}
+
+section.theme .lede {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+section.theme .cols {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0 32px;
+}
+
+section.theme .cols h2 {
+  font-size: 16px;
+  margin: 6px 0 2px;
+}
+
+section.theme .cols h2:first-child {
+  margin-top: 0;
+}
+
+section.theme .cols ul,
+section.theme .cols ol {
+  margin: 0 0 4px;
+}
+
+section.theme .cols li {
+  margin: 0;
+}
+
+/* diagrams rendered from ```mermaid fences (inline SVG) */
+section.theme .cols p:has(> svg) {
+  margin: 2px 0 8px;
+  text-align: center;
+}
+
+section.theme .cols svg {
+  max-width: 100%;
+  height: auto;
+  max-height: 330px;
+}
+
+section.theme .sources {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 40px;
+  margin: 0;
+  padding-top: 5px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+section.theme .sources a {
+  color: var(--muted);
+  border-bottom: 1px dotted var(--line);
+}

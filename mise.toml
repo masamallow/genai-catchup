@@ -1,0 +1,35 @@
+# Tool versions and task runner (https://mise.jdx.dev/)
+
+[tools]
+node = "24"
+pnpm = "11"
+uv = "latest"
+
+[tasks.fetch]
+description = "Fetch curated feeds published since the previous run into work/candidates.{json,md}"
+run = "uv run scripts/fetch_feeds.py fetch"
+
+[tasks.mark-seen]
+description = "Record the current candidates as seen (run after the research note is written)"
+run = "uv run scripts/fetch_feeds.py mark-seen"
+
+[tasks.lint]
+description = "Check the Markdown writing rules in content/ and templates/"
+run = "uv run scripts/lint_md.py content templates"
+
+[tasks.build]
+description = "Build the static site into dist/ (one tree per language)"
+run = "uv run scripts/build_site.py"
+
+[tasks.serve]
+description = "Serve dist/ at http://localhost:8000"
+depends = ["build"]
+run = "uv run python -m http.server -d dist 8000"
+
+[tasks.stats]
+description = "Show how often each source was used in research notes"
+run = "uv run scripts/source_stats.py"
+
+[tasks.publish]
+description = "Push main to origin; GitHub Actions then deploys the site"
+run = "git push origin main"

@@ -1,0 +1,16 @@
+{
+  "name": "genai-catchup",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Personal AI catch-up routine: curated feeds -> research notes -> Marp report -> GitHub Pages",
+  "packageManager": "pnpm@11.20.0",
+  "scripts": {
+    "build": "uv run scripts/build_site.py",
+    "marp:watch": "marp --no-stdin --input-dir reports -o dist/reports -w"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.5.1",
+    "@marp-team/marp-core": "^5.0.2",
+    "beautiful-mermaid": "^1.1.3"
+  }
+}

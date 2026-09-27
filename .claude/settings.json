@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mise run *)",
+      "Bash(uv run *)",
+      "Bash(pnpm exec marp *)",
+      "Bash(pnpm install *)",
+      "Bash(date *)",
+      "Bash(ls *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "WebFetch",
+      "WebSearch"
+    ]
+  }
+}

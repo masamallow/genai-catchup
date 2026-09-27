@@ -1,0 +1,70 @@
+---
+marp: true
+theme: genai-catchup
+lang: ja
+paginate: true
+title: "GenAI Catch-up Report YYYY-MM-DD"
+description: "テーマ 1 / テーマ 2 / テーマ 3"
+footer: "GenAI Catch-up Report · YYYY-MM-DD"
+---
+
+<!-- _class: summary -->
+
+# 🗞️ GenAI Catch-up Report <span class="date">YYYY-MM-DD</span>
+
+<p class="lead">YYYY-MM-DD 〜 MM-DD の K テーマ (候補 N 件から選定)。詳細は <a href="../research/YYYY-MM-DD.md">調査ノート</a>。</p>
+
+<div class="grid">
+<article class="card">
+<h3>1️⃣ 🧭 テーマ 1 の見出し</h3>
+<p>1 行の要約。</p>
+<p class="tags"><span class="tag high">影響 高</span><span class="tag high">将来性 高</span><span class="tag">生成AIエンジニアリング</span></p>
+</article>
+<article class="card">
+<h3>2️⃣ 🛠️ テーマ 2 の見出し</h3>
+<p>1 行の要約。</p>
+<p class="tags"><span class="tag high">影響 高</span><span class="tag mid">将来性 中</span><span class="tag">コーディングAI</span></p>
+</article>
+</div>
+
+---
+
+<!-- _class: theme -->
+
+# 1️⃣ 🧭 テーマ 1 の見出し
+
+<p class="lede">1 行の要約。</p>
+
+<div class="cols">
+<div>
+
+## 要点
+
+- 要点 1。
+- 要点 2。
+
+## 見方と論点
+
+- 一次情報の枠組み: 発行元の狙い。
+- 分析: 実務家の評価と差分。
+- 制約: 未確認の点や preview の制限。
+
+</div>
+<div>
+
+```mermaid
+flowchart TB
+    A[入力] --> B[仕組み]
+    B --> C[出力]
+```
+
+## 技術要素
+
+- 識別子: ...
+- プラットフォーム・サービス: ...
+- 仕様・プロトコル: ...
+
+</div>
+</div>
+
+<p class="sources">出典: <a href="URL">発行元 A</a> · <a href="URL">発行元 B</a> · 前回: <a href="./YYYY-MM-DD.md#3">MM-DD #3</a></p>
