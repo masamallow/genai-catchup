@@ -11,7 +11,12 @@
 #   reliability  A = primary source, B = reputable independent analysis, C = community / opinion (supplementary only)
 #   track        genai-eng | coding-ai | both
 #   role         changelog = releases and changes, read = human-written commentary, digest = aggregator
-#   filter.any   optional case-insensitive keywords; an item must match at least one (title + summary)
+#   filter.any   optional case-insensitive keywords; an item must match at least one (title + summary).
+#                A filter keeps a feed to the scope in AGENTS.md; it does not find what is new.
+#                Use category terms and long-lived names (platforms and tools the scope names,
+#                major model vendors and their models, a vendor's own products in its own feed),
+#                never a product added to catch one missed item.
+#                For when a feed stays unfiltered, see docs/sources-notes.md ("Keyword filters").
 #   max_items    optional per-source cap (default below)
 #   enabled      optional, default true. Tier 3 sources ship disabled; enable them one by one.
 
@@ -399,9 +404,10 @@ sources:
     role: read
     max_items: 5
 
-  # community momentum (reliability C: only supplement and evidence of discussion)
+  # community momentum and practitioner write-ups (reliability C: evidence of discussion or supplement,
+  # but a technical write-up they surface is the primary of its own topic, as AGENTS.md says)
   - id: zenn-trending
-    name: Zenn トレンド (filtered)
+    name: Zenn トレンド
     url: https://zenn.dev/
     feed: https://zenn.dev/feed
     tier: 2
@@ -410,9 +416,8 @@ sources:
     reliability: C
     track: both
     role: digest
-    max_items: 10
-    filter:
-      any: [LLM, 生成AI, エージェント, RAG, Claude, GPT, Gemini, Codex, Copilot, Cursor, MCP, Bedrock, Jev, 推論]
+    max_items: 20
+    note: Unfiltered on purpose; its posts name tools and techniques rather than categories, so the run judges their scope.
 
   - id: hatena-llm
     name: はてなブックマーク検索 (LLM, 30 users+)

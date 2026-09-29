@@ -36,9 +36,29 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 
 - Practitioner momentum (a tool everyone starts trying) shows up first on X, Zenn and Hacker News, not in vendor feeds.
   A first draft of the sample missed TypeSafe's Jev (launched 2026-09-15) for that reason: with a 4-day window the only feed item was one laiso post, hnrss was down, and X has no feed.
-- Mitigations in place: `zenn-trending`, `hatena-llm`, `hn-llm` (reliability C, evidence only), the LangChain blog enabled, and the momentum check in AGENTS.md before a single-source item is dropped.
+- Mitigations in place: the aggregators `zenn-trending`, `hatena-llm` and `hn-llm` (reliability C), the LangChain blog enabled, and the momentum check in [AGENTS.md](../AGENTS.md) before a single-source item is dropped.
+    - The aggregators also bring practitioner write-ups that can become topics of their own, so a filter that drops an in-scope post loses a topic, not just evidence (see [Keyword filters](#keyword-filters)).
 - Still uncovered: X itself.
   AINews summarises X daily, and the momentum check (one WebSearch) is the fallback.
+
+## Keyword filters
+
+- `filter.any` in [sources.yaml](../sources.yaml) keeps a feed to the scope in [AGENTS.md](../AGENTS.md); it does not find what is new.
+    - What is new and popular comes from the aggregators' own ranking (Zenn trending, Hatena Bookmark 30 users+, Hacker News 100 points+) and from the momentum check.
+- How a feed is narrowed depends on whether category terms or the vendor's own product names can describe what it should keep.
+
+| Feed | Narrowed by | Sources |
+| --- | --- | --- |
+| Category terms or the vendor's own product names describe what to keep | `filter.any` | `aws-whats-new`, `aws-jp-weekly-genai`, `openai-news`, `google-developers-blog`, `publickey` |
+| The site offers a search feed | A category term in the query (`LLM`) | `hatena-llm`, `hn-llm` |
+| Posts name tools and techniques rather than categories, and the feed is small | Nothing; the run drops what is out of scope ([SKILL.md](../.claude/skills/genai-catchup-report/SKILL.md) step 3) | `zenn-trending` (20 items) |
+
+- Keywords are category terms or long-lived names: platforms and tools the scope names, major model vendors and their models, or a vendor's own products in its own feed.
+    - Adding a vendor's new product to that vendor's feed is upkeep of a closed list.
+- Never add a product to catch one missed item.
+    - A list of names cannot know the next new one, and routine runs do not edit `sources.yaml`, so an added name outlives its topic.
+    - Fix the class of the miss instead: a category term that did not match, a missing source, or a feed that should not be filtered.
+- Keywords match as case-insensitive substrings of the title and the summary, so a short keyword such as `AI` also matches `available` or `email`.
 
 ## Operational caveats
 
@@ -46,7 +66,7 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 - `hnrss.org` answers 502 intermittently; a failure there is expected noise.
 - GitHub `releases.atom` feeds sometimes answer 504; retry on the next run.
 - `https://github.com/anthropics/claude-code/releases.atom` answered 504 twice on 2026-09-18; the official changelog RSS is enough.
-- Zenn topic feeds return the newest 20 items with no popularity signal; keep them disabled unless a downstream filter exists.
+- Zenn topic feeds return the newest 20 items with no popularity signal; keep them disabled unless a downstream popularity filter exists.
 
 ## Monthly review
 
