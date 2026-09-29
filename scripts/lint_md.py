@@ -11,9 +11,9 @@ R1  Semantic line breaks: one sentence per line.
     single-letter initials are ignored, and so are link titles and inline code.
 R2  Hard breaks: a prose line directly followed by another prose line at the same
     quote depth must end with two spaces, and no other line may end with two spaces.
-R3  Slide density (reports/ directories only): a theme slide column holds at most 8 list
+R3  Slide density (reports/ directories only): a topic slide column holds at most 8 list
     items, each at most 68 em of display width (full-width characters count 1, others
-    0.55), and the summary slide holds at most 5 cards.
+    0.55), and a summary slide holds at most 5 cards.
 
 Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments.
 Usage: uv run scripts/lint_md.py [PATH ...]   (default: content templates)
@@ -78,7 +78,7 @@ def continues_after_en_period(plain: str) -> bool:
     return False
 
 
-MAX_ITEM_WIDTH_EM = 68.0  # two lines in a theme-slide column at the theme font size
+MAX_ITEM_WIDTH_EM = 68.0  # two lines in a topic-slide column at the theme font size
 MAX_ITEMS_PER_COLUMN = 8
 MAX_SUMMARY_CARDS = 5
 LIST_ITEM_RE = re.compile(r"^\s*([-*+]|\d+\.)\s+(.*)$")
@@ -90,7 +90,7 @@ def display_width(text: str) -> float:
 
 
 def lint_density(path: Path, lines: list[str], start: int) -> list[str]:
-    """R3: keep theme slides inside the 1280x720 frame (reports/ only)."""
+    """R3: keep summary and topic slides inside the 1280x720 frame (reports/ only)."""
     problems: list[str] = []
     slide_start = start
     slides: list[tuple[int, list[str]]] = []
@@ -104,7 +104,7 @@ def lint_density(path: Path, lines: list[str], start: int) -> list[str]:
             cards = text.count("<article")
             if cards > MAX_SUMMARY_CARDS:
                 problems.append(f"{path}:{offset + 1}: R3 summary slide has {cards} cards (max {MAX_SUMMARY_CARDS})")
-        if "_class: theme" not in text:
+        if "_class: topic" not in text:
             continue
         column_items = 0
         for j, line in enumerate(slide):

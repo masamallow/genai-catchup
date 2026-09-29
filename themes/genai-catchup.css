@@ -4,7 +4,7 @@
  * @size 16:9 1280px 720px
  *
  * White, quiet report theme for the AI catch-up slides.
- * Slide classes: `summary` (one-page overview grid) and `theme` (one topic, two columns).
+ * Slide classes: `summary` (overview grid of cards) and `topic` (one topic, two columns).
  */
 @import 'default';
 
@@ -170,6 +170,11 @@ section::after {
   color: var(--warn);
 }
 
+.tag.low {
+  background: var(--card);
+  color: var(--muted);
+}
+
 /* ---- summary slide ---------------------------------------------------- */
 
 section.summary h1 {
@@ -222,62 +227,62 @@ section.summary .card .tags {
   margin-top: 8px;
 }
 
-/* ---- theme slide ------------------------------------------------------ */
+/* ---- topic slide ------------------------------------------------------ */
 
-section.theme {
+section.topic {
   font-size: 17px;
   line-height: 1.42;
   padding-bottom: 92px; /* keeps the columns clear of the sources line */
 }
 
-section.theme h1 {
+section.topic h1 {
   font-size: 28px;
   margin-bottom: 2px;
 }
 
-section.theme .lede {
+section.topic .lede {
   color: var(--muted);
   font-size: 16px;
   margin: 0 0 8px;
 }
 
-section.theme .cols {
+section.topic .cols {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 0 32px;
 }
 
-section.theme .cols h2 {
+section.topic .cols h2 {
   font-size: 16px;
   margin: 6px 0 2px;
 }
 
-section.theme .cols h2:first-child {
+section.topic .cols h2:first-child {
   margin-top: 0;
 }
 
-section.theme .cols ul,
-section.theme .cols ol {
+section.topic .cols ul,
+section.topic .cols ol {
   margin: 0 0 4px;
 }
 
-section.theme .cols li {
+section.topic .cols li {
   margin: 0;
 }
 
 /* diagrams rendered from ```mermaid fences (inline SVG) */
-section.theme .cols p:has(> svg) {
+section.topic .cols p:has(> svg) {
   margin: 2px 0 8px;
   text-align: center;
 }
 
-section.theme .cols svg {
+section.topic .cols svg {
   max-width: 100%;
   height: auto;
   max-height: 330px;
 }
 
-section.theme .sources {
+section.topic .sources {
   position: absolute;
   left: 64px;
   right: 64px;
@@ -289,7 +294,7 @@ section.theme .sources {
   color: var(--muted);
 }
 
-section.theme .sources a {
+section.topic .sources a {
   color: var(--muted);
   border-bottom: 1px dotted var(--line);
 }

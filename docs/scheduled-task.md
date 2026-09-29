@@ -32,7 +32,7 @@ Run the genai-catchup-report skill for today.
 - Working folder: this repository (genai-catchup). Read AGENTS.md first.
 - Languages: en, ja (English is always written; remove `ja` for an English-only run).
 - This is a scheduled run: set `run: scheduled` in the research note front matter.
-- Finish with the completion message described in the skill (themes with scores, file paths per language,
+- Finish with the completion message described in the skill (topics with scores, file paths per language,
   failed sources, suggested source changes). Do not push.
 ```
 

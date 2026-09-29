@@ -2,10 +2,10 @@
 
 A personal routine for staying current with generative AI: LLM application engineering and AI coding tools.
 
-On the days set in [schedule.yaml](./schedule.yaml), a scheduled Claude Code task fetches a curated set of feeds, keeps the few events that matter, deepens each one with several sources, and writes two files per language:
+On the days set in [schedule.yaml](./schedule.yaml), a scheduled Claude Code task fetches a curated set of feeds, keeps the topics a tech lead should not miss (events and technical write-ups), deepens each one with several sources, and writes two files per language:
 
-- `content/<lang>/research/YYYY-MM-DD.md` — the source of truth: a dossier per theme (every source read, with its numbers and wording), notes, and ideas for hands-on practice.
-- `content/<lang>/reports/YYYY-MM-DD.md` — a Marp slide deck: one summary slide, then one slide per theme (key points, perspectives and debates, technical details, a diagram when it helps; practice ideas stay in the note).
+- `content/<lang>/research/YYYY-MM-DD.md` — the source of truth: a dossier per topic (every source read, with its numbers and wording), notes, and ideas for hands-on practice.
+- `content/<lang>/reports/YYYY-MM-DD.md` — a Marp slide deck: one or two summary slides, then one slide per topic (key points, perspectives and debates, technical details, a diagram when it helps; practice ideas stay in the note).
 
 English (`content/en/`) is always written; other editions such as `content/ja/` are written when a run asks for them.
 GitHub Actions turns the decks and notes into HTML and publishes them on GitHub Pages, one tree per language under `/<lang>/`.
@@ -29,7 +29,7 @@ flowchart LR
 ```
 
 - Feeds are the discovery layer: deterministic, deduplicated, capped per source, and windowed from the previous scheduled run (or from the newest note under `content/*/research/` when a scheduled run left none).
-- Web search is the deepening layer: used only for the selected themes, to add independent perspectives.
+- Web search is the deepening layer: used only for the selected topics, to add independent perspectives.
 - The human reads the report, decides whether to publish (`git push`), and picks up the ideas in their own notes.
 
 ## Layout

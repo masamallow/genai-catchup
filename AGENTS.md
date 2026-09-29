@@ -37,8 +37,8 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 
 | Path | Written by | Content |
 | --- | --- | --- |
-| `content/<lang>/research/YYYY-MM-DD.md` | agent | The dossier: one heading per clustered theme in priority order, holding everything collected (one sub-heading per source with verbatim-level bullets), the theme's notes and its ideas for practice and output.<br/>Selected themes are thick, dropped ones thin |
-| `content/<lang>/reports/YYYY-MM-DD.md` | agent | The synthesis: Marp slides picked from the dossier — one summary slide, then one slide per selected theme with key points, perspectives and debates, technical details, and a diagram when it earns its place.<br/>No practice guidance, no proposals |
+| `content/<lang>/research/YYYY-MM-DD.md` | agent | The dossier: one heading per topic in priority order, holding everything collected (one sub-heading per source with verbatim-level bullets), the topic's notes and its ideas for practice and output.<br/>Selected topics are thick, dropped ones thin |
+| `content/<lang>/reports/YYYY-MM-DD.md` | agent | The synthesis: Marp slides picked from the dossier — one or two summary slides, then one slide per selected topic with key points, perspectives and debates, technical details, and a diagram when it earns its place.<br/>No practice guidance, no proposals |
 | `templates/<lang>/` | human | Everything language-specific: the two skeletons and the site strings, see [templates/README.md](./templates/README.md) |
 | `state/seen.json` | script | URLs already offered as candidates (180-day TTL) |
 | `work/` | script | Per-run scratch, ignored by git |
@@ -51,7 +51,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 - `content/en/` is the primary edition and is always written.
 - Extra editions are written only when the request names them, for example `languages: en, ja` in the scheduled task's prompt.
   Each extra edition is a full research note and report under `content/<lang>/` with the same file name as the English one.
-- Editions share the selection (themes, order, scores, anchor dates), the facts and numbers, the sources and the diagrams; they differ only in language.
+- Editions share the selection (topics, order, scores, anchor dates), the facts and numbers, the sources and the diagrams; they differ only in language.
 - Write each edition from that language's templates as a native technical writer would.
   Do not translate the other edition sentence by sentence: restate the same facts in the idiom of the language.
   A quotation keeps the source's original wording when the source is in that language; otherwise it is paraphrased with numbers and names kept verbatim.
@@ -64,35 +64,44 @@ Nothing is summarised in the note that the report will summarise again.
 
 Research note (`templates/<lang>/research.md`):
 
-- One `##` heading per clustered theme, in priority order, numbered.
-  The line under the heading carries the status (selected or dropped), the scores, the anchor date and the track.
-- Under a selected theme: the feed items that formed the cluster, then the collected-information section with one `####` sub-heading per source (`[A|B|C] Publisher — Title (date)` followed by the URL) and bullets that keep the source's numbers, names and wording.
+- One `##` heading per topic, in priority order, numbered.
+  The line under the heading carries the status (selected or dropped), the scores, the anchor date, the kind and the areas (vocabulary in [templates/README.md](./templates/README.md)).
+- Under a selected topic: the feed items it gathers, then the collected-information section with one `####` sub-heading per source (`[A|B|C] Publisher — Title (date)` followed by the URL) and bullets that keep the source's numbers, names and wording.
   The bullets are exhaustive for the sources actually read; do not condense them into prose.
-- Then the notes section for contradictions between sources, unverified claims and open questions, and the ideas section for what the reader might try or produce — inside the theme, never in a separate section at the end.
-- Depth follows priority: a theme that will make the report gets every relevant source read and extracted; a dropped theme gets its feed items, its scores and a one-line reason.
+- Then the notes section for contradictions between sources, unverified claims and open questions, and the ideas section for what the reader might try or produce — inside the topic, never in a separate section at the end.
+- Depth follows priority: a topic that will make the report gets every relevant source read and extracted; a dropped topic gets its feed items, its scores and a one-line reason.
+- Dropped topics that came close get a heading each; the other dropped items go under two headings at the end, other one-off items and out of scope.
 
 Report (`templates/<lang>/report.md`):
 
-- Summary slide, then one slide per selected theme.
-- Each theme slide synthesises three sections from the dossier: key points (what happened, with numbers; facts only, opinions belong in the next section), perspectives and debates (how the primary source frames it, independent perspectives, including ones written in the languages of the requested editions when they exist, constraints), technical details (identifiers, stack, platform or service, pricing or limits, specs).
+- One or two summary slides, then one slide per selected topic.
+- Each summary card carries level tags for impact, potential and importance, one kind tag and one or two area tags, labelled as in [templates/README.md](./templates/README.md).
+- Each topic slide synthesises three sections from the dossier: key points (what happened, with numbers; facts only, opinions belong in the next section), perspectives and debates (how the primary source frames it, independent perspectives, including ones written in the languages of the requested editions when they exist, constraints), technical details (identifiers, stack, platform or service, pricing or limits, specs).
 - The report never contains practice guidance or proposals.
 - A diagram belongs on a slide when it shows a mechanism, a flow, a topology or a comparison that bullets cannot show as clearly; a diagram that only decorates is left out.
   Write it as a ```` ```mermaid ```` fence (flowchart, sequence, state, class, ER or xychart), keep it to about 8 nodes laid out top to bottom (the column is narrow), and put it in the right column above the technical-details bullets.
   Diagram labels follow the edition's language.
 
-## Theme rules
+## Topic rules
 
-- The window runs from the previous scheduled run to now; the fetcher derives it from [schedule.yaml](./schedule.yaml) and prints it.
+- A topic is one event or one piece of work, together with the coverage that continues it.
+    - Events: a release, an announcement, an incident, a paper, a decision, or a new tool that practitioners have started to adopt.
+    - Pieces of work: a technical write-up, such as a hands-on test, a benchmark or a technique, that the reader can learn from or reproduce.
+    - A topic is described in one sentence, never as a bare keyword such as "MCP" or "agents".
+- Two items belong to the same topic only when one could be folded into the other's write-up as an update, a supplement or a reaction without changing its headline.
+  Items that merely share a keyword, a product or a vendor are separate topics, the way a news page lists them as related articles.
+- Score and select each topic on its own; dropped topics are grouped only when they are written up.
+- The window decides what the fetcher reads, not what may be selected.
+    - It runs from the previous scheduled run to now; the fetcher derives it from [schedule.yaml](./schedule.yaml) and prints it.
     - It starts at local midnight of the scheduled day before the latest one on or before today, or of the newest note's date under `content/*/research/` when that is older because a scheduled run left no note: the previous run's day is fetched again in full, and seeing an item twice is better than missing it.
     - Items the previous run already offered are dropped by `state/seen.json`.
-      An event the previous note already selected is not selected again; only a new development on it can anchor a theme.
-- A theme is one concrete event: a release, an announcement, a paper, an incident, a decision, or a new tool that practitioners have started to adopt.
-  It is described in one sentence, never as a bare keyword such as "MCP" or "agents".
-- The event that anchors a theme must have happened inside the window, and the candidates-and-selection section records that anchor date for every selected theme.
-    - Earlier events are background: they may appear in the key points labelled as background with their date, but they cannot anchor a theme.
-    - A recap, newsletter mention or analysis published inside the window does not move an older event into the window.
-      The theme is then the in-window development itself (a new integration, a policy change, a measurement, a shutdown), scored on its own merits.
-- Rank by `impact` + `potential`, each 0–2.
+- A topic is eligible when no note of the last 30 days selected it.
+    - Its anchor date is the date of the event or of the write-up, and the candidates-and-selection section records it for every selected topic.
+    - An event from before the window is eligible when it first reaches the feeds in this run, often through news media or practitioners; the note marks its anchor as before the window and names the item that surfaced it.
+    - A topic that an earlier note dropped may be selected when it comes back.
+    - A topic that an earlier note selected is not selected again; only a new development on it makes a new topic, with the continuation section.
+    - An event older than 30 days is background: it may appear in the key points labelled as background with its date, but it cannot anchor a topic.
+- Score `impact`, `potential` and `importance`, each 0–2.
     - impact 2: it changes what many practitioners do this month.
       Evidence is any one of: a tier-1 primary source, coverage by two or more independent sources, or momentum (a practitioner-grade source reports sustained discussion, confirmed by one web search that finds two or more further independent write-ups).
     - impact 1: notable inside one ecosystem, or a single credible report without confirmed momentum.
@@ -100,21 +109,31 @@ Report (`templates/<lang>/report.md`):
     - potential 2: a standard, protocol or platform-level change, a new model class, or a durable shift in practice.
     - potential 1: likely to matter for a quarter.
     - potential 0: incremental.
+    - importance is judged for the reader: a tech lead in Japan who leads generative-AI engineering and is asked about AI coding tools.
+      Every candidate is already in scope, so importance does not measure relevance; it asks what the reader would miss.
+    - importance 2: missing it would leave the reader wrong-footed within weeks, because it calls for a decision or a change in how a team builds or runs LLM applications or coding agents (a migration, a settings change, a security check, a new look at a tool or model choice), or because a measurement, an incident or a working technique overturns an assumption with concrete evidence.
+      Good to know is not enough, and a run rarely has more than a handful of topics at 2.
+    - importance 1: useful context for later decisions, with nothing to change yet; most in-scope topics sit here.
+    - importance 0: nothing changes for the reader, such as a minor version, availability in one more region or cloud without a new capability, a customer story or marketing.
 - Vendor releases and practitioner momentum are both valid signals.
   A single item from a reliability-B practitioner source is never dropped without the momentum check above.
-- Select 3 to 5 themes per run and never pad.
-  Record the scored shortlist in the note's candidates-and-selection section: every selected theme with its anchor date and scores, and up to 5 notable dropped candidates with their scores and a one-line reason, so the reader can overrule the selection next time.
-  Dropped candidates are not carried over automatically; if they matter, they will come back with more coverage.
-- Every theme cites at least two sources including the primary one.
+- Select the topics whose scores add up to 5 or more, or to 4 with importance 2, highest first and at most 8, and never pad.
+    - Break ties by importance, then by primary-source presence, then by the number of independent sources.
+    - A quiet window selects fewer topics, or none.
+- Record the scored shortlist in the note's candidates-and-selection section: every selected topic with its anchor date and scores, and up to 5 notable dropped topics with their scores and a one-line reason, so the reader can overrule the selection next time.
+- Every topic cites at least two sources including the primary one.
+  For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.
   Reliability grades follow `sources.yaml`: A primary, B reputable independent analysis, C community or opinion, used only as supplement.
 
 ## Slide density
 
 The frame is 1280x720 and nothing scrolls, so `mise run lint` enforces these limits (rule R3).
 
-- Summary slide: 3 to 5 cards, each with a title, one or two lines of takeaway, and tags.
-  Use `<div class="grid">` for 3 or 4 cards and `<div class="grid cols-3">` for 5.
-- Theme slide: each column holds at most 8 list items, and each item is at most about 68 em of display width (two lines; full-width characters count 1, others 0.55) after stripping link syntax.
+- Summary slides: one or two, each with at most 5 cards; a card has a title, one or two lines of takeaway, and tags.
+    - Up to 4 topics: one slide with `<div class="grid">`.
+    - 5 topics: one slide with `<div class="grid cols-3">` when the takeaways are short, otherwise two slides.
+    - 6 to 8 topics: two slides of 3 or 4 cards with `<div class="grid">`; the second repeats the title without the lead line.
+- Topic slide: each column holds at most 8 list items, and each item is at most about 68 em of display width (two lines; full-width characters count 1, others 0.55) after stripping link syntax.
     - Left column: key points (up to 5 items) and perspectives and debates (up to 3 items).
     - Right column: technical details (up to 6 items), or a diagram plus up to 3 items.
 - The lede is one sentence and the sources line holds at most 4 links.
