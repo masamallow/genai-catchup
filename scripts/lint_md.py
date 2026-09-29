@@ -13,7 +13,8 @@ R2  Hard breaks: a prose line directly followed by another prose line at the sam
     quote depth must end with two spaces, and no other line may end with two spaces.
 R3  Slide density (reports/ directories only): a topic slide column holds at most 8 list
     items, each at most 68 em of display width (full-width characters count 1, others
-    0.55), and a summary slide holds at most 5 cards.
+    0.55), a summary slide holds at most 5 cards, and an Other topics slide holds 2 to 4
+    cards with at most 6, 3 or 2 list items each (for 2, 3 or 4 cards) of the same width.
 
 Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments.
 Usage: uv run scripts/lint_md.py [PATH ...]   (default: content templates)
@@ -81,6 +82,7 @@ def continues_after_en_period(plain: str) -> bool:
 MAX_ITEM_WIDTH_EM = 68.0  # two lines in a topic-slide column at the theme font size
 MAX_ITEMS_PER_COLUMN = 8
 MAX_SUMMARY_CARDS = 5
+MAX_ITEMS_PER_OTHER_CARD = {2: 6, 3: 3, 4: 2}  # cards on an Other topics slide -> items per card
 LIST_ITEM_RE = re.compile(r"^\s*([-*+]|\d+\.)\s+(.*)$")
 
 
@@ -89,8 +91,50 @@ def display_width(text: str) -> float:
     return sum(1.0 if unicodedata.east_asian_width(ch) in ("W", "F") else 0.55 for ch in text)
 
 
+def item_width_problem(path: Path, lineno: int, item: str) -> list[str]:
+    plain = INLINE_CODE_RE.sub(lambda c: c.group(0).strip("`"), LINK_RE.sub(r"\1", item))
+    width = display_width(plain)
+    if width > MAX_ITEM_WIDTH_EM:
+        return [f"{path}:{lineno}: R3 list item is about {width:.0f} em wide (max {MAX_ITEM_WIDTH_EM:.0f})"]
+    return []
+
+
+def lint_topic_slide(path: Path, offset: int, slide: list[str]) -> list[str]:
+    problems: list[str] = []
+    column_items = 0
+    for j, line in enumerate(slide):
+        if line.strip() == "<div>":
+            column_items = 0
+        elif line.strip() == "</div>" and column_items > MAX_ITEMS_PER_COLUMN:
+            problems.append(f"{path}:{offset + j + 1}: R3 column has {column_items} list items (max {MAX_ITEMS_PER_COLUMN})")
+        m = LIST_ITEM_RE.match(line)
+        if m:
+            column_items += 1
+            problems += item_width_problem(path, offset + j + 1, m.group(2))
+    return problems
+
+
+def lint_others_slide(path: Path, offset: int, slide: list[str]) -> list[str]:
+    cards = sum(line.lstrip().startswith("<article") for line in slide)
+    if cards not in MAX_ITEMS_PER_OTHER_CARD:
+        return [f"{path}:{offset + 1}: R3 Other topics slide has {cards} cards (2 to 4)"]
+    limit = MAX_ITEMS_PER_OTHER_CARD[cards]
+    problems: list[str] = []
+    card_items = 0
+    for j, line in enumerate(slide):
+        if line.lstrip().startswith("<article"):
+            card_items = 0
+        elif line.strip() == "</article>" and card_items > limit:
+            problems.append(f"{path}:{offset + j + 1}: R3 card has {card_items} list items (max {limit} with {cards} cards)")
+        m = LIST_ITEM_RE.match(line)
+        if m:
+            card_items += 1
+            problems += item_width_problem(path, offset + j + 1, m.group(2))
+    return problems
+
+
 def lint_density(path: Path, lines: list[str], start: int) -> list[str]:
-    """R3: keep summary and topic slides inside the 1280x720 frame (reports/ only)."""
+    """R3: keep summary, topic and Other topics slides inside the 1280x720 frame (reports/ only)."""
     problems: list[str] = []
     slide_start = start
     slides: list[tuple[int, list[str]]] = []
@@ -104,21 +148,10 @@ def lint_density(path: Path, lines: list[str], start: int) -> list[str]:
             cards = text.count("<article")
             if cards > MAX_SUMMARY_CARDS:
                 problems.append(f"{path}:{offset + 1}: R3 summary slide has {cards} cards (max {MAX_SUMMARY_CARDS})")
-        if "_class: topic" not in text:
-            continue
-        column_items = 0
-        for j, line in enumerate(slide):
-            if line.strip() == "<div>":
-                column_items = 0
-            elif line.strip() == "</div>" and column_items > MAX_ITEMS_PER_COLUMN:
-                problems.append(f"{path}:{offset + j + 1}: R3 column has {column_items} list items (max {MAX_ITEMS_PER_COLUMN})")
-            m = LIST_ITEM_RE.match(line)
-            if m:
-                column_items += 1
-                plain = INLINE_CODE_RE.sub(lambda c: c.group(0).strip("`"), LINK_RE.sub(r"\1", m.group(2)))
-                width = display_width(plain)
-                if width > MAX_ITEM_WIDTH_EM:
-                    problems.append(f"{path}:{offset + j + 1}: R3 list item is about {width:.0f} em wide (max {MAX_ITEM_WIDTH_EM:.0f})")
+        elif "_class: topic" in text:
+            problems += lint_topic_slide(path, offset, slide)
+        elif "_class: others" in text:
+            problems += lint_others_slide(path, offset, slide)
     return problems
 
 

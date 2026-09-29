@@ -28,8 +28,8 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
     1. Topic 1 heading (anchor MM-DD, impact 2 / potential 2 / importance 2).
     2. Topic 2 heading (anchor MM-DD, before the window, surfaced by `source-id`, 1 / 2 / 2).
 - Dropped (input for the next run's judgement):
-    3. Topic 3 heading (anchor MM-DD, 1 / 2 / 1) — reason in one sentence.
-    4. Topic 4 heading (anchor MM-DD, 2 / 1 / 0) — reason in one sentence.
+    3. Topic 3 heading (anchor MM-DD, 1 / 1 / 1) — what it lacks for the reader, in one sentence.
+    4. Topic 4 heading (anchor MM-DD, 2 / 2 / 0) — what it lacks for the reader, in one sentence.
     5. Other one-off items — listed below.
     6. Out of scope — listed below.
 
@@ -71,10 +71,10 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 ## 3. 🧪 Dropped topic heading
 
-- Dropped / impact 1 / potential 2 / importance 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
+- Dropped / impact 1 / potential 1 / importance 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
 - Feed items in this topic:
     - `source-id` MM-DD [item title](URL)
-- Reason for dropping it: one sentence.
+- Reason for dropping it: one sentence that says what the topic lacks for the reader, such as "an announcement with no setup, numbers or design to learn from yet".
 
 ## 5. 📎 Other one-off items
 

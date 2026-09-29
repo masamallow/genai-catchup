@@ -6,7 +6,7 @@ Everything that depends on the language lives here; the rest of the repository i
 | File | Purpose |
 | --- | --- |
 | `research.md` | Skeleton of the research note: front matter, header, the candidates section, one thick topic, one thin one and the two groups of minor items |
-| `report.md` | Skeleton of the Marp deck: the summary slide and one topic slide |
+| `report.md` | Skeleton of the Marp deck: the summary slide, one topic slide and one Other topics slide |
 | `site.yaml` | Strings of the site chrome: language name, tagline, link labels, empty state |
 
 `content/en/` is always written; other editions are written when a run asks for them (`languages: en, ja`).  
@@ -40,6 +40,7 @@ The templates are the source of truth; this table lines them up.
 | Report: what happened | Key points | 要点 |
 | Report: framing, perspectives, constraints | Perspectives and debates | 見方と論点 |
 | Report: identifiers, stack, pricing, specs | Technical details | 技術要素 |
+| Report: slide that gathers the thinner topics | Other topics | その他のトピック |
 | Labels | Selected, Dropped, Impact, Potential, Importance, Anchor, before the window, Kind, Areas, Background, unverified | 選定、見送り、影響度、将来性、重要度、起点、期間前の出来事、種別、領域、背景、未確認 |
 
 ## Tags on the summary cards

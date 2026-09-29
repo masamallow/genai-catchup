@@ -38,7 +38,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 | Path | Written by | Content |
 | --- | --- | --- |
 | `content/<lang>/research/YYYY-MM-DD.md` | agent | The dossier: one heading per topic in priority order, holding everything collected (one sub-heading per source with verbatim-level bullets), the topic's notes and its ideas for practice and output.<br/>Selected topics are thick, dropped ones thin |
-| `content/<lang>/reports/YYYY-MM-DD.md` | agent | The synthesis: Marp slides picked from the dossier — one or two summary slides, then one slide per selected topic with key points, perspectives and debates, technical details, and a diagram when it earns its place.<br/>No practice guidance, no proposals |
+| `content/<lang>/reports/YYYY-MM-DD.md` | agent | The synthesis: Marp slides picked from the dossier — summary slides, one slide per selected topic with key points, perspectives and debates, technical details, and a diagram when it earns its place, then Other topics slides that gather the thinner topics.<br/>No practice guidance, no proposals |
 | `templates/<lang>/` | human | Everything language-specific: the two skeletons and the site strings, see [templates/README.md](./templates/README.md) |
 | `state/seen.json` | script | URLs already offered as candidates (180-day TTL) |
 | `work/` | script | Per-run scratch, ignored by git |
@@ -74,8 +74,11 @@ Research note (`templates/<lang>/research.md`):
 
 Report (`templates/<lang>/report.md`):
 
-- One or two summary slides, then one slide per selected topic.
+- Summary slides with one card per selected topic, then the topic slides, then the Other topics slides, each in rank order.
 - Each summary card carries level tags for impact, potential and importance, one kind tag and one or two area tags, labelled as in [templates/README.md](./templates/README.md).
+- A topic with 5 points or more gets a topic slide of its own.
+    - A topic with 4 points gets one when its material fills the three sections below; otherwise it goes on an Other topics slide, as a card of facts, technical details and sources.
+    - An Other topics slide holds 2 to 4 topics, so a topic left alone gets a topic slide.
 - Each topic slide synthesises three sections from the dossier: key points (what happened, with numbers; facts only, opinions belong in the next section), perspectives and debates (how the primary source frames it, independent perspectives, including ones written in the languages of the requested editions when they exist, constraints), technical details (identifiers, stack, platform or service, pricing or limits, specs).
 - The report never contains practice guidance or proposals.
 - A diagram belongs on a slide when it shows a mechanism, a flow, a topology or a comparison that bullets cannot show as clearly; a diagram that only decorates is left out.
@@ -109,17 +112,16 @@ Report (`templates/<lang>/report.md`):
     - potential 2: a standard, protocol or platform-level change, a new model class, or a durable shift in practice.
     - potential 1: likely to matter for a quarter.
     - potential 0: incremental.
-    - importance is judged for the reader: a tech lead in Japan who leads generative-AI engineering and is asked about AI coding tools.
-      Every candidate is already in scope, so importance does not measure relevance; it asks what the reader would miss.
-    - importance 2: missing it would leave the reader wrong-footed within weeks, because it calls for a decision or a change in how a team builds or runs LLM applications or coding agents (a migration, a settings change, a security check, a new look at a tool or model choice), or because a measurement, an incident or a working technique overturns an assumption with concrete evidence.
-      Good to know is not enough, and a run rarely has more than a handful of topics at 2.
-    - importance 1: useful context for later decisions, with nothing to change yet; most in-scope topics sit here.
-    - importance 0: nothing changes for the reader, such as a minor version, availability in one more region or cloud without a new capability, a customer story or marketing.
+    - importance is judged for the reader: an engineer in Japan who leads generative-AI engineering as a tech lead, keeps up with the field to improve their own and their team's practice, and is asked about AI coding tools.
+      Every candidate is already in scope, so importance does not measure relevance; it measures what the reader gains by catching up on the topic.
+    - importance 2: the reader gains something concrete and new: a technique or setup they can reproduce, a mechanism or design explained well enough to learn from, a measurement by a third party or in a reproducible form, a capability that changes what they can build, or a change they have to act on (a migration, a settings change, a security check).
+    - importance 1: worth knowing but thin: an announcement without the details to learn from, a vendor's claims that nobody else can check, or an explainer of what is already known.
+    - importance 0: nothing new for the reader, such as a minor version, availability in one more region or cloud without a new capability, a customer story or marketing.
 - Vendor releases and practitioner momentum are both valid signals.
   A single item from a reliability-B practitioner source is never dropped without the momentum check above.
-- Select the topics whose scores add up to 5 or more, or to 4 with importance 2, highest first and at most 8, and never pad.
+- Select every topic whose scores add up to 4 or more, unless its importance is 0, and rank the selected topics by that total; never pad.
     - Break ties by importance, then by primary-source presence, then by the number of independent sources.
-    - A quiet window selects fewer topics, or none.
+    - There is no upper limit, and a quiet window selects fewer topics, or none.
 - Record the scored shortlist in the note's candidates-and-selection section: every selected topic with its anchor date and scores, and up to 5 notable dropped topics with their scores and a one-line reason, so the reader can overrule the selection next time.
 - Every topic cites at least two sources including the primary one.
   For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.
@@ -129,12 +131,16 @@ Report (`templates/<lang>/report.md`):
 
 The frame is 1280x720 and nothing scrolls, so `mise run lint` enforces these limits (rule R3).
 
-- Summary slides: one or two, each with at most 5 cards; a card has a title, one or two lines of takeaway, and tags.
+- Summary slides: each holds at most 5 cards; a card has a title, one or two lines of takeaway, and tags.
     - Up to 4 topics: one slide with `<div class="grid">`.
     - 5 topics: one slide with `<div class="grid cols-3">` when the takeaways are short, otherwise two slides.
-    - 6 to 8 topics: two slides of 3 or 4 cards with `<div class="grid">`; the second repeats the title without the lead line.
+    - More topics: slides of 3 or 4 cards with `<div class="grid">`; the slides after the first repeat the title without the lead line.
 - Topic slide: each column holds at most 8 list items, and each item is at most about 68 em of display width (two lines; full-width characters count 1, others 0.55) after stripping link syntax.
     - Left column: key points (up to 5 items) and perspectives and debates (up to 3 items).
     - Right column: technical details (up to 6 items), or a diagram plus up to 3 items.
 - The lede is one sentence and the sources line holds at most 4 links.
+- Other topics slide: 2 to 4 cards in `<div class="cards">`, laid out by their number: two side by side, three or four stacked.
+    - Pick the grouping by the amount of text: topics with more to say go two to a slide.
+    - A card has the title, list items of at most about 68 em each, and a sources line of at most 3 links.
+    - Two cards hold at most 6 items each, three cards at most 3 each, and four cards at most 2 each.
 - When a slide overflows, cut words, not sections.

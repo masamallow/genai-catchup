@@ -4,7 +4,8 @@
  * @size 16:9 1280px 720px
  *
  * White, quiet report theme for the AI catch-up slides.
- * Slide classes: `summary` (overview grid of cards) and `topic` (one topic, two columns).
+ * Slide classes: `summary` (overview grid of cards), `topic` (one topic, two columns) and
+ * `others` (two to four thinner topics as cards).
  */
 @import 'default';
 
@@ -295,6 +296,61 @@ section.topic .sources {
 }
 
 section.topic .sources a {
+  color: var(--muted);
+  border-bottom: 1px dotted var(--line);
+}
+
+/* ---- other topics slide ----------------------------------------------- */
+
+section.others {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+section.others h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+/* three or four cards are stacked; two sit side by side */
+section.others .cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+section.others .cards:has(> .card:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 18px;
+}
+
+section.others .card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 16px;
+}
+
+section.others .card h3 {
+  font-size: 17px;
+  margin: 0 0 4px;
+}
+
+section.others .card ul {
+  margin: 0 0 4px;
+}
+
+section.others .card li {
+  margin: 0;
+}
+
+section.others .card .sources {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+section.others .card .sources a {
   color: var(--muted);
   border-bottom: 1px dotted var(--line);
 }
