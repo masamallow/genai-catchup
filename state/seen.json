@@ -7,6 +7,10 @@
   "first_seen": "2026-09-28",
   "source": "hn-llm"
  },
+ "https://arxiv.org/abs/2609.25021": {
+  "first_seen": "2026-09-29",
+  "source": "hn-llm"
+ },
  "https://atmarkit.itmedia.co.jp/ait/articles/2609/25/news048.html": {
   "first_seen": "2026-09-28",
   "source": "hatena-llm"
@@ -17,6 +21,10 @@
  },
  "https://aws.amazon.com/about-aws/whats-new/2026/09/Amazon-Connect-Customer-A2A": {
   "first_seen": "2026-09-28",
+  "source": "aws-whats-new"
+ },
+ "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-bedrock-grok-4-7": {
+  "first_seen": "2026-09-29",
   "source": "aws-whats-new"
  },
  "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-bedrock-managed-knowledge-base-salesforce-zendesk-native-data-source-connectors": {
@@ -87,6 +95,18 @@
   "first_seen": "2026-09-28",
   "source": "aws-ml-blog-bedrock"
  },
+ "https://aws.amazon.com/blogs/machine-learning/grok-4-7-is-now-available-on-amazon-bedrock": {
+  "first_seen": "2026-09-29",
+  "source": "aws-ml-blog-bedrock"
+ },
+ "https://aws.amazon.com/blogs/machine-learning/implementing-synthetic-monitoring-using-amazon-nova-act": {
+  "first_seen": "2026-09-29",
+  "source": "aws-ml-blog-bedrock"
+ },
+ "https://aws.amazon.com/blogs/machine-learning/introducing-claude-sonnet-5-5-on-aws": {
+  "first_seen": "2026-09-29",
+  "source": "aws-ml-blog-bedrock"
+ },
  "https://aws.amazon.com/blogs/machine-learning/narrateai-production-ready-llm-quality-assurance-on-amazon-bedrock": {
   "first_seen": "2026-09-28",
   "source": "aws-ml-blog-bedrock"
@@ -101,6 +121,10 @@
  },
  "https://aws.amazon.com/jp/blogs/news/weekly-genai-20260914": {
   "first_seen": "2026-09-28",
+  "source": "aws-jp-weekly-genai"
+ },
+ "https://aws.amazon.com/jp/blogs/news/weekly-genai-20260921": {
+  "first_seen": "2026-09-29",
   "source": "aws-jp-weekly-genai"
  },
  "https://bestmodelforyourbudget.terrydjony.com/": {
@@ -187,6 +211,10 @@
   "first_seen": "2026-09-28",
   "source": "claude-code-changelog"
  },
+ "https://code.claude.com/docs/en/changelog#2-1-284": {
+  "first_seen": "2026-09-29",
+  "source": "claude-code-changelog"
+ },
  "https://code.visualstudio.com/blogs/2026/09/16/building-the-github-copilot-inline-suggestions-model-part-one": {
   "first_seen": "2026-09-28",
   "source": "vscode-updates"
@@ -201,6 +229,10 @@
  },
  "https://code.visualstudio.com/updates/v1_139": {
   "first_seen": "2026-09-28",
+  "source": "vscode-updates"
+ },
+ "https://code.visualstudio.com/updates/v1_140": {
+  "first_seen": "2026-09-29",
   "source": "vscode-updates"
  },
  "https://cursor.com/changelog/rollouts-and-security-reviewer": {
@@ -227,8 +259,32 @@
   "first_seen": "2026-09-28",
   "source": "classmethod-claude-code"
  },
+ "https://dev.classmethod.jp/articles/20260927-aws-startup-advisor": {
+  "first_seen": "2026-09-29",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/aws-devops-agent-claude-code-agent-toolkit-setup": {
+  "first_seen": "2026-09-29",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/aws-wa-agent-preview": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
+ "https://dev.classmethod.jp/articles/claude-code-cloud-environment-settings": {
+  "first_seen": "2026-09-29",
+  "source": "classmethod-claude-code"
+ },
  "https://dev.classmethod.jp/articles/claude-code-permission-error-fix": {
   "first_seen": "2026-09-28",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/claude-code-web-multiple-repositories": {
+  "first_seen": "2026-09-29",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/claude-code-web-twelve-repositories": {
+  "first_seen": "2026-09-29",
   "source": "classmethod-claude-code"
  },
  "https://dev.classmethod.jp/articles/claude-security-configuration-tips": {
@@ -251,12 +307,52 @@
   "first_seen": "2026-09-28",
   "source": "microsoft-foundry-blog"
  },
+ "https://developers.googleblog.com/4-engineering-patterns-behind-the-strongest-ai-agents-challenge-submissions": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
  "https://developers.googleblog.com/agent-anomaly-detection-now-in-private-preview-on-the-gemini-enterprise-agent-platform": {
   "first_seen": "2026-09-28",
   "source": "google-developers-blog"
  },
+ "https://developers.googleblog.com/announcing-adk-for-kotlin-10-building-production-ready-ai-agents-in-kotlin-android-and-beyond": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/autonomous-llm-post-training-with-tunix-on-tpus": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
  "https://developers.googleblog.com/build-zero-trust-ai-agents-that-judge-intent-not-just-syntax": {
   "first_seen": "2026-09-28",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/build-zero-trust-ai-agents-with-googles-agent-development-kit": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/colab-is-now-part-of-your-google-ai-plan": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/driving-developer-excellence-inside-the-program-sprints": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/how-to-evaluate-live-voice-agents-in-adk": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/introducing-support-for-local-ai-models-in-the-antigravity-sdk": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/mastering-edge-ai-on-raspberry-pi-with-litert-and-gemma": {
+  "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/reproducing-olmo-3-7b-pre-training-in-maxtext-case-study-of-large-scale-training-on-tpus": {
+  "first_seen": "2026-09-29",
   "source": "google-developers-blog"
  },
  "https://developers.googleblog.com/the-anatomy-of-harness-engineering-how-to-evaluate-iterate-and-guard-ai-coding-agents": {
@@ -265,6 +361,10 @@
  },
  "https://developers.googleblog.com/turn-your-rest-apis-into-mcp-tools-with-google-cloud-api-gateway": {
   "first_seen": "2026-09-28",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/why-go-is-an-ideal-language-for-ai-assisted-software-engineering": {
+  "first_seen": "2026-09-29",
   "source": "google-developers-blog"
  },
  "https://developers.openai.com/codex/changelog#codex-2026-09-14-codex-spark-deprecation": {
@@ -311,6 +411,10 @@
   "first_seen": "2026-09-28",
   "source": "openai-chatgpt-codex-changelog"
  },
+ "https://developers.openai.com/codex/changelog#github-release-397962047": {
+  "first_seen": "2026-09-29",
+  "source": "openai-chatgpt-codex-changelog"
+ },
  "https://docs.cloud.google.com/gemini-enterprise-agent-platform/docs/release-notes#September_14_2026": {
   "first_seen": "2026-09-28",
   "source": "gcp-agent-platform-release-notes"
@@ -343,6 +447,10 @@
   "first_seen": "2026-09-28",
   "source": "gcp-agent-platform-release-notes"
  },
+ "https://docs.cloud.google.com/gemini-enterprise-agent-platform/docs/release-notes#September_28_2026": {
+  "first_seen": "2026-09-29",
+  "source": "gcp-agent-platform-release-notes"
+ },
  "https://docs.cloud.google.com/vertex-ai/docs/release-notes#September_13_2026": {
   "first_seen": "2026-09-28",
   "source": "gcp-vertex-ai-release-notes"
@@ -357,6 +465,14 @@
  },
  "https://docs.cloud.google.com/vertex-ai/docs/release-notes#September_21_2026": {
   "first_seen": "2026-09-28",
+  "source": "gcp-vertex-ai-release-notes"
+ },
+ "https://docs.cloud.google.com/vertex-ai/docs/release-notes#September_27_2026": {
+  "first_seen": "2026-09-29",
+  "source": "gcp-vertex-ai-release-notes"
+ },
+ "https://docs.cloud.google.com/vertex-ai/docs/release-notes#September_28_2026": {
+  "first_seen": "2026-09-29",
   "source": "gcp-vertex-ai-release-notes"
  },
  "https://gihyo.jp/article/2026/09/quail": {
@@ -403,6 +519,10 @@
   "first_seen": "2026-09-28",
   "source": "github-changelog-copilot"
  },
+ "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot": {
+  "first_seen": "2026-09-29",
+  "source": "github-changelog-copilot"
+ },
  "https://github.com/anuj0456/OpenArch": {
   "first_seen": "2026-09-28",
   "source": "hn-llm"
@@ -410,6 +530,10 @@
  "https://hamel.dev/blog/posts/evals-faq": {
   "first_seen": "2026-09-28",
   "source": "hamel-husain"
+ },
+ "https://honeshabri.hatenablog.com/entry/hatebu-veil": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
  },
  "https://kiro.dev/changelog/cli/2-22": {
   "first_seen": "2026-09-28",
@@ -441,6 +565,10 @@
  },
  "https://kiro.dev/changelog/models/claude-fable-5-1-for-enterprise": {
   "first_seen": "2026-09-28",
+  "source": "kiro-changelog"
+ },
+ "https://kiro.dev/changelog/models/claude-opus-5-5": {
+  "first_seen": "2026-09-29",
   "source": "kiro-changelog"
  },
  "https://kiro.dev/changelog/models/gpt-5-6-1m-context-window": {
@@ -515,12 +643,32 @@
   "first_seen": "2026-09-28",
   "source": "hatena-claude-code"
  },
+ "https://note.com/npaka/n/n0ee92a316be3": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
+ "https://note.com/npaka/n/n1d86b2196515": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-ai-agent"
+ },
+ "https://note.com/npaka/n/n557fb948c3cf": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
  "https://ollaya.dev/": {
   "first_seen": "2026-09-28",
   "source": "hatena-llm"
  },
+ "https://openai.com/form/codex-originals": {
+  "first_seen": "2026-09-29",
+  "source": "openai-news"
+ },
  "https://openai.com/index/airbnb-gpt-6-astra": {
   "first_seen": "2026-09-28",
+  "source": "openai-news"
+ },
+ "https://openai.com/index/basis-tax-workbook-with-astra": {
+  "first_seen": "2026-09-29",
   "source": "openai-news"
  },
  "https://openai.com/index/better-prompt-caching-for-gpt-6": {
@@ -607,6 +755,18 @@
   "first_seen": "2026-09-28",
   "source": "claude-platform-release-notes"
  },
+ "https://platform.claude.com/docs/en/release-notes/overview#september-28-2026": {
+  "first_seen": "2026-09-29",
+  "source": "claude-platform-release-notes"
+ },
+ "https://qiita.com/yoshioterada/items/7123aef3db7d1ba91fc3": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
+ "https://recruit.group.gmo/engineer/jisedai/blog/jev-system-one-model": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
  "https://simonwillison.net/2026/Sep/12/astra-running-routes": {
   "first_seen": "2026-09-28",
   "source": "simon-willison"
@@ -623,6 +783,10 @@
   "first_seen": "2026-09-28",
   "source": "simon-willison"
  },
+ "https://simonwillison.net/2026/Sep/27/2026-in-llms-so-far": {
+  "first_seen": "2026-09-29",
+  "source": "simon-willison"
+ },
  "https://sizu.me/laiso/posts/ut6i125ew44m": {
   "first_seen": "2026-09-28",
   "source": "hatena-ai-agent"
@@ -635,9 +799,21 @@
   "first_seen": "2026-09-28",
   "source": "hatena-ai-agent"
  },
+ "https://speakerdeck.com/magicpod/20260828-event": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
  "https://speakerdeck.com/minorun365/claude-code-o-tsukau-hodo-sodatsu-ai-hisho-ni-suru-nouhau": {
   "first_seen": "2026-09-28",
   "source": "hatena-claude-code"
+ },
+ "https://speakerdeck.com/ryotarai/niokeru-ai-jidai-no-kousoku-kiban-arca": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
+ "https://stateofutopia.com/experiments/microllmlab": {
+  "first_seen": "2026-09-29",
+  "source": "hn-llm"
  },
  "https://syu-m-5151.hatenablog.com/entry/2026/09/22/124945": {
   "first_seen": "2026-09-28",
@@ -666,6 +842,10 @@
  "https://www.assbench.com/": {
   "first_seen": "2026-09-28",
   "source": "hn-llm"
+ },
+ "https://www.itmedia.co.jp/news/article/2609/28/2000001777": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-ai-agent"
  },
  "https://www.langchain.com/blog/building-a-harness-with-jev": {
   "first_seen": "2026-09-28",
@@ -727,12 +907,24 @@
   "first_seen": "2026-09-28",
   "source": "publickey"
  },
+ "https://www.publickey1.jp/blog/26/awsaistrandsllm.html": {
+  "first_seen": "2026-09-29",
+  "source": "publickey"
+ },
  "https://www.publickey1.jp/blog/26/claude_codeagentsmdclaudemd.html": {
   "first_seen": "2026-09-28",
   "source": "publickey"
  },
+ "https://www.publickey1.jp/blog/26/copilot_managed_runtimemicrosoft_365.html": {
+  "first_seen": "2026-09-29",
+  "source": "publickey"
+ },
  "https://www.publickey1.jp/blog/26/devinmacosmacdevinappstore.html": {
   "first_seen": "2026-09-28",
+  "source": "publickey"
+ },
+ "https://www.publickey1.jp/blog/26/docker_cloud_snadboxesai.html": {
+  "first_seen": "2026-09-29",
   "source": "publickey"
  },
  "https://www.publickey1.jp/blog/26/java_27g1_gctls_13.html": {
@@ -759,16 +951,32 @@
   "first_seen": "2026-09-28",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/algoartis/articles/73f4da4aa13dcc": {
+  "first_seen": "2026-09-29",
+  "source": "hatena-llm"
+ },
  "https://zenn.dev/goat_eat_any/articles/claude-code-cloud-sessions": {
   "first_seen": "2026-09-28",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/goat_eat_any/articles/claude-code-effort-explained": {
+  "first_seen": "2026-09-29",
   "source": "zenn-trending"
  },
  "https://zenn.dev/hampen2929/books/claude-code-production-guide": {
   "first_seen": "2026-09-28",
   "source": "hatena-claude-code"
  },
+ "https://zenn.dev/headwaters/articles/15875671106c54": {
+  "first_seen": "2026-09-29",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/loglass/articles/f69996279763ab": {
   "first_seen": "2026-09-28",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/mazrean/articles/bd9b563ace18db": {
+  "first_seen": "2026-09-29",
   "source": "zenn-trending"
  },
  "https://zenn.dev/nanora/articles/20260925-claude-prompt-audit-opus55": {
@@ -785,6 +993,10 @@
  },
  "https://zenn.dev/peoplex_blog/articles/1bc5c181ad19f0": {
   "first_seen": "2026-09-28",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/sun_asterisk/articles/e9b50f09839def": {
+  "first_seen": "2026-09-29",
   "source": "zenn-trending"
  },
  "https://zenn.dev/uhyo/articles/react-profession-bench-17": {
