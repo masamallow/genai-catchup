@@ -19,9 +19,10 @@ flowchart LR
     SCH[schedule.yaml] --> F
     F --> C["work/candidates.md<br/>(ignored)"]
     C --> A["Claude Code<br/>skill: genai-catchup-report"]
-    W[(WebSearch / WebFetch)] --> A
-    A --> R["content/LANG/research/DATE.md"]
-    A --> P["content/LANG/reports/DATE.md (Marp)"]
+    A --> SUB["subagents<br/>researchers and writers"]
+    W[("WebSearch, web pages<br/>(work/pages cache)")] --> SUB
+    SUB --> R["content/LANG/research/DATE.md"]
+    SUB --> P["content/LANG/reports/DATE.md (Marp)"]
     A --> SEEN["state/seen.json"]
     R & P --> G["git commit<br/>(human pushes)"]
     G --> CI["GitHub Actions<br/>build_site.py + Marp CLI"]
@@ -30,6 +31,8 @@ flowchart LR
 
 - Feeds are the discovery layer: deterministic, deduplicated, capped per source, and windowed from the previous scheduled run (or from the newest note under `content/*/research/` when a scheduled run left none).
 - Web search is the deepening layer: used only for the selected topics, to add independent perspectives.
+- The skill orchestrates and subagents with fresh contexts do the work ([.claude/agents/](./.claude/agents/)): researchers deepen groups of topics in parallel and write their sections to `work/sections/`, and writers produce the report and the extra editions from those files.
+    - Every page is read once into the page cache `work/pages/`, so all agents quote the same exact text.
 - The human reads the report, decides whether to publish (`git push`), and picks up the ideas in their own notes.
 
 ## Layout
@@ -45,6 +48,7 @@ flowchart LR
 ├── schedule.yaml             # canonical schedule (cron): the scheduled task and the fetch window follow it
 ├── scripts/
 │   ├── fetch_feeds.py        # feeds -> work/candidates.{json,md}; mark-seen -> state/seen.json
+│   ├── fetch_page.py         # web pages -> work/pages/ as text, the cache a run's agents share
 │   ├── lint_md.py            # semantic line break and slide density rules
 │   ├── build_site.py         # Marp decks + research pages + indexes -> dist/<lang>/
 │   └── source_stats.py       # which sources actually get cited
@@ -61,6 +65,7 @@ flowchart LR
 │   └── sources-notes.md      # feeds that moved, died or do not exist
 ├── .claude/
 │   ├── settings.json         # pre-approved tools for unattended runs
+│   ├── agents/               # subagents of a run: catchup-researcher, catchup-writer
 │   └── skills/genai-catchup-report/SKILL.md
 └── .github/workflows/pages.yml
 ```
@@ -81,6 +86,7 @@ flowchart LR
 
 ```bash
 mise run fetch       # feeds published since the previous run -> work/candidates.md (`--since YYYY-MM-DD` or `--days N` to override)
+mise run page -- URL # save a page's text in work/pages/ (`-- --list` shows the cache)
 mise run lint        # writing rules for content/ and templates/
 mise run build       # dist/ (decks, notes and an index per language)
 mise run serve       # http://localhost:8000

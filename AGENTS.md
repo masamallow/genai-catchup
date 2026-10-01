@@ -22,7 +22,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
    A prose line that continues on the next prose line ends with two spaces.
 5. Commit, do not push.
    Publishing to the site is a human decision (`mise run publish`).
-6. During a routine run do not edit `sources.yaml`, `schedule.yaml`, `themes/`, `scripts/` or `templates/`.
+6. During a routine run do not edit `sources.yaml`, `schedule.yaml`, `.claude/`, `themes/`, `scripts/` or `templates/`.
    Put suggested changes in the completion summary instead.
 
 ## Scope
@@ -40,8 +40,9 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 | `content/<lang>/research/YYYY-MM-DD.md` | agent | The dossier: one heading per topic in priority order, holding everything collected (one sub-heading per source with verbatim-level bullets), the topic's notes and its ideas for practice and output.<br/>Selected topics are thick, dropped ones thin |
 | `content/<lang>/reports/YYYY-MM-DD.md` | agent | The synthesis: Marp slides picked from the dossier — summary slides, one slide per selected topic with key points, perspectives and debates, technical details, and a diagram when it earns its place, then Other topics slides that gather the thinner topics.<br/>No practice guidance, no proposals |
 | `templates/<lang>/` | human | Everything language-specific: the two skeletons and the site strings, see [templates/README.md](./templates/README.md) |
+| `.claude/agents/` | human | The subagents a run starts: `catchup-researcher` deepens a group of topics, `catchup-writer` writes one document from the run's files; see the skill |
 | `state/seen.json` | script | URLs already offered as candidates (180-day TTL) |
-| `work/` | script | Per-run scratch, ignored by git |
+| `work/` | script, agent | Per-run scratch, ignored by git: the candidates, the page cache (`work/pages/`, `mise run page`) and the topic sections the researchers write (`work/sections/`).<br/>`mise run fetch` empties the page cache and the sections |
 | `sources.yaml` | human | Curated feeds. The agent proposes edits, the human applies them |
 | `schedule.yaml` | human | The canonical schedule (cron): the Desktop scheduled task and the fetch window follow it |
 | `dist/` | build | Generated site, one tree per language under `dist/<lang>/`, ignored by git, deployed by GitHub Actions |

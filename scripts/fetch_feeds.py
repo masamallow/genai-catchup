@@ -26,6 +26,10 @@ the agent judges the rest against the previous note.
 `fetch` never writes to state/: it only produces work/candidates.json and
 work/candidates.md. Run `mark-seen` after the research note is written, so a
 failed run does not hide items from the next one.
+
+`fetch` starts a run, so it also empties work/pages/ and work/sections/, the page cache
+(scripts/fetch_page.py) and the topic sections the researchers write: nothing an
+earlier run fetched can then be cited as fetched in this one.
 """
 
 from __future__ import annotations
@@ -34,6 +38,7 @@ import argparse
 import html
 import json
 import re
+import shutil
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
@@ -50,6 +55,7 @@ SOURCES_FILE = ROOT / "sources.yaml"
 SCHEDULE_FILE = ROOT / "schedule.yaml"
 SEEN_FILE = ROOT / "state" / "seen.json"
 CONTENT_DIR = ROOT / "content"
+RUN_SCRATCH_DIRS = (ROOT / "work" / "pages", ROOT / "work" / "sections")
 NOTE_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 CRON_DAY_NAMES = {"sun": 0, "mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6}
 USER_AGENT = "genai-catchup/1.0 (personal feed reader)"
@@ -287,6 +293,8 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     seen = load_seen()
     out_dir = ROOT / args.out
     out_dir.mkdir(parents=True, exist_ok=True)
+    for scratch in RUN_SCRATCH_DIRS:
+        shutil.rmtree(scratch, ignore_errors=True)
 
     headers = {"User-Agent": USER_AGENT, "Accept": ACCEPT}
     timeout = httpx.Timeout(30.0, connect=15.0)

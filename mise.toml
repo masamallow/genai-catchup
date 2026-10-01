@@ -9,6 +9,10 @@ uv = "latest"
 description = "Fetch curated feeds published since the previous run into work/candidates.{json,md}"
 run = "uv run scripts/fetch_feeds.py fetch"
 
+[tasks.page]
+description = "Save web pages as text in work/pages/, the page cache the run's agents share (--list shows it)"
+run = "uv run scripts/fetch_page.py"
+
 [tasks.mark-seen]
 description = "Record the current candidates as seen (run after the research note is written)"
 run = "uv run scripts/fetch_feeds.py mark-seen"
