@@ -14,20 +14,41 @@ Only Markdown is committed; the site is a build artifact.
 ## Pipeline
 
 ```mermaid
-flowchart LR
-    S[sources.yaml] --> F["fetch_feeds.py<br/>(uv run)"]
-    SCH[schedule.yaml] --> F
-    F --> C["work/candidates.md<br/>(ignored)"]
-    C --> A["Claude Code<br/>skill: genai-catchup-report"]
-    A --> SUB["subagents<br/>researchers and writers"]
-    W[("WebSearch, web pages<br/>(work/pages cache)")] --> SUB
-    SUB --> R["content/LANG/research/DATE.md"]
-    SUB --> P["content/LANG/reports/DATE.md (Marp)"]
-    A --> SEEN["state/seen.json"]
-    R & P --> G["git commit<br/>(human pushes)"]
-    G --> CI["GitHub Actions<br/>build_site.py + Marp CLI"]
-    CI --> PAGES["GitHub Pages<br/>dist/LANG/"]
+flowchart TB
+    subgraph discovery["Discovery"]
+        direction LR
+        S[sources.yaml] --> F["fetch_feeds.py<br/>(uv run)"]
+        SCH[schedule.yaml] --> F
+        F --> C["work/candidates.md<br/>(ignored)"]
+    end
+    subgraph deepening["Deepening and writing"]
+        direction TB
+        A["Claude Code<br/>skill: genai-catchup-report"] --> SUB["subagents<br/>researchers and writers"]
+        W[("WebSearch, web pages<br/>(work/pages cache)")] --> SUB
+        SUB --> R["content/LANG/research/DATE.md"]
+        SUB --> P["content/LANG/reports/DATE.md (Marp)"]
+        A --> SEEN["state/seen.json<br/>(mark-seen)"]
+        R & P & SEEN --> G["git commit"]
+    end
+    subgraph publishing["Publishing"]
+        direction LR
+        PUSH["git push<br/>(human)"] --> CI["GitHub Actions<br/>build_site.py + Marp CLI"] --> PAGES["GitHub Pages<br/>dist/LANG/"]
+    end
+    discovery --> deepening --> publishing
+
+    classDef human fill:#2da44e33,stroke:#2da44e
+    classDef code fill:#4493f833,stroke:#4493f8
+    classDef agent fill:#d9775733,stroke:#d97757
+    classDef web fill:#8b949e26,stroke:#8b949e
+    classDef stage fill:none,stroke:#8b949e,stroke-dasharray:4 4
+    class S,SCH,PUSH human
+    class F,C,SEEN,CI,PAGES code
+    class A,SUB,R,P,G agent
+    class W web
+    class discovery,deepening,publishing stage
 ```
+
+Colours mark who writes or runs each node: green the human, blue scripts and the site build, orange Claude Code, grey the web.
 
 - Feeds are the discovery layer: deterministic, deduplicated, capped per source, and windowed from the previous scheduled run (or from the newest note under `content/*/research/` when a scheduled run left none).
 - Web search is the deepening layer: used only for the selected topics, to add independent perspectives.
