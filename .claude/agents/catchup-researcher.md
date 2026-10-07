@@ -67,7 +67,7 @@ For each topic, in at most about 120 words:
 
 - `<slug>`: written, or what is missing.
 - Sources: the count per grade, and the primary's URL.
-- Scores: only when what you found changes impact, potential or importance, the new value and the reason in one line, such as independent coverage found or no details to learn from.
+- Scores: only when what you found changes impact, potential or attention, the new value and the reason in one line, such as independent write-ups found (attention) or a change smaller than announced (impact).
 - Unverified: facts that rest on WebFetch alone or on search results.
 - Needs the browser: URLs you could not read.
 - Source ids: the `sources.yaml` ids you cited, for the note's `sources_used`.

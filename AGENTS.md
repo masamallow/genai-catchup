@@ -27,6 +27,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 
 ## Scope
 
+- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, follows the field to know what changed and what it means for their team's decisions, and is asked about AI coding tools.
 - In scope: generative AI and LLMs.
     - Track `genai-eng`: building with LLMs — models and their pricing or availability, agents, RAG, evals, LLMOps, serving platforms (Bedrock, Vertex AI, Foundry), protocols (MCP, A2A, Agent Skills), and new model classes that change how LLM applications are built.
     - Track `coding-ai`: AI coding tools and workflows — Claude Code, Codex, Cursor, Copilot, Gemini CLI, Kiro.
@@ -76,9 +77,9 @@ Research note (`templates/<lang>/research.md`):
 Report (`templates/<lang>/report.md`):
 
 - Summary slides with one card per selected topic, then the topic slides, then the Other topics slides, each in rank order.
-- Each summary card carries level tags for impact, potential and importance, one kind tag and one or two area tags, labelled as in [templates/README.md](./templates/README.md).
-- A topic with 5 points or more gets a topic slide of its own.
-    - A topic with 4 points gets one when its material fills the three sections below; otherwise it goes on an Other topics slide, as a card of facts, technical details and sources.
+- Each summary card carries level tags for impact, potential and attention, one kind tag and one or two area tags, labelled as in [templates/README.md](./templates/README.md).
+- A selected topic gets a topic slide of its own when its material fills the three sections below, whatever its score.
+    - A topic whose material would leave about half a slide empty goes on an Other topics slide instead, as a card of facts, technical details and sources.
     - An Other topics slide holds 2 to 4 topics, so a topic left alone gets a topic slide.
 - Each topic slide synthesises three sections from the dossier: key points (what happened, with numbers; facts only, opinions belong in the next section), perspectives and debates (how the primary source frames it, independent perspectives, including ones written in the languages of the requested editions when they exist, constraints), technical details (identifiers, stack, platform or service, pricing or limits, specs).
 - The report never contains practice guidance or proposals.
@@ -90,7 +91,7 @@ Report (`templates/<lang>/report.md`):
 
 - A topic is one event or one piece of work, together with the coverage that continues it.
     - Events: a release, an announcement, an incident, a paper, a decision, or a new tool that practitioners have started to adopt.
-    - Pieces of work: a technical write-up, such as a hands-on test, a benchmark or a technique, that the reader can learn from or reproduce.
+    - Pieces of work: a technical write-up, such as a hands-on test, a benchmark or a technique.
     - A topic is described in one sentence, never as a bare keyword such as "MCP" or "agents".
 - Two items belong to the same topic only when one could be folded into the other's write-up as an update, a supplement or a reaction without changing its headline.
   Items that merely share a keyword, a product or a vendor are separate topics, the way a news page lists them as related articles.
@@ -105,24 +106,28 @@ Report (`templates/<lang>/report.md`):
     - A topic that an earlier note dropped may be selected when it comes back.
     - A topic that an earlier note selected is not selected again; only a new development on it makes a new topic, with the continuation section.
     - An event older than 30 days is background: it may appear in the key points labelled as background with its date, but it cannot anchor a topic.
-- Score `impact`, `potential` and `importance`, each 0–2.
-    - impact 2: it changes what many practitioners do this month.
-      Evidence is any one of: a tier-1 primary source, coverage by two or more independent sources, or momentum (a practitioner-grade source reports sustained discussion, confirmed by one web search that finds two or more further independent write-ups).
-    - impact 1: notable inside one ecosystem, or a single credible report without confirmed momentum.
-    - impact 0: minor or incremental.
+- Score `impact`, `potential` and `attention`, each 0–2.
+  Each measures one thing: impact what the topic changes, potential how long that lasts, and attention how much credible venues are discussing it now.
+    - impact 2: it changes what many practitioners build or do this month, such as a new frontier model or a price change, a breaking change or deprecation that needs a migration, a security fix to act on, or a new capability on a major platform.
+    - impact 1: it changes what some teams build or do, or what practitioners do inside one ecosystem.
+    - impact 0: minor or incremental, such as a minor version, availability in one more region or cloud without a new capability, a customer story or marketing.
+    - Judge impact from what the topic itself shows, the change or a write-up's findings, as its primary source documents them; how widely it is discussed belongs to attention.
     - potential 2: a standard, protocol or platform-level change, a new model class, or a durable shift in practice.
     - potential 1: likely to matter for a quarter.
     - potential 0: incremental.
-    - importance is judged for the reader: an engineer in Japan who leads generative-AI engineering as a tech lead, keeps up with the field to improve their own and their team's practice, and is asked about AI coding tools.
-      Every candidate is already in scope, so importance does not measure relevance; it measures what the reader gains by catching up on the topic.
-    - importance 2: the reader gains something concrete and new: a technique or setup they can reproduce, a mechanism or design explained well enough to learn from, a measurement by a third party or in a reproducible form, a capability that changes what they can build, or a change they have to act on (a migration, a settings change, a security check).
-    - importance 1: worth knowing but thin: an announcement without the details to learn from, a vendor's claims that nobody else can check, or an explainer of what is already known.
-    - importance 0: nothing new for the reader, such as a minor version, availability in one more region or cloud without a new capability, a customer story or marketing.
-- Vendor releases and practitioner momentum are both valid signals.
-  A single item from a reliability-B practitioner source is never dropped without the momentum check above.
-- Select every topic whose scores add up to 4 or more, unless its importance is 0, and rank the selected topics by that total; never pad.
-    - Break ties by importance, then by primary-source presence, then by the number of independent sources.
+    - attention 2: discussed widely in credible venues: two or more independent write-ups in established media or by known practitioners, or strong engagement in a curated community (about 100 Hatena Bookmark users, 300 Hacker News points or 100 Zenn likes).
+    - attention 1: some credible discussion: one such write-up, community posts reacting to the topic, engagement at about the level the curated feeds require (30 Hatena Bookmark users, 100 Hacker News points or 30 Zenn likes), or a listing in two or more feeds.
+    - attention 0: no discussion beyond the source itself.
+    - Count the Japanese venues the reader follows (Hatena Bookmark, Zenn, Japanese tech media) as well as the global ones (Hacker News, tech media, practitioners' blogs); raw social numbers, such as views on X, count only when a credible outlet reports them.
+    - Attention measures discussion, not truth: a widely discussed claim that the sources cannot confirm is scored like any other, and the note and the report present it as a claim, saying what is verified and what is not.
+    - The engagement figures are starting points: record them on the topic's feed-item lines, so later runs can calibrate them.
+- Whether a topic gives the reader something to try plays no part in its scores; once a topic is selected, the practical details go to the note's ideas section.
+- Vendor releases and practitioner write-ups are both valid topics.
+  A single item from a reliability-B practitioner source is never dropped before one web search for further independent write-ups, which count toward its attention.
+- Select every topic whose scores add up to 4 or more, and rank the selected topics by that total; never pad.
+    - Break ties by impact, then by attention, then by primary-source presence, then by the number of independent sources.
     - There is no upper limit, and a quiet window selects fewer topics, or none.
+- Notes written before 2026-10-08 score `importance` where later notes score `attention`; they stay as the record of that rubric.
 - Record the scored shortlist in the note's candidates-and-selection section: every selected topic with its anchor date and scores, and up to 5 notable dropped topics with their scores and a one-line reason, so the reader can overrule the selection next time.
 - Every topic cites at least two sources including the primary one.
   For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.

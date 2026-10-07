@@ -41,7 +41,7 @@ The templates are the source of truth; this table lines them up.
 | Report: framing, perspectives, constraints | Perspectives and debates | 見方と論点 |
 | Report: identifiers, stack, pricing, specs | Technical details | 技術要素 |
 | Report: slide that gathers the thinner topics | Other topics | その他のトピック |
-| Labels | Selected, Dropped, Impact, Potential, Importance, Anchor, before the window, Kind, Areas, Background, unverified | 選定、見送り、影響度、将来性、重要度、起点、期間前の出来事、種別、領域、背景、未確認 |
+| Labels | Selected, Dropped, Impact, Potential, Attention, Anchor, before the window, Kind, Areas, Background, unverified | 選定、見送り、影響度、将来性、注目度、起点、期間前の出来事、種別、領域、背景、未確認 |
 
 ## Tags on the summary cards
 
@@ -50,9 +50,9 @@ The front matter of the research note stores the keys; the cards show the labels
 
 | Level tag (class) | `en` | `ja` |
 | --- | --- | --- |
-| `tag high` (score 2) | Impact high, Potential high, Importance high | 影響 高、将来性 高、重要度 高 |
-| `tag mid` (score 1) | Impact mid, Potential mid, Importance mid | 影響 中、将来性 中、重要度 中 |
-| `tag low` (score 0) | Impact low, Potential low, Importance low | 影響 低、将来性 低、重要度 低 |
+| `tag high` (score 2) | Impact high, Potential high, Attention high | 影響 高、将来性 高、注目度 高 |
+| `tag mid` (score 1) | Impact mid, Potential mid, Attention mid | 影響 中、将来性 中、注目度 中 |
+| `tag low` (score 0) | Impact low, Potential low, Attention low | 影響 低、将来性 低、注目度 低 |
 
 | Kind (`kind`) | `en` | `ja` | Meaning |
 | --- | --- | --- | --- |

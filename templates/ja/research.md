@@ -13,7 +13,7 @@ topics:                   # selected topics only, in rank order
     areas: [models, api-cloud]   # 1 or 2 of: models, api-cloud, coding-agents, agent-dev, security, evals-ops
     impact: 2             # 0-2, see AGENTS.md
     potential: 2          # 0-2
-    importance: 2         # 0-2, for the reader
+    attention: 2          # 0-2, discussion in credible venues
 sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed a citation
 ---
 
@@ -25,19 +25,19 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 ## 候補と選定
 
 - 選定 (レポートに載せる):
-    1. トピック 1 の見出し (起点 MM-DD、影響度 2 / 将来性 2 / 重要度 2)。
+    1. トピック 1 の見出し (起点 MM-DD、影響度 2 / 将来性 2 / 注目度 2)。
     2. トピック 2 の見出し (起点 MM-DD、期間前の出来事で `source-id` で初出、1 / 2 / 2)。
 - 見送り (次回の判断材料):
-    3. トピック 3 の見出し (起点 MM-DD、1 / 1 / 1) — 読者にとって何が足りないかを 1 文で。
-    4. トピック 4 の見出し (起点 MM-DD、2 / 2 / 0) — 読者にとって何が足りないかを 1 文で。
+    3. トピック 3 の見出し (起点 MM-DD、1 / 1 / 1) — 何が足りないかを 1 文で。
+    4. トピック 4 の見出し (起点 MM-DD、1 / 2 / 0) — 何が足りないかを 1 文で。
     5. その他の単発項目 — 下記に列挙。
     6. 対象外 (スコープ外) — 下記に列挙。
 
 ## 1. 🧭 トピック 1 の見出し
 
-- 選定 / 影響度 2 / 将来性 2 / 重要度 2 / 起点 MM-DD / 種別: リリース / 領域: モデル、API・クラウド。
+- 選定 / 影響度 2 / 将来性 2 / 注目度 2 / 起点 MM-DD / 種別: リリース / 領域: モデル、API・クラウド。
 - 候補になったフィード項目:
-    - `source-id` MM-DD [項目のタイトル](URL)
+    - `source-id` MM-DD [項目のタイトル](URL) — はてなブックマーク 120 users (取得時点)
     - `source-id` MM-DD [項目のタイトル](URL)
 
 ### 収集した情報
@@ -71,10 +71,10 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 ## 3. 🧪 見送りトピックの見出し
 
-- 見送り / 影響度 1 / 将来性 1 / 重要度 1 / 起点 MM-DD / 種別: 検証・実践 / 領域: コーディングエージェント。
+- 見送り / 影響度 1 / 将来性 1 / 注目度 1 / 起点 MM-DD / 種別: 検証・実践 / 領域: コーディングエージェント。
 - 候補になったフィード項目:
     - `source-id` MM-DD [項目のタイトル](URL)
-- 見送りの理由: 読者にとって何が足りないかを、目的語を省かずに 1 文で書く (例: 発表だけで、試せる設定や数値、学べる設計がまだない)。
+- 見送りの理由: 何が足りないかを、目的語を省かずに 1 文で書く (例: 一部のチームにしか関係せず、発表元の外ではまだ誰も論じていない)。
 
 ## 5. 📎 その他の単発項目
 

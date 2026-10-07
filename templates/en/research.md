@@ -13,7 +13,7 @@ topics:                   # selected topics only, in rank order
     areas: [models, api-cloud]   # 1 or 2 of: models, api-cloud, coding-agents, agent-dev, security, evals-ops
     impact: 2             # 0-2, see AGENTS.md
     potential: 2          # 0-2
-    importance: 2         # 0-2, for the reader
+    attention: 2          # 0-2, discussion in credible venues
 sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed a citation
 ---
 
@@ -25,19 +25,19 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 ## Candidates and selection
 
 - Selected (go into the report):
-    1. Topic 1 heading (anchor MM-DD, impact 2 / potential 2 / importance 2).
+    1. Topic 1 heading (anchor MM-DD, impact 2 / potential 2 / attention 2).
     2. Topic 2 heading (anchor MM-DD, before the window, surfaced by `source-id`, 1 / 2 / 2).
 - Dropped (input for the next run's judgement):
-    3. Topic 3 heading (anchor MM-DD, 1 / 1 / 1) — what it lacks for the reader, in one sentence.
-    4. Topic 4 heading (anchor MM-DD, 2 / 2 / 0) — what it lacks for the reader, in one sentence.
+    3. Topic 3 heading (anchor MM-DD, 1 / 1 / 1) — why it falls short, in one sentence.
+    4. Topic 4 heading (anchor MM-DD, 1 / 2 / 0) — why it falls short, in one sentence.
     5. Other one-off items — listed below.
     6. Out of scope — listed below.
 
 ## 1. 🧭 Topic 1 heading
 
-- Selected / impact 2 / potential 2 / importance 2 / anchor MM-DD / kind: release / areas: models, API and cloud.
+- Selected / impact 2 / potential 2 / attention 2 / anchor MM-DD / kind: release / areas: models, API and cloud.
 - Feed items in this topic:
-    - `source-id` MM-DD [item title](URL)
+    - `source-id` MM-DD [item title](URL) — 120 Hatena Bookmark users when fetched
     - `source-id` MM-DD [item title](URL)
 
 ### Collected information
@@ -71,10 +71,10 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 ## 3. 🧪 Dropped topic heading
 
-- Dropped / impact 1 / potential 1 / importance 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
+- Dropped / impact 1 / potential 1 / attention 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
 - Feed items in this topic:
     - `source-id` MM-DD [item title](URL)
-- Reason for dropping it: one sentence that says what the topic lacks for the reader, such as "an announcement with no setup, numbers or design to learn from yet".
+- Reason for dropping it: one sentence that says why it falls short, such as "a change for few teams that nobody outside the vendor has discussed yet".
 
 ## 5. 📎 Other one-off items
 

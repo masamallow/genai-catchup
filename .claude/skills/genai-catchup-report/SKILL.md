@@ -16,7 +16,7 @@ Follow [AGENTS.md](../../../AGENTS.md) for scope, languages, citations, section 
 - Languages: English is always written.
   When the request names extra languages (`languages: en, ja`), the same two files are also written under `content/<lang>/` from `templates/<lang>/`, following "Languages and editions" in AGENTS.md.
 - Scratch: `work/pages/`, the page cache through which every agent of the run reads web pages (`mise run page`), and `work/sections/`, the topic sections the researchers write; `mise run fetch` empties both.
-- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, keeps up with the field to improve their own and their team's practice, and is asked about AI coding tools.
+- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, follows the field to know what changed and what it means for their team's decisions, and is asked about AI coding tools.
   Headlines are not enough; each topic must carry technical substance.
 
 ## Agents
@@ -52,9 +52,13 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - Check eligibility against `topics` in the front matter of the notes of the last 30 days.
       A topic selected there returns only as a new development, with the continuation section of step 5.
     - An event from before the window is eligible when this run is the first to see it; note the item that surfaced it.
-    - Score impact, potential and importance (0–2 each) as defined in AGENTS.md, one topic at a time.
-      A single item from a reliability-B practitioner source gets one WebSearch to check momentum before it is scored.
-    - Select as AGENTS.md says: every topic with a total of 4 or more, unless its importance is 0, ranked by the total.
+    - Score impact, potential and attention (0–2 each) as defined in AGENTS.md, one topic at a time.
+      A single item from a reliability-B practitioner source gets one WebSearch for further independent write-ups before it is scored.
+    - Look up the engagement behind attention when the candidates do not show it, and keep the figures for the feed-item lines.
+        - Hacker News points are in the item's summary.
+        - Hatena Bookmark users: `curl -s 'https://bookmark.hatenaapis.com/count/entry?url=<url-encoded URL>'`.
+        - Zenn likes: `liked_count` in `curl -s https://zenn.dev/api/articles/<slug>`.
+    - Select as AGENTS.md says: every topic with a total of 4 or more, ranked by the total.
     - Record the count of candidates, the selected topics with their anchor dates and scores, and up to 5 notable dropped topics with scores and a one-line reason each.
 4. Deepen the selected topics with researchers.
     - Prime the page cache with the feed-item URLs of the selected topics: `mise run page -- <url> ...`.
@@ -69,11 +73,11 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - Check every section without reading it: the file exists, and `grep -c '^#### \['` counts at least two sources.
 5. Assemble the research note, English edition.
     - Copy `templates/en/research.md` to `content/en/research/<date>.md`.
-    - Front matter: `date`, `run` (`scheduled` or `manual`), `generated_by`, `window`, `candidates`, `topics` (the selected ones: id, emoji, title, kind, areas, impact, potential, importance), `sources_used` (ids from `sources.yaml` that contributed a citation: those of the selected topics' feed items and those the researchers report).
+    - Front matter: `date`, `run` (`scheduled` or `manual`), `generated_by`, `window`, `candidates`, `topics` (the selected ones: id, emoji, title, kind, areas, impact, potential, attention), `sources_used` (ids from `sources.yaml` that contributed a citation: those of the selected topics' feed items and those the researchers report).
     - `generated_by` names the agent and model that run this skill as the runtime names them, for example `Claude Opus 5.5` or `Codex GPT-6 Sol`; never guess it.
     - Candidates and selection: the scored index of every topic heading (selected first, then dropped), each with anchor date and scores.
     - One `##` heading per topic in priority order.
-    - Selected topics: write the heading, the status line and the feed items, then append the topic's section after a blank line: `cat work/sections/<slug>.md >> content/en/research/<date>.md`.
+    - Selected topics: write the heading, the status line and the feed items with their engagement figures, then append the topic's section after a blank line: `cat work/sections/<slug>.md >> content/en/research/<date>.md`.
       The section holds the rest of the topic: the continuation section when it continues an earlier one, the collected-information section with one `####` per source read and exhaustive bullets, the notes section and the ideas section.
     - Dropped topics: feed items, scores and a one-line reason only, grouped as AGENTS.md describes; write them yourself.
     - Do not write the report's sections (key points, perspectives and debates, technical details) in the note; that synthesis happens in the report.
@@ -86,7 +90,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - The front matter's `footer` is `GenAI Catch-up Report · <date> · 🤖 Generated by <generated_by>`, with the same `generated_by` as the note.
     - The deck opens with summary slides of class `summary`: the date, a lead line linking to `../research/<date>.md` on the first, and one card per selected topic in rank order, laid out as "Slide density" in AGENTS.md says.
       Level tags use the class `high` for 2, `mid` for 1 and `low` for 0.
-    - Decide which topics get a slide of their own as AGENTS.md says: every topic with 5 points or more, and a topic with 4 points when its material fills the three sections.
+    - Decide which topics get a slide of their own as AGENTS.md says: by whether the material fills the three sections, not by the score.
     - One slide per such topic with class `topic`: title with the rank emoji, a one-line lede, left column key points and perspectives and debates, right column technical details (with a Mermaid diagram above it when the mechanism, flow, topology or comparison is clearer drawn), and a `<p class="sources">` line.
     - The other topics go last, on slides of class `others` titled with the edition's label for Other topics: 2 to 4 cards per slide in rank order, each with the rank emoji and title, the facts and technical details as list items, and a `<p class="sources">` line.
     - The report never contains practice guidance or proposals.
@@ -108,7 +112,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
 10. Commit and stop.
     - `git add content state && git commit -m "docs(content): add <date> catch-up"`.
     - Do not push.
-11. Print the completion message: the selected topics with their impact, potential and importance scores and whether each has a slide of its own or sits on an Other topics slide, the dropped topics, the file paths per language, failed sources, and any suggested change to `sources.yaml` (new source found during research, or a source that produced only noise).
+11. Print the completion message: the selected topics with their impact, potential and attention scores and whether each has a slide of its own or sits on an Other topics slide, the dropped topics, the file paths per language, failed sources, and any suggested change to `sources.yaml` (new source found during research, or a source that produced only noise).
 
 ## Failure handling
 
