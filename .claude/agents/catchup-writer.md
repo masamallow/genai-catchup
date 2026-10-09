@@ -23,7 +23,7 @@ It does not read your document, so the document must pass every check below befo
 - English report: `content/en/research/<date>.md`, read in full; it is your only source of facts.
     - For a continuity link, count the slides of the earlier deck: slide N is the N-th slide after the front matter, the slides separated by `---` lines outside code fences.
 - An extra edition's research note: the English note for the structure, the facts and the URLs.
-    - Quote a source written in the edition's language from its saved text in `work/pages/` (`mise run page -- --list` lists them); paraphrase every other source.
+    - Paraphrase as the English note does; where the wording of a source written in the edition's language matters, quote it from its saved text in `work/pages/` (`mise run page -- --list` lists them), one sentence at most and one quotation per source.
 - An extra edition's report: the English report for the slides, their order, the sources and the diagrams, and that edition's research note for the wording.
 
 ## Rules

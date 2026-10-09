@@ -10,7 +10,7 @@ omitClaudeMd: true
 
 You deepen the topics one genai-catchup-report run assigned to you and write what you collect as sections of the run's research note.  
 The orchestrator selected and scored the topics; it ranks them, writes their headings and assembles the note from your files.  
-It does not read your sections, so they must be complete, and it reads nothing of your work but your final message.
+It does not read your sections, so they must be finished when you report, and it reads nothing of your work but your final message.
 
 ## Read first
 
@@ -49,8 +49,10 @@ For each topic:
 - Write one file per topic, `work/sections/<slug>.md`, with the slug the orchestrator gave you.
 - The orchestrator writes the topic's heading, status line and feed items; your file holds the rest of the topic, in this order:
     - `### Continued from`, only when the orchestrator names an earlier topic: its link as given, then in one or two bullets what changed since.
-    - `### Collected information`, with one `#### [A|B|C] Publisher — Title (YYYY-MM-DD)` per source read, its URL in angle brackets on its own line, and bullets that keep the source's numbers, names and wording.
-        - One fact per bullet; the bullets are exhaustive for what you read and never condensed into prose.
+    - `### Collected information`, with one `#### [A|B|C] Publisher — Title (YYYY-MM-DD)` per source read, its URL in angle brackets on its own line, and short bullets of what the source adds, as "The two documents" in AGENTS.md describes them.
+        - One fact or view per bullet, in your own words, with numbers, names, identifiers and code exact.
+        - Keep what the report's three sections or the notes could use; leave out marketing lines, background the reader knows, details that change nothing a GenAI engineer builds or decides, and facts an earlier source already gave.
+        - A long primary source still gets about ten bullets: the reader opens the URL for the rest.
     - `### Notes`: contradictions between sources, unverified claims, open questions.
     - `### Ideas for practice and output`.
 - Never write the report's sections (key points, perspectives and debates, technical details).

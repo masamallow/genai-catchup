@@ -4,7 +4,7 @@ A personal routine for staying current with generative AI: LLM application engin
 
 On the days set in [schedule.yaml](./schedule.yaml), a scheduled Claude Code task fetches a curated set of feeds, keeps the topics worth catching up on for an engineer who leads generative-AI work (events and technical write-ups), deepens each one with several sources, and writes two files per language:
 
-- `content/<lang>/research/YYYY-MM-DD.md` — the source of truth: a dossier per topic (every source read, with its numbers and wording), notes, and ideas for hands-on practice.
+- `content/<lang>/research/YYYY-MM-DD.md` — the source of truth: a dossier per topic (every source read, with the facts and views it adds), notes, and ideas for hands-on practice.
 - `content/<lang>/reports/YYYY-MM-DD.md` — a Marp slide deck: summary slides, one slide per topic (key points, perspectives and debates, technical details, a diagram when it helps), and Other topics slides that gather the thinner topics as cards; practice ideas stay in the note.
 
 English (`content/en/`) is always written; other editions such as `content/ja/` are written when a run asks for them.

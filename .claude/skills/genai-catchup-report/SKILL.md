@@ -78,7 +78,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - Candidates and selection: the scored index of every topic heading (selected first, then dropped), each with anchor date and scores.
     - One `##` heading per topic in priority order.
     - Selected topics: write the heading, the status line and the feed items with their engagement figures, then append the topic's section after a blank line: `cat work/sections/<slug>.md >> content/en/research/<date>.md`.
-      The section holds the rest of the topic: the continuation section when it continues an earlier one, the collected-information section with one `####` per source read and exhaustive bullets, the notes section and the ideas section.
+      The section holds the rest of the topic: the continuation section when it continues an earlier one, the collected-information section with one `####` per source read and short bullets of what it adds, the notes section and the ideas section.
     - Dropped topics: feed items, scores and a one-line reason only, grouped as AGENTS.md describes; write them yourself.
     - Do not write the report's sections (key points, perspectives and debates, technical details) in the note; that synthesis happens in the report.
     - When a topic directly continues one from an earlier note, its continuation section links `[topic N of YYYY-MM-DD](./YYYY-MM-DD.md#n-...)` and says what changed since.

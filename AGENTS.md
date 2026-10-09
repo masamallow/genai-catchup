@@ -38,7 +38,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 
 | Path | Written by | Content |
 | --- | --- | --- |
-| `content/<lang>/research/YYYY-MM-DD.md` | agent | The dossier: one heading per topic in priority order, holding everything collected (one sub-heading per source with verbatim-level bullets), the topic's notes and its ideas for practice and output.<br/>Selected topics are thick, dropped ones thin |
+| `content/<lang>/research/YYYY-MM-DD.md` | agent | The dossier: one heading per topic in priority order, holding the sources read (one sub-heading per source with short bullets of what it adds), the topic's notes and its ideas for practice and output.<br/>Selected topics are thick, dropped ones thin |
 | `content/<lang>/reports/YYYY-MM-DD.md` | agent | The synthesis: Marp slides picked from the dossier — summary slides, one slide per selected topic with key points, perspectives and debates, technical details, and a diagram when it earns its place, then Other topics slides that gather the thinner topics.<br/>No practice guidance, no proposals |
 | `templates/<lang>/` | human | Everything language-specific: the two skeletons and the site strings, see [templates/README.md](./templates/README.md) |
 | `.claude/agents/` | human | The subagents a run starts: `catchup-researcher` deepens a group of topics, `catchup-writer` writes one document from the run's files; see the skill |
@@ -68,11 +68,17 @@ Research note (`templates/<lang>/research.md`):
 
 - One `##` heading per topic, in priority order, numbered.
   The line under the heading carries the status (selected or dropped), the scores, the anchor date, the kind and the areas (vocabulary in [templates/README.md](./templates/README.md)).
-- Under a selected topic: the feed items it gathers, then the collected-information section with one `####` sub-heading per source (`[A|B|C] Publisher — Title (date)` followed by the URL) and bullets that keep the source's numbers, names and wording.
-  The bullets are exhaustive for the sources actually read; do not condense them into prose.
+- Under a selected topic: the feed items it gathers, then the collected-information section with one `####` sub-heading per source read (`[A|B|C] Publisher — Title (date)` followed by the URL) and short bullets of what that source adds.
+    - The bullets are the fact base of the report and of the other editions, not a copy of the source: the reader opens the URL for the rest.
+    - Keep what the report could use and what the notes need: facts with their numbers, names and identifiers, measurements, views and contradictions.
+    - State a fact once, under the first source that gives it, usually the primary; a later source mentions it only to confirm or contradict it.
+    - About ten bullets for the primary source, one to four for any other, one or two for community reaction; a source that adds nothing gets one bullet that says what it confirms.
+    - Paraphrase, keeping numbers, names, identifiers and code exact.
+    - Quote only where the wording itself matters, such as a claim, a commitment or a contested statement: one sentence at most, and one quotation per source.
 - Then the notes section for contradictions between sources, unverified claims and open questions, and the ideas section for what the reader might try or produce — inside the topic, never in a separate section at the end.
-- Depth follows priority: a topic that will make the report gets every relevant source read and extracted; a dropped topic gets its feed items, its scores and a one-line reason.
+- Depth follows priority: a topic that will make the report gets every relevant source read, each with what it adds; a dropped topic gets its feed items, its scores and a one-line reason.
 - Dropped topics that came close get a heading each; the other dropped items go under two headings at the end, other one-off items and out of scope.
+- Notes written before 2026-10-09 keep exhaustive, quote-heavy bullets for every source; they stay as the record and are not a model for later notes.
 
 Report (`templates/<lang>/report.md`):
 

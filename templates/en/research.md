@@ -46,20 +46,20 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 <URL>
 
-- Facts from the primary source, keeping its numbers, names and wording.
-- One fact per bullet; do not condense.
+- A fact the topic rests on, in your own words, with its numbers, names and identifiers exact.
+- About ten such bullets for the primary source; the reader opens the URL for the rest.
 
 #### [B] Publisher — Title (YYYY-MM-DD)
 
 <URL>
 
-- Claims of the independent analysis, and where they differ from the primary source.
+- What this analysis adds, in one to four bullets: a measurement, a view, or where it differs from the primary source.
 
 #### [C] Publisher — Title (YYYY-MM-DD)
 
 <URL>
 
-- Community reaction (supplementary).
+- Community reaction in one or two bullets (supplementary).
 
 ### Notes
 
