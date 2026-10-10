@@ -22,7 +22,10 @@ Each file starts with a header between `---` lines (url, final_url, title, fetch
 method, status, content_type, chars, state), followed by the text: headings as `#`
 lines, list items as `-` lines, links as [text](url) and code fenced. An HTML page
 keeps the content of its <main> or <article> when it has one, and a PDF keeps its text
-page by page. A page read by other means, such as the browser, joins the cache when
+page by page. Text is decoded as a browser would: a byte-order mark, then the charset of
+the Content-Type header, then for HTML and XML the page's own <meta> or XML declaration,
+else UTF-8, with legacy labels such as Shift_JIS read as the superset browsers use
+(windows-31j). A page read by other means, such as the browser, joins the cache when
 its file starts with the same header, with `method: browser`; a lookup prefers it to a
 thin copy of the same URL.
 
@@ -39,6 +42,7 @@ retried twice. The exit status is 1 when a URL failed or came back thin.
 from __future__ import annotations
 
 import argparse
+import codecs
 import hashlib
 import io
 import os
@@ -84,6 +88,22 @@ BLOCK_TAGS = {
 ROOT_RE = re.compile(r"<(?:main|article)\b|role=[\"']main[\"']", re.I)
 HEADING_RE = re.compile(r"^(#{1,6}) ")
 INDENT = "\x00"  # list indentation marker that survives whitespace collapsing
+
+# How text_encoding() finds a page's encoding besides the Content-Type header.
+SNIFF_BYTES = 4096
+BOMS = ((codecs.BOM_UTF8, "utf-8-sig"), (codecs.BOM_UTF16_LE, "utf-16"), (codecs.BOM_UTF16_BE, "utf-16"))
+XML_ENCODING_RE = re.compile(rb"""^\s*<\?xml[^>]*?\bencoding\s*=\s*["']([A-Za-z0-9._:-]+)""", re.I)
+META_CHARSET_RE = re.compile(rb"""<meta\b[^>]*?\bcharset\s*=\s*["']?\s*([A-Za-z0-9._:-]+)""", re.I)
+# Labels that browsers decode with a superset encoding (WHATWG Encoding Standard).
+ENCODING_ALIASES = {
+    **dict.fromkeys(
+        ("shift_jis", "shift-jis", "sjis", "x-sjis", "ms_kanji", "csshiftjis", "windows-31j", "ms932"), "cp932"
+    ),
+    **dict.fromkeys(("iso-8859-1", "iso8859-1", "latin1", "l1", "us-ascii", "ascii", "x-cp1252"), "cp1252"),
+    **dict.fromkeys(("gb2312", "gbk", "x-gbk", "csgb2312", "gb_2312-80"), "gb18030"),
+    **dict.fromkeys(("euc-kr", "ks_c_5601-1987", "windows-949"), "cp949"),
+    "big5": "big5hkscs",
+}
 
 
 class TextExtractor(HTMLParser):
@@ -318,6 +338,35 @@ def html_to_text(html: str, base_url: str) -> tuple[str, str]:
     return whole.title, whole.text
 
 
+def resolve_encoding(label: str | None) -> str | None:
+    """The Python codec for an encoding label, or None when the label is unknown."""
+    if not label:
+        return None
+    name = label.strip().lower()
+    try:
+        return codecs.lookup(ENCODING_ALIASES.get(name, name)).name
+    except LookupError:
+        return None
+
+
+def text_encoding(raw: bytes, declared: str | None, markup: bool) -> str:
+    """Pick the encoding as a browser would: a byte-order mark, then the charset of the
+    Content-Type header, then for HTML and XML the page's own declaration, else UTF-8."""
+    for bom, name in BOMS:
+        if raw.startswith(bom):
+            return name
+    if name := resolve_encoding(declared):
+        return name
+    if markup:
+        head = raw[:SNIFF_BYTES]
+        for pattern in (XML_ENCODING_RE, META_CHARSET_RE):
+            match = pattern.search(head)
+            if match and (name := resolve_encoding(match.group(1).decode("ascii"))):
+                # A declaration readable as ASCII cannot be UTF-16 or UTF-32.
+                return "utf-8" if name.startswith(("utf-16", "utf-32")) else name
+    return "utf-8"
+
+
 def pdf_to_text(data: bytes) -> tuple[str, str]:
     from pypdf import PdfReader
 
@@ -439,7 +488,7 @@ def fetch_once(url: str, client: httpx.Client) -> Result:
                 if len(data) > MAX_BYTES:
                     return Result(url, "failed", detail="size")
             content_type = response.headers.get("content-type", "").split(";")[0].strip().lower()
-            encoding = response.encoding or "utf-8"
+            declared = response.charset_encoding  # None when the header names no charset
             final_url, status = str(response.url), response.status_code
     except httpx.HTTPError as exc:
         return Result(url, "failed", detail=type(exc).__name__)
@@ -449,8 +498,10 @@ def fetch_once(url: str, client: httpx.Client) -> Result:
         if "pdf" in content_type or raw.startswith(b"%PDF"):
             title, text = pdf_to_text(raw)
         elif "html" in content_type or "xml" in content_type:
+            encoding = text_encoding(raw, declared, markup=True)
             title, text = html_to_text(raw.decode(encoding, errors="replace"), final_url)
         elif content_type.startswith("text/") or "json" in content_type:
+            encoding = text_encoding(raw, declared, markup=False)
             title, text = "", raw.decode(encoding, errors="replace").strip() + "\n"
         else:
             return Result(url, "failed", detail=content_type or "type")
