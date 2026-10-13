@@ -139,6 +139,10 @@
   "first_seen": "2026-10-03",
   "source": "aws-whats-new"
  },
+ "https://aws.amazon.com/about-aws/whats-new/2026/10/agentcore-memory-consumption-based-pricing": {
+  "first_seen": "2026-10-13",
+  "source": "aws-whats-new"
+ },
  "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-glm-5-3": {
   "first_seen": "2026-10-08",
   "source": "aws-whats-new"
@@ -175,6 +179,10 @@
   "first_seen": "2026-10-08",
   "source": "aws-whats-new"
  },
+ "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-prefills-guides-acw": {
+  "first_seen": "2026-10-13",
+  "source": "aws-whats-new"
+ },
  "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-sol-ultrafast-amazon": {
   "first_seen": "2026-10-10",
   "source": "aws-whats-new"
@@ -182,6 +190,10 @@
  "https://aws.amazon.com/about-aws/whats-new/2026/10/twelve-labs-pegasus-1-5-aws": {
   "first_seen": "2026-10-10",
   "source": "aws-whats-new"
+ },
+ "https://aws.amazon.com/blogs/machine-learning/accessing-openai-gpt-models-on-amazon-bedrock-with-global-cross-region-inference-in-thailand-malaysia-singapore-indonesia-and-taiwan": {
+  "first_seen": "2026-10-13",
+  "source": "aws-ml-blog-bedrock"
  },
  "https://aws.amazon.com/blogs/machine-learning/add-secure-web-search-to-claude-desktop-with-amazon-bedrock-agentcore": {
   "first_seen": "2026-10-03",
@@ -371,6 +383,10 @@
   "first_seen": "2026-09-28",
   "source": "laiso-newsletter"
  },
+ "https://blog.lai.so/2026-10-12": {
+  "first_seen": "2026-10-13",
+  "source": "laiso-newsletter"
+ },
  "https://blog.lai.so/eli5-archify-explainer-skills": {
   "first_seen": "2026-10-06",
   "source": "laiso-newsletter"
@@ -382,6 +398,10 @@
  "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on": {
   "first_seen": "2026-09-28",
   "source": "hn-claude-code"
+ },
+ "https://boristane.com/blog/self-improving-software-is-inevitable": {
+  "first_seen": "2026-10-13",
+  "source": "hatena-llm"
  },
  "https://clashreport.com/world/articles/houthis-used-claude-code-to-develop-missile-guidance-software-anthropic-s52mnx4pwpo": {
   "first_seen": "2026-09-28",
@@ -615,6 +635,10 @@
   "first_seen": "2026-10-10",
   "source": "classmethod-claude-code"
  },
+ "https://dev.classmethod.jp/articles/20261010-cc-updates-v2-1-296": {
+  "first_seen": "2026-10-13",
+  "source": "classmethod-claude-code"
+ },
  "https://dev.classmethod.jp/articles/aws-devops-agent-claude-code-agent-toolkit-setup": {
   "first_seen": "2026-09-29",
   "source": "classmethod-claude-code"
@@ -626,6 +650,14 @@
  "https://dev.classmethod.jp/articles/aws-wa-agent-preview": {
   "first_seen": "2026-09-29",
   "source": "hatena-llm"
+ },
+ "https://dev.classmethod.jp/articles/bizdev-primer-with-claude-code": {
+  "first_seen": "2026-10-13",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/claude-code-aws-mcp-multi-account": {
+  "first_seen": "2026-10-13",
+  "source": "classmethod-claude-code"
  },
  "https://dev.classmethod.jp/articles/claude-code-block-reads-outside-working-directories": {
   "first_seen": "2026-10-06",
@@ -943,6 +975,14 @@
   "first_seen": "2026-10-01",
   "source": "gcp-agent-platform-release-notes"
  },
+ "https://docs.cloud.google.com/vertex-ai/docs/release-notes#October_11_2026": {
+  "first_seen": "2026-10-13",
+  "source": "gcp-vertex-ai-release-notes"
+ },
+ "https://docs.cloud.google.com/vertex-ai/docs/release-notes#October_12_2026": {
+  "first_seen": "2026-10-13",
+  "source": "gcp-vertex-ai-release-notes"
+ },
  "https://docs.cloud.google.com/vertex-ai/docs/release-notes#September_13_2026": {
   "first_seen": "2026-09-28",
   "source": "gcp-vertex-ai-release-notes"
@@ -985,6 +1025,10 @@
  },
  "https://gigazine.net/news/20261006-woman-arrested-claude-diary": {
   "first_seen": "2026-10-08",
+  "source": "hatena-llm"
+ },
+ "https://gigazine.net/news/20261012-stochastic-parrot": {
+  "first_seen": "2026-10-13",
   "source": "hatena-llm"
  },
  "https://giginet.hateblo.jp/entry/2026/09/22/114642": {
@@ -1093,6 +1137,10 @@
  },
  "https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5": {
   "first_seen": "2026-10-10",
+  "source": "github-changelog-copilot"
+ },
+ "https://github.blog/changelog/2026-10-10-new-controls-and-chat-improvements-in-copilot-for-jetbrains": {
+  "first_seen": "2026-10-13",
   "source": "github-changelog-copilot"
  },
  "https://github.com/anuj0456/OpenArch": {
@@ -1599,6 +1647,10 @@
   "first_seen": "2026-09-29",
   "source": "hatena-llm"
  },
+ "https://simonwillison.net/2026/Oct/12/python-3-15": {
+  "first_seen": "2026-10-13",
+  "source": "simon-willison"
+ },
  "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps": {
   "first_seen": "2026-10-06",
   "source": "simon-willison"
@@ -1703,12 +1755,20 @@
   "first_seen": "2026-10-06",
   "source": "hatena-llm"
  },
+ "https://twitter.com/karpathy/status/2109361546505966046": {
+  "first_seen": "2026-10-13",
+  "source": "hn-llm"
+ },
  "https://type.jp/et/feature/31834": {
   "first_seen": "2026-10-06",
   "source": "hatena-llm"
  },
  "https://voluntas.ghost.io/2026-10-first-half-llm": {
   "first_seen": "2026-10-06",
+  "source": "hatena-llm"
+ },
+ "https://voluntas.ghost.io/migrate-opencode-to-pi": {
+  "first_seen": "2026-10-13",
   "source": "hatena-llm"
  },
  "https://www.anthropic.com/news/2026-usage-policy-update": {
@@ -1883,6 +1943,10 @@
   "first_seen": "2026-09-28",
   "source": "ainews"
  },
+ "https://www.latent.space/p/ainews-typesafejev-at-100m-arr-75b": {
+  "first_seen": "2026-10-13",
+  "source": "ainews"
+ },
  "https://www.latent.space/p/ainews-xiaomi-mimo-v26-pro-1t-a42b": {
   "first_seen": "2026-09-28",
   "source": "ainews"
@@ -1947,6 +2011,10 @@
   "first_seen": "2026-09-28",
   "source": "publickey"
  },
+ "https://www.publickey1.jp/blog/26/openid_foundationbtconjp2026.html": {
+  "first_seen": "2026-10-13",
+  "source": "publickey"
+ },
  "https://www.publickey1.jp/blog/26/state_of_devs_2026_ai.html": {
   "first_seen": "2026-10-06",
   "source": "publickey"
@@ -1970,6 +2038,10 @@
  "https://www.sbbit.jp/article/cont1/186367": {
   "first_seen": "2026-09-28",
   "source": "hatena-claude-code"
+ },
+ "https://www.techno-edge.net/article/2026/10/12/5574.html": {
+  "first_seen": "2026-10-13",
+  "source": "hatena-llm"
  },
  "https://zenn.dev/339/articles/56ef43afde8bd2": {
   "first_seen": "2026-10-01",
@@ -2007,12 +2079,20 @@
   "first_seen": "2026-09-29",
   "source": "hatena-llm"
  },
+ "https://zenn.dev/aws_japan/articles/aws-bedrock-cur2-user-cost-dashboard": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/berobero/articles/steam-update-ssd-writes": {
   "first_seen": "2026-10-10",
   "source": "zenn-trending"
  },
  "https://zenn.dev/bita/articles/1616afdb93c4a6": {
   "first_seen": "2026-10-10",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/branbran/articles/047821d64590f0": {
+  "first_seen": "2026-10-13",
   "source": "zenn-trending"
  },
  "https://zenn.dev/canary_techblog/articles/348d976da70857": {
@@ -2095,8 +2175,16 @@
   "first_seen": "2026-09-29",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/headwaters/articles/6e889f79ee9f2e": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/hopetekigozaru/articles/jest-ci-hang-2core-tanstack-query": {
   "first_seen": "2026-10-08",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/kashiwabaray/articles/fc2d097da71f30": {
+  "first_seen": "2026-10-13",
   "source": "zenn-trending"
  },
  "https://zenn.dev/kevin_namba/books/afe09c60f698e8": {
@@ -2105,6 +2193,22 @@
  },
  "https://zenn.dev/knowledgework/articles/2691721311c2e4": {
   "first_seen": "2026-10-01",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/komatsuh/articles/komatsuh_mozc_updates_from_2025_10": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/komlock_lab/articles/besu-local-network-handson": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/kotap/articles/clip-image-embedding": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/kotton_mas/articles/rc-basics-05-anomaly-detection": {
+  "first_seen": "2026-10-13",
   "source": "zenn-trending"
  },
  "https://zenn.dev/kyami/articles/97231d0de16f31": {
@@ -2119,6 +2223,10 @@
   "first_seen": "2026-09-28",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/mattn/articles/6e9996319ac099": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/mazrean/articles/bd9b563ace18db": {
   "first_seen": "2026-09-29",
   "source": "zenn-trending"
@@ -2131,6 +2239,10 @@
   "first_seen": "2026-10-06",
   "source": "hatena-ai-agent"
  },
+ "https://zenn.dev/mkj/articles/speech-tts-japanese-2026": {
+  "first_seen": "2026-10-13",
+  "source": "hatena-llm"
+ },
  "https://zenn.dev/muit_techblog/articles/6ea28887c79457": {
   "first_seen": "2026-10-10",
   "source": "zenn-trending"
@@ -2141,6 +2253,10 @@
  },
  "https://zenn.dev/neurogica/articles/a37c2fdb8bc0d4": {
   "first_seen": "2026-10-08",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/nishino_hiroki/articles/d7570d3bb3408f": {
+  "first_seen": "2026-10-13",
   "source": "zenn-trending"
  },
  "https://zenn.dev/nogu66/articles/claude-code-function-hooks-claude-mods": {
@@ -2195,6 +2311,10 @@
   "first_seen": "2026-10-08",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/shimitaro/articles/eb45d8d63c7bd1": {
+  "first_seen": "2026-10-13",
+  "source": "hatena-ai-agent"
+ },
  "https://zenn.dev/shunei/articles/google-maps-embed-billing": {
   "first_seen": "2026-10-08",
   "source": "zenn-trending"
@@ -2247,6 +2367,10 @@
   "first_seen": "2026-09-28",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/uhyo/articles/react-profession-bench-20": {
+  "first_seen": "2026-10-13",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/ultrasupara/articles/7daaaf4f7aceed": {
   "first_seen": "2026-10-10",
   "source": "zenn-trending"
@@ -2269,6 +2393,10 @@
  },
  "https://zenn.dev/ymotongpoo/books/observability-platform-with-otel": {
   "first_seen": "2026-09-28",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/yoshia/articles/cpp2-section2-string-operations-0bc4a0ca4858": {
+  "first_seen": "2026-10-13",
   "source": "zenn-trending"
  },
  "https://zenn.dev/yoshihiko555/articles/ea2db6070058b3": {
