@@ -88,6 +88,8 @@ Report (`templates/<lang>/report.md`):
     - A topic whose material would leave about half a slide empty goes on an Other topics slide instead, as a card of facts, technical details and sources.
     - An Other topics slide holds 2 to 4 topics, so a topic left alone gets a topic slide.
 - Each topic slide synthesises three sections from the dossier: key points (what happened, with numbers; facts only, opinions belong in the next section), perspectives and debates (how the primary source frames it, independent perspectives, including ones written in the languages of the requested editions when they exist, constraints), technical details (identifiers, stack, platform or service, pricing or limits, specs).
+- The lede says what happened and when, in one sentence.
+    - Engagement figures, such as Hacker News points, Hatena Bookmark users or Zenn likes, stay on the note's feed-item lines and appear nowhere in the report; the attention tag carries that information.
 - The report never contains practice guidance or proposals.
 - A diagram belongs on a slide when it shows a mechanism, a flow, a topology or a comparison that bullets cannot show as clearly; a diagram that only decorates is left out.
   Write it as a ```` ```mermaid ```` fence (flowchart, sequence, state, class, ER or xychart), keep it to about 8 nodes laid out top to bottom (the column is narrow), and put it in the right column above the technical-details bullets.
