@@ -46,8 +46,8 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 <URL>
 
-- A fact the topic rests on, in your own words, with its numbers, names and identifiers exact.
-- About ten such bullets for the primary source; the reader opens the URL for the rest.
+- A fact the topic rests on, in one sentence of your own words, with its numbers, names and identifiers exact.
+- At most ten such bullets for the primary source, none nested; the reader opens the URL for the rest.
 
 #### [B] Publisher — Title (YYYY-MM-DD)
 
@@ -60,6 +60,8 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 <URL>
 
 - Community reaction in one or two bullets (supplementary).
+
+Also read: [Title](URL), [Title](URL).
 
 ### Notes
 

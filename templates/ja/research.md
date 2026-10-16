@@ -46,8 +46,8 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 <URL>
 
-- トピックの土台になる事実を自分の言葉で書き、数値・名称・識別子は正確に残す。
-- 一次情報でも 10 項目程度にとどめ、残りは URL 先に任せる。
+- トピックの土台になる事実を 1 文で自分の言葉で書き、数値・名称・識別子は正確に残す。
+- 一次情報でも入れ子なしの 10 項目までにとどめ、残りは URL 先に任せる。
 
 #### [B] 発行元 — タイトル (YYYY-MM-DD)
 
@@ -60,6 +60,8 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 <URL>
 
 - コミュニティの反応を 1〜2 項目で (補足)。
+
+他に読んだページ: [タイトル](URL)、[タイトル](URL)。
 
 ### メモ
 

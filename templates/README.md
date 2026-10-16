@@ -34,6 +34,7 @@ The templates are the source of truth; this table lines them up.
 | Research: what the reader might try | Ideas for practice and output | 実践やアウトプットの提案 |
 | Research: unit of selection | Topic | トピック |
 | Research: feed items of a topic | Feed items in this topic | 候補になったフィード項目 |
+| Research: pages read without a sub-heading | Also read | 他に読んだページ |
 | Research: minor dropped items | Other one-off items | その他の単発項目 |
 | Research: dropped as out of scope | Out of scope | 対象外 (スコープ外) |
 | Research: continuation of an earlier topic | Continued from | 前回からの継続 |

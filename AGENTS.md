@@ -68,17 +68,21 @@ Research note (`templates/<lang>/research.md`):
 
 - One `##` heading per topic, in priority order, numbered.
   The line under the heading carries the status (selected or dropped), the scores, the anchor date, the kind and the areas (vocabulary in [templates/README.md](./templates/README.md)).
-- Under a selected topic: the feed items it gathers, then the collected-information section with one `####` sub-heading per source read (`[A|B|C] Publisher — Title (date)` followed by the URL) and short bullets of what that source adds.
+- Under a selected topic: the feed items it gathers, then the collected-information section with one `####` sub-heading per source that earns one (`[A|B|C] Publisher — Title (date)` followed by the URL) and short bullets of what that source adds.
     - The bullets are the fact base of the report and of the other editions, not a copy of the source: the reader opens the URL for the rest.
     - Keep what the report could use and what the notes need: facts with their numbers, names and identifiers, measurements, views and contradictions.
     - State a fact once, under the first source that gives it, usually the primary; a later source mentions it only to confirm or contradict it.
-    - About ten bullets for the primary source, one to four for any other, one or two for community reaction; a source that adds nothing gets one bullet that says what it confirms.
+    - A topic has at most seven sub-headings: the primary and at most one more A page, such as the docs or the model card, up to three B sources, and up to two C sources, one per venue.
+    - At most ten bullets for the primary source, one to four for any other B or A source, one or two for community reaction, and at most thirty for the topic; a source that adds nothing gets one bullet that says what it confirms, or a place on the Also-read line.
+    - A bullet is one sentence of at most about 110 em of display width (about 200 Latin or 110 Japanese characters), never nested.
+    - Pages read beyond the sub-headings go on one Also-read line (label in [templates/README.md](./templates/README.md)) with their links and no bullets; background older than 30 days is cited inline in the notes section rather than under a sub-heading.
     - Paraphrase, keeping numbers, names, identifiers and code exact.
     - Quote only where the wording itself matters, such as a claim, a commitment or a contested statement: one sentence at most, and one quotation per source.
+    - `mise run lint` enforces the counts, the width and the nesting on notes dated 2026-10-17 or later and on `work/sections/` (rule R4).
 - Then the notes section for contradictions between sources, unverified claims and open questions, and the ideas section for what the reader might try or produce — inside the topic, never in a separate section at the end.
-- Depth follows priority: a topic that will make the report gets every relevant source read, each with what it adds; a dropped topic gets its feed items, its scores and a one-line reason.
+- Depth follows priority: a topic that will make the report gets its sources read, each sub-heading saying what that source adds; a dropped topic gets its feed items, its scores and a one-line reason.
 - Dropped topics that came close get a heading each; the other dropped items go under two headings at the end, other one-off items and out of scope.
-- Notes written before 2026-10-09 keep exhaustive, quote-heavy bullets for every source; they stay as the record and are not a model for later notes.
+- Notes written before 2026-10-17 stay as the record and are not a model for later notes: the ones before 2026-10-09 keep exhaustive, quote-heavy bullets for every source, and the ones up to 2026-10-15 read about eighteen sources per topic with long, nested bullets.
 
 Report (`templates/<lang>/report.md`):
 

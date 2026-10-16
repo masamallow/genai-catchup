@@ -15,6 +15,10 @@ R3  Slide density (reports/ directories only): a topic slide column holds at mos
     items, each at most 68 em of display width (full-width characters count 1, others
     0.55), a summary slide holds at most 5 cards, and an Other topics slide holds 2 to 4
     cards with at most 6, 3 or 2 list items each (for 2, 3 or 4 cards) of the same width.
+R4  Note density (research/ notes dated 2026-10-17 or later, and work/sections/): a topic
+    has at most 7 source sub-headings ("#### [A|B|C] ...") and at most 30 bullets under
+    them; an A source has at most 10 bullets, a B source 4, a C source 2; a source bullet
+    is never nested and is at most 110 em wide (one sentence).
 
 Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments.
 Usage: uv run scripts/lint_md.py [PATH ...]   (default: content templates)
@@ -85,17 +89,25 @@ MAX_SUMMARY_CARDS = 5
 MAX_ITEMS_PER_OTHER_CARD = {2: 6, 3: 3, 4: 2}  # cards on an Other topics slide -> items per card
 LIST_ITEM_RE = re.compile(r"^\s*([-*+]|\d+\.)\s+(.*)$")
 
+R4_SINCE = "2026-10-17"  # earlier notes stay as the record (AGENTS.md, "The two documents")
+MAX_SOURCES_PER_TOPIC = 7
+MAX_BULLETS_PER_SOURCE = {"A": 10, "B": 4, "C": 2}
+MAX_BULLETS_PER_TOPIC = 30
+MAX_SOURCE_BULLET_WIDTH_EM = 110.0  # one sentence: about 200 Latin or 110 Japanese characters
+SOURCE_HEADING_RE = re.compile(r"^#### \[([ABC])\]")
+HEADING_RE = re.compile(r"^#{1,6} ")
+
 
 def display_width(text: str) -> float:
     """Approximate rendered width in em: full-width glyphs are 1, the rest about 0.55."""
     return sum(1.0 if unicodedata.east_asian_width(ch) in ("W", "F") else 0.55 for ch in text)
 
 
-def item_width_problem(path: Path, lineno: int, item: str) -> list[str]:
+def item_width_problem(path: Path, lineno: int, item: str, limit: float = MAX_ITEM_WIDTH_EM, rule: str = "R3") -> list[str]:
     plain = INLINE_CODE_RE.sub(lambda c: c.group(0).strip("`"), LINK_RE.sub(r"\1", item))
     width = display_width(plain)
-    if width > MAX_ITEM_WIDTH_EM:
-        return [f"{path}:{lineno}: R3 list item is about {width:.0f} em wide (max {MAX_ITEM_WIDTH_EM:.0f})"]
+    if width > limit:
+        return [f"{path}:{lineno}: {rule} list item is about {width:.0f} em wide (max {limit:.0f})"]
     return []
 
 
@@ -155,6 +167,67 @@ def lint_density(path: Path, lines: list[str], start: int) -> list[str]:
     return problems
 
 
+def r4_applies(path: Path) -> bool:
+    """R4 covers the researchers' section files and the notes written since the rule exists."""
+    if path.parent.name == "sections":
+        return True
+    return path.parent.name == "research" and path.stem[:10] >= R4_SINCE
+
+
+def lint_note_density(path: Path, lines: list[str], start: int, kinds: list[str | None]) -> list[str]:
+    """R4: cap the sources of a topic and the bullets under each source (research notes and work/sections/)."""
+    problems: list[str] = []
+    topic_at = 0  # line of the current "## " heading; a section file has none and is one topic
+    topic_sources = topic_bullets = 0
+    source: list | None = None  # [grade, line, bullets] of the current "#### [A|B|C]" block
+
+    def close_source() -> None:
+        nonlocal source
+        if source:
+            grade, at, n = source
+            if n > MAX_BULLETS_PER_SOURCE[grade]:
+                problems.append(f"{path}:{at + 1}: R4 [{grade}] source has {n} bullets (max {MAX_BULLETS_PER_SOURCE[grade]})")
+        source = None
+
+    def close_topic() -> None:
+        nonlocal topic_sources, topic_bullets
+        close_source()
+        if topic_sources > MAX_SOURCES_PER_TOPIC:
+            problems.append(f"{path}:{topic_at + 1}: R4 topic has {topic_sources} sources (max {MAX_SOURCES_PER_TOPIC})")
+        if topic_bullets > MAX_BULLETS_PER_TOPIC:
+            problems.append(f"{path}:{topic_at + 1}: R4 topic has {topic_bullets} source bullets (max {MAX_BULLETS_PER_TOPIC})")
+        topic_sources = topic_bullets = 0
+
+    for i in range(start, len(lines)):
+        if kinds[i] == "fence":
+            continue
+        line = lines[i]
+        if line.startswith("## "):
+            close_topic()
+            topic_at = i
+            continue
+        m = SOURCE_HEADING_RE.match(line)
+        if m:
+            close_source()
+            source = [m.group(1), i, 0]
+            topic_sources += 1
+            continue
+        if HEADING_RE.match(line):
+            close_source()
+            continue
+        if source is None:
+            continue
+        item = LIST_ITEM_RE.match(line)
+        if item:
+            if line[0] in " \t":
+                problems.append(f"{path}:{i + 1}: R4 nested bullet under a source -> one sentence per bullet, no nesting")
+            source[2] += 1
+            topic_bullets += 1
+            problems += item_width_problem(path, i + 1, item.group(2), MAX_SOURCE_BULLET_WIDTH_EM, "R4")
+    close_topic()
+    return problems
+
+
 def lint_file(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8").split("\n")
     problems: list[str] = []
@@ -197,6 +270,8 @@ def lint_file(path: Path) -> list[str]:
             problems.append(f"{path}:{i + 1}: R2 trailing two spaces are not needed here")
     if path.parent.name == "reports":
         problems += lint_density(path, lines, start)
+    if r4_applies(path):
+        problems += lint_note_density(path, lines, start, kinds)
     return problems
 
 
