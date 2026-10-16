@@ -41,6 +41,8 @@ The templates are the source of truth; this table lines them up.
 | Report: framing, perspectives, constraints | Perspectives and debates | 見方と論点 |
 | Report: identifiers, stack, pricing, specs | Technical details | 技術要素 |
 | Report: slide that gathers the thinner topics | Other topics | その他のトピック |
+| Report: back link in the header | ↑ Summary | ↑ 目次 |
+| Report: link to the topic in the note | Note | 調査ノート |
 | Labels | Selected, Dropped, Impact, Potential, Attention, Anchor, before the window, Kind, Areas, Background, unverified | 選定、見送り、影響度、将来性、注目度、起点、期間前の出来事、種別、領域、背景、未確認 |
 
 ## Tags on the summary cards

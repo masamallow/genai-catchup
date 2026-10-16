@@ -91,6 +91,10 @@ Report (`templates/<lang>/report.md`):
 - The lede says what happened and when, in one sentence.
     - Engagement figures, such as Hacker News points, Hatena Bookmark users or Zenn likes, stay on the note's feed-item lines and appear nowhere in the report; the attention tag carries that information.
 - The report never contains practice guidance or proposals.
+- The deck links its parts.
+    - The front matter's `header` is a back link to the first slide; the summary slides blank it with `<!-- _header: "" -->`.
+    - Each summary card's title links to the slide that holds the topic as `#N`, by slide number.
+    - Each topic slide and each Other topics card ends its sources line with a link to the topic in the note, `../research/<date>.md#topic-N`; the build gives every numbered topic heading that anchor and rewrites `.md` to `.html`.
 - A diagram belongs on a slide when it shows a mechanism, a flow, a topology or a comparison that bullets cannot show as clearly; a diagram that only decorates is left out.
   Write it as a ```` ```mermaid ```` fence (flowchart, sequence, state, class, ER or xychart), keep it to about 8 nodes laid out top to bottom (the column is narrow), and put it in the right column above the technical-details bullets.
   Diagram labels follow the edition's language.
@@ -152,9 +156,9 @@ The frame is 1280x720 and nothing scrolls, so `mise run lint` enforces these lim
 - Topic slide: each column holds at most 8 list items, and each item is at most about 68 em of display width (two lines; full-width characters count 1, others 0.55) after stripping link syntax.
     - Left column: key points (up to 5 items) and perspectives and debates (up to 3 items).
     - Right column: technical details (up to 6 items), or a diagram plus up to 3 items.
-- The lede is one sentence and the sources line holds at most 4 links.
+- The lede is one sentence and the sources line holds at most 4 source links plus the link to the note.
 - Other topics slide: 2 to 4 cards in `<div class="cards">`, laid out by their number: two side by side, three or four stacked.
     - Pick the grouping by the amount of text: topics with more to say go two to a slide.
-    - A card has the title, list items of at most about 68 em each, and a sources line of at most 3 links.
+    - A card has the title, list items of at most about 68 em each, and a sources line of at most 3 source links plus the link to the note.
     - Two cards hold at most 6 items each, three cards at most 3 each, and four cards at most 2 each.
 - When a slide overflows, cut words, not sections.

@@ -22,6 +22,8 @@ its tree, and every index and research page links to the other languages.
 Links to sibling Markdown files such as `./2026-09-22.md#3`, `../research/x.md` or
 `../../ja/research/x.md` are rewritten to `.html`, so the same links work on GitHub
 and on the site.
+Every numbered topic heading of a research note also gets the anchor `topic-N`, so decks
+and later notes link `research/<date>.md#topic-N` without computing the heading's slug.
 """
 
 from __future__ import annotations
@@ -45,6 +47,7 @@ SITE_TITLE = "GenAI Catch-up Reports"
 FRONT_MATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n", re.S)
 MD_LINK_RE = re.compile(r'(href=")(\.\.?/[^"#?]*?)\.md(#[^"]*)?(")')
 ALERT_RE = re.compile(r"^(>\s*)\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]", re.M)
+TOPIC_HEADING_RE = re.compile(r'(<h2 id="[^"]*">)(\d+)\. ')  # "## N. ..." topic headings, which get the anchor topic-N
 
 TEMPLATES = ROOT / "templates"
 # Strings of the site chrome come from templates/<lang>/site.yaml; these are the fallbacks.
@@ -176,6 +179,7 @@ def build_research(lang: str, report_stems: set[str], langs: list[str]) -> list[
         front, body = split_front_matter(src.read_text(encoding="utf-8"))
         body = ALERT_RE.sub(lambda m: f"{m.group(1)}**{m.group(2)}**", body)
         rendered = markdown.markdown(body, extensions=["extra", "toc", "sane_lists"])
+        rendered = TOPIC_HEADING_RE.sub(r'\1<a id="topic-\2"></a>\2. ', rendered)
         if front.get("generated_by"):
             # the agent and model that wrote the note, in small text under the title
             line = f'<p class="meta generated">{html.escape(strings["generated"])} {html.escape(str(front["generated_by"]))}</p>'

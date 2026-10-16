@@ -22,6 +22,7 @@ It does not read your document, so the document must pass every check below befo
 
 - English report: `content/en/research/<date>.md`, read in full; it is your only source of facts.
     - For a continuity link, count the slides of the earlier deck: slide N is the N-th slide after the front matter, the slides separated by `---` lines outside code fences.
+    - The summary cards link to this deck's slides the same way, so settle which topics get a slide of their own before writing the cards.
 - An extra edition's research note: the English note for the structure, the facts and the URLs.
     - Paraphrase as the English note does; where the wording of a source written in the edition's language matters, quote it from its saved text in `work/pages/` (`mise run page -- --list` lists them), one sentence at most and one quotation per source.
 - An extra edition's report: the English report for the slides, their order, the sources and the diagrams, and that edition's research note for the wording.
@@ -30,8 +31,7 @@ It does not read your document, so the document must pass every check below befo
 
 - An extra edition shares everything with the English one but the language, as AGENTS.md says; restate the facts as a native technical writer would, never sentence by sentence.
 - Never put a paraphrase in quotation marks, `「」` included.
-- A continuation link in an extra edition points at that edition's earlier note.
-    - python-markdown builds a heading's anchor from its text and drops the characters it cannot transliterate, so compute the anchor rather than reusing the English one: `uv run --with markdown python -c 'from markdown.extensions.toc import slugify; print(slugify("<heading>", "-"))'`.
+- A continuation link is the same in every edition, `./YYYY-MM-DD.md#topic-N`, since each edition's notes sit side by side and the build gives every numbered topic heading the anchor `topic-N`; only the link text changes language.
 - In Mermaid, write xychart labels without quotes and keep sequence-diagram labels short.
 - Inside HTML cards, write code as `<code>`, not with backticks.
 - Write a long document in parts: the front matter and the header first, then one topic per call, appended with a quoted heredoc, linting as you go.

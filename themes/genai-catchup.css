@@ -228,6 +228,16 @@ section.summary .card .tags {
   margin-top: 8px;
 }
 
+/* card titles link to the topic's slide */
+section.summary .card h3 a {
+  color: inherit;
+  border-bottom: 0;
+}
+
+section.summary .card h3 a:hover {
+  color: var(--accent);
+}
+
 /* ---- topic slide ------------------------------------------------------ */
 
 section.topic {
