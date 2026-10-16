@@ -76,7 +76,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - Front matter: `date`, `run` (`scheduled` or `manual`), `generated_by`, `window`, `candidates`, `topics` (the selected ones: id, emoji, title, kind, areas, impact, potential, attention), `sources_used` (ids from `sources.yaml` that contributed a citation: those of the selected topics' feed items and those the researchers report).
     - `generated_by` names the agent and model that run this skill as the runtime names them, for example `Claude Opus 5.5` or `Codex GPT-6 Sol`; never guess it.
     - Candidates and selection: the scored index of every topic heading (selected first, then dropped), each with anchor date and scores.
-    - One `##` heading per topic in priority order.
+    - One `##` heading per topic in priority order, each ending with `<a id="topic-N"></a>` as the template shows.
     - Selected topics: write the heading, the status line and the feed items with their engagement figures, then append the topic's section after a blank line: `cat work/sections/<slug>.md >> content/en/research/<date>.md`.
       The section holds the rest of the topic: the continuation section when it continues an earlier one, the collected-information section with one `####` per source read and short bullets of what it adds, the notes section and the ideas section.
     - Dropped topics: feed items, scores and a one-line reason only, grouped as AGENTS.md describes; write them yourself.
@@ -96,7 +96,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - One slide per such topic with class `topic`: title with the rank emoji, a one-line lede, left column key points and perspectives and debates, right column technical details (with a Mermaid diagram above it when the mechanism, flow, topology or comparison is clearer drawn), and a `<p class="sources">` line that ends with the link to the topic in the note, `../research/<date>.md#topic-N`, labelled as the template shows.
     - The other topics go last, on slides of class `others` titled with the edition's label for Other topics: 2 to 4 cards per slide in rank order, each with the rank emoji and title, the facts and technical details as list items, and a `<p class="sources">` line that ends with the same link to the note.
     - The report never contains practice guidance or proposals.
-    - Links to slides use slide numbers, so continuity links point at the earlier deck as `./YYYY-MM-DD.md#N`; links into a note use `#topic-N`, the anchor the build gives every numbered topic heading; the build rewrites `.md` to `.html`.
+    - Links to slides use slide numbers, so continuity links point at the earlier deck as `./YYYY-MM-DD.md#N`; links into a note use `#topic-N`, the anchor every numbered topic heading carries; the build rewrites `.md` to `.html`.
     - Respect the density limits in AGENTS.md.
     - The writer's final message lists the slides; keep it for the completion message.
 7. Write the extra editions.

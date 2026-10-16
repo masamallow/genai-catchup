@@ -66,7 +66,7 @@ Nothing is summarised in the note that the report will summarise again.
 
 Research note (`templates/<lang>/research.md`):
 
-- One `##` heading per topic, in priority order, numbered.
+- One `##` heading per topic, in priority order, numbered, ending with its anchor `<a id="topic-N"></a>` so that links into the note work on GitHub and on the site (`mise run lint` checks it, rule R5).
   The line under the heading carries the status (selected or dropped), the scores, the anchor date, the kind and the areas (vocabulary in [templates/README.md](./templates/README.md)).
 - Under a selected topic: the feed items it gathers, then the collected-information section with one `####` sub-heading per source that earns one (`[A|B|C] Publisher — Title (date)` followed by the URL) and short bullets of what that source adds.
     - The bullets are the fact base of the report and of the other editions, not a copy of the source: the reader opens the URL for the rest.
@@ -98,7 +98,7 @@ Report (`templates/<lang>/report.md`):
 - The deck links its parts.
     - The front matter's `header` is a back link to the first slide; the summary slides blank it with `<!-- _header: "" -->`.
     - Each summary card's title links to the slide that holds the topic as `#N`, by slide number.
-    - Each topic slide and each Other topics card ends its sources line with a link to the topic in the note, `../research/<date>.md#topic-N`; the build gives every numbered topic heading that anchor and rewrites `.md` to `.html`.
+    - Each topic slide and each Other topics card ends its sources line with a link to the topic in the note, `../research/<date>.md#topic-N`, the anchor every numbered topic heading carries; the build rewrites `.md` to `.html`.
 - A diagram belongs on a slide when it shows a mechanism, a flow, a topology or a comparison that bullets cannot show as clearly; a diagram that only decorates is left out.
   Write it as a ```` ```mermaid ```` fence (flowchart, sequence, state, class, ER or xychart), keep it to about 8 nodes laid out top to bottom (the column is narrow), and put it in the right column above the technical-details bullets.  
   Diagram labels follow the edition's language.

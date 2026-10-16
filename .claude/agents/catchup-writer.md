@@ -31,7 +31,7 @@ It does not read your document, so the document must pass every check below befo
 
 - An extra edition shares everything with the English one but the language, as AGENTS.md says; restate the facts as a native technical writer would, never sentence by sentence.
 - Never put a paraphrase in quotation marks, `「」` included.
-- A continuation link is the same in every edition, `./YYYY-MM-DD.md#topic-N`, since each edition's notes sit side by side and the build gives every numbered topic heading the anchor `topic-N`; only the link text changes language.
+- A continuation link is the same in every edition, `./YYYY-MM-DD.md#topic-N`, since each edition's notes sit side by side and every numbered topic heading carries the anchor `<a id="topic-N"></a>`; only the link text changes language.
 - In Mermaid, write xychart labels without quotes and keep sequence-diagram labels short.
 - Inside HTML cards, write code as `<code>`, not with backticks.
 - Write a long document in parts: the front matter and the header first, then one topic per call, appended with a quoted heredoc, linting as you go.

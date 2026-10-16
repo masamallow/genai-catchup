@@ -33,7 +33,7 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
     5. Other one-off items — listed below.
     6. Out of scope — listed below.
 
-## 1. 🧭 Topic 1 heading
+## 1. 🧭 Topic 1 heading <a id="topic-1"></a>
 
 - Selected / impact 2 / potential 2 / attention 2 / anchor MM-DD / kind: release / areas: models, API and cloud.
 - Feed items in this topic:
@@ -71,18 +71,18 @@ Also read: [Title](URL), [Title](URL).
 
 - What to try, at what scale, and what it would verify.
 
-## 3. 🧪 Dropped topic heading
+## 3. 🧪 Dropped topic heading <a id="topic-3"></a>
 
 - Dropped / impact 1 / potential 1 / attention 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
 - Feed items in this topic:
     - `source-id` MM-DD [item title](URL)
 - Reason for dropping it: one sentence that says why it falls short, such as "a change for few teams that nobody outside the vendor has discussed yet".
 
-## 5. 📎 Other one-off items
+## 5. 📎 Other one-off items <a id="topic-5"></a>
 
 - Dropped / each scored on its own, none close to the threshold.
 - `source-id` MM-DD the item in a few words.
 
-## 6. 🚫 Out of scope
+## 6. 🚫 Out of scope <a id="topic-6"></a>
 
 - `source-id` MM-DD the item in a few words.

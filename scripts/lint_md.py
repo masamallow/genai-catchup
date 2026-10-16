@@ -19,6 +19,9 @@ R4  Note density (research/ notes dated 2026-10-17 or later, and work/sections/)
     has at most 7 source sub-headings ("#### [A|B|C] ...") and at most 30 bullets under
     them; an A source has at most 10 bullets, a B source 4, a C source 2; a source bullet
     is never nested and is at most 110 em wide (one sentence).
+R5  Topic anchors (research/ directories only): every numbered "## N. ..." heading ends
+    with <a id="topic-N"></a>, the anchor that slide and continuation links use and that
+    GitHub and the site both honour.
 
 Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments.
 Usage: uv run scripts/lint_md.py [PATH ...]   (default: content, templates and the rule documents)
@@ -96,6 +99,8 @@ MAX_BULLETS_PER_TOPIC = 30
 MAX_SOURCE_BULLET_WIDTH_EM = 110.0  # one sentence: about 200 Latin or 110 Japanese characters
 SOURCE_HEADING_RE = re.compile(r"^#### \[([ABC])\]")
 HEADING_RE = re.compile(r"^#{1,6} ")
+NUMBERED_H2_RE = re.compile(r"^## (\d+)\. ")
+TOPIC_ANCHOR_RE = re.compile(r'<a id="topic-(\d+)"></a>\s*$')
 
 
 def display_width(text: str) -> float:
@@ -228,6 +233,21 @@ def lint_note_density(path: Path, lines: list[str], start: int, kinds: list[str 
     return problems
 
 
+def lint_topic_anchors(path: Path, lines: list[str], start: int, kinds: list[str | None]) -> list[str]:
+    """R5: every numbered topic heading of a research note ends with its anchor <a id="topic-N"></a>."""
+    problems: list[str] = []
+    for i in range(start, len(lines)):
+        if kinds[i] == "fence":
+            continue
+        m = NUMBERED_H2_RE.match(lines[i])
+        if not m:
+            continue
+        anchor = TOPIC_ANCHOR_RE.search(lines[i])
+        if not anchor or anchor.group(1) != m.group(1):
+            problems.append(f'{path}:{i + 1}: R5 topic heading must end with <a id="topic-{m.group(1)}"></a>')
+    return problems
+
+
 def lint_file(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8").split("\n")
     problems: list[str] = []
@@ -272,6 +292,8 @@ def lint_file(path: Path) -> list[str]:
         problems += lint_density(path, lines, start)
     if r4_applies(path):
         problems += lint_note_density(path, lines, start, kinds)
+    if path.parent.name == "research":
+        problems += lint_topic_anchors(path, lines, start, kinds)
     return problems
 
 
