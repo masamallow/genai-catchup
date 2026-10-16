@@ -7,8 +7,8 @@ On the days set in [schedule.yaml](./schedule.yaml), a scheduled Claude Code tas
 - `content/<lang>/research/YYYY-MM-DD.md` — the source of truth: a dossier per topic (up to seven sources with the facts and views each adds, the other pages read on one line), notes, and ideas for hands-on practice.
 - `content/<lang>/reports/YYYY-MM-DD.md` — a Marp slide deck: summary slides, one slide per topic (key points, perspectives and debates, technical details, a diagram when it helps), and Other topics slides that gather the thinner topics as cards; practice ideas stay in the note.
 
-English (`content/en/`) is always written; other editions such as `content/ja/` are written when a run asks for them.
-GitHub Actions turns the decks and notes into HTML and publishes them on GitHub Pages, one tree per language under `/<lang>/`.
+English (`content/en/`) is always written; other editions such as `content/ja/` are written when a run asks for them.  
+GitHub Actions turns the decks and notes into HTML and publishes them on GitHub Pages, one tree per language under `/<lang>/`.  
 Only Markdown is committed; the site is a build artifact.
 
 ## Pipeline
@@ -108,7 +108,7 @@ Colours mark who writes or runs each node: green the human, blue scripts and the
 ```bash
 mise run fetch       # feeds published since the previous run -> work/candidates.md (`--since YYYY-MM-DD` or `--days N` to override)
 mise run page -- URL # save a page's text in work/pages/ (`-- --list` shows the cache)
-mise run lint        # writing rules for content/ and templates/
+mise run lint        # writing rules for content/, templates/ and the rule documents
 mise run build       # dist/ (decks, notes and an index per language)
 mise run serve       # http://localhost:8000
 mise run mark-seen   # after the research note is written
@@ -116,25 +116,25 @@ mise run stats       # source usage table for the monthly review
 mise run publish     # git push origin main -> GitHub Actions deploys
 ```
 
-To run the whole cycle interactively, open the folder in Claude Code and ask for "Make today's GenAI catch-up report"; the `genai-catchup-report` skill drives the run.
+To run the whole cycle interactively, open the folder in Claude Code and ask for "Make today's GenAI catch-up report"; the `genai-catchup-report` skill drives the run.  
 Add `languages: en, ja` to the request for an extra edition in that language.
 
 ## Writing rules
 
 - Generated content is English by default.
-  Extra editions are written natively in their language from the same facts, never translated sentence by sentence (see AGENTS.md).
+  Extra editions are written natively in their language from the same facts, never translated sentence by sentence (see AGENTS.md).  
   Identifiers, code, comments and repository docs are English.
 - GitHub Flavored Markdown with semantic line breaks: one sentence per line, break right after `.` or `。`.
-  Multi-sentence bullets keep the first sentence on the item line and nest the rest.
+  Multi-sentence bullets keep the first sentence on the item line and nest the rest.  
   `mise run lint` enforces this.
 - Every claim has a source that was actually opened during the run.
   Reliability grades: A primary, B reputable independent analysis, C community or opinion (supplement only).
 
 ## Sources
 
-`sources.yaml` is curated by hand.
-Tier 1 and 2 are fetched on every run; tier 3 ships disabled and can be switched on per source.
-Once a month run `mise run stats`: enabled sources that never get cited are demotion candidates, and sources that keep appearing in web research but are not listed are promotion candidates.
+`sources.yaml` is curated by hand.  
+Tier 1 and 2 are fetched on every run; tier 3 ships disabled and can be switched on per source.  
+Once a month run `mise run stats`: enabled sources that never get cited are demotion candidates, and sources that keep appearing in web research but are not listed are promotion candidates.  
 Known gaps (no feed, moved, dead) are tracked in [docs/sources-notes.md](./docs/sources-notes.md).
 
 ## Design decisions

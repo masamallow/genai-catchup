@@ -1,11 +1,11 @@
 # Scheduled task
 
-The routine runs as a Claude Code Desktop **local** scheduled task (Code tab → Routines → New routine → Local).
+The routine runs as a Claude Code Desktop **local** scheduled task (Code tab → Routines → New routine → Local).  
 Local tasks run on this machine with direct access to the folder; they fire only while the app is open and the Mac is awake, and a missed run is caught up once on wake.
 
 ## Register
 
-The schedule is the cron in [schedule.yaml](../schedule.yaml), the canonical one.
+The schedule is the cron in [schedule.yaml](../schedule.yaml), the canonical one.  
 It is not one of the presets, so create the task by asking Claude in any Desktop session:
 
 ```text
@@ -14,7 +14,7 @@ Schedule: the cron in schedule.yaml of that folder (local time).
 Use the prompt in docs/scheduled-task.md of that folder.
 ```
 
-Or edit the generated file afterwards: `~/.claude/scheduled-tasks/genai-catchup-report/SKILL.md` holds the prompt; schedule, folder and model are edited in the app.
+Or edit the generated file afterwards: `~/.claude/scheduled-tasks/genai-catchup-report/SKILL.md` holds the prompt; schedule, folder and model are edited in the app.  
 To change the schedule, edit `schedule.yaml` first and then the task's schedule in the app; the fetch window follows `schedule.yaml` on its own.
 
 Recommended settings:

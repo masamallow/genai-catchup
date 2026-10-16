@@ -1,24 +1,24 @@
 # AGENTS.md — rules for AI agents in this repository
 
-This repository is one person's public catch-up routine for generative AI:
-curated feeds → research note → Marp report → GitHub Pages.
+This repository is one person's public catch-up routine for generative AI:  
+curated feeds → research note → Marp report → GitHub Pages.  
 Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.claude/skills/genai-catchup-report/SKILL.md) for the run procedure.
 
 ## Non-negotiables
 
 1. This repository is public.
-   Never write non-public information: employer, clients, colleagues, internal projects, credentials, personal data.
+   Never write non-public information: employer, clients, colleagues, internal projects, credentials, personal data.  
    If a candidate would need such context to be useful, drop it.
 2. No fabricated sources.
-   Cite only URLs you fetched in this run, or whose content you confirmed in search results.
+   Cite only URLs you fetched in this run, or whose content you confirmed in search results.  
    Mark anything else as unverified, in the wording of that edition's templates, instead of guessing.
 3. Languages.
-   Repository docs, identifiers, file names, front-matter keys, code, comments and commit messages are English.
-   Generated content (research notes and reports) is English by default and lives under `content/en/`.
+   Repository docs, identifiers, file names, front-matter keys, code, comments and commit messages are English.  
+   Generated content (research notes and reports) is English by default and lives under `content/en/`.  
    A run writes extra editions only when asked (`languages: en, ja`); see "Languages and editions" below.
 4. Writing rules (checked by `mise run lint`).
-   GitHub Flavored Markdown with semantic line breaks: one sentence per line, break right after `.` or `。`.
-   A bullet with several sentences keeps the first sentence on the item line and nests the rest one level as flat bullets.
+   GitHub Flavored Markdown with semantic line breaks: one sentence per line, break right after `.` or `。`.  
+   A bullet with several sentences keeps the first sentence on the item line and nests the rest one level as flat bullets.  
    A prose line that continues on the next prose line ends with two spaces.
 5. Commit, do not push.
    Publishing to the site is a human decision (`mise run publish`).
@@ -55,13 +55,13 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
   Each extra edition is a full research note and report under `content/<lang>/` with the same file name as the English one.
 - Editions share the selection (topics, order, scores, anchor dates), the facts and numbers, the sources and the diagrams; they differ only in language.
 - Write each edition from that language's templates as a native technical writer would.
-  Do not translate the other edition sentence by sentence: restate the same facts in the idiom of the language.
+  Do not translate the other edition sentence by sentence: restate the same facts in the idiom of the language.  
   A quotation keeps the source's original wording when the source is in that language; otherwise it is paraphrased with numbers and names kept verbatim.
 - Section names and labels come from `templates/<lang>/`; [templates/README.md](./templates/README.md) lines them up per language and explains how to add one.
 
 ## The two documents
 
-The research note collects; the report picks and summarises.
+The research note collects; the report picks and summarises.  
 Nothing is summarised in the note that the report will summarise again.
 
 Research note (`templates/<lang>/research.md`):
@@ -100,7 +100,7 @@ Report (`templates/<lang>/report.md`):
     - Each summary card's title links to the slide that holds the topic as `#N`, by slide number.
     - Each topic slide and each Other topics card ends its sources line with a link to the topic in the note, `../research/<date>.md#topic-N`; the build gives every numbered topic heading that anchor and rewrites `.md` to `.html`.
 - A diagram belongs on a slide when it shows a mechanism, a flow, a topology or a comparison that bullets cannot show as clearly; a diagram that only decorates is left out.
-  Write it as a ```` ```mermaid ```` fence (flowchart, sequence, state, class, ER or xychart), keep it to about 8 nodes laid out top to bottom (the column is narrow), and put it in the right column above the technical-details bullets.
+  Write it as a ```` ```mermaid ```` fence (flowchart, sequence, state, class, ER or xychart), keep it to about 8 nodes laid out top to bottom (the column is narrow), and put it in the right column above the technical-details bullets.  
   Diagram labels follow the edition's language.
 
 ## Topic rules
@@ -146,7 +146,7 @@ Report (`templates/<lang>/report.md`):
 - Notes written before 2026-10-08 score `importance` where later notes score `attention`; they stay as the record of that rubric.
 - Record the scored shortlist in the note's candidates-and-selection section: every selected topic with its anchor date and scores, and up to 5 notable dropped topics with their scores and a one-line reason, so the reader can overrule the selection next time.
 - Every topic cites at least two sources including the primary one.
-  For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.
+  For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.  
   Reliability grades follow `sources.yaml`: A primary, B reputable independent analysis, C community or opinion, used only as supplement.
 
 ## Slide density

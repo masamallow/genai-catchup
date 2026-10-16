@@ -18,8 +18,8 @@ description = "Record the current candidates as seen (run after the research not
 run = "uv run scripts/fetch_feeds.py mark-seen"
 
 [tasks.lint]
-description = "Check the Markdown writing rules in content/ and templates/"
-run = "uv run scripts/lint_md.py content templates"
+description = "Check the Markdown writing rules in content/, templates/ and the rule documents (AGENTS.md, README.md, docs/, .claude/)"
+run = "uv run scripts/lint_md.py"
 
 [tasks.build]
 description = "Build the static site into dist/ (one tree per language)"

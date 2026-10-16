@@ -21,7 +21,7 @@ R4  Note density (research/ notes dated 2026-10-17 or later, and work/sections/)
     is never nested and is at most 110 em wide (one sentence).
 
 Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments.
-Usage: uv run scripts/lint_md.py [PATH ...]   (default: content templates)
+Usage: uv run scripts/lint_md.py [PATH ...]   (default: content, templates and the rule documents)
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TARGETS = ("content", "templates")
+DEFAULT_TARGETS = ("content", "templates", "AGENTS.md", "README.md", "docs", ".claude")  # the rule documents too, never _me/
 LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 INLINE_CODE_RE = re.compile(r"`[^`]*`")
 IDEOGRAPHIC_PERIOD_RE = re.compile(r"。(?![\s)）」』]*$)")
