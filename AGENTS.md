@@ -72,7 +72,7 @@ Research note (`templates/<lang>/research.md`):
     - The bullets are the fact base of the report and of the other editions, not a copy of the source: the reader opens the URL for the rest.
     - Keep what the report could use and what the notes need: facts with their numbers, names and identifiers, measurements, views and contradictions.
     - State a fact once, under the first source that gives it, usually the primary; a later source mentions it only to confirm or contradict it.
-    - A topic has at most seven sub-headings: the primary and at most one more A page, such as the docs or the model card, up to three B sources, and up to two C sources, one per venue.
+    - A topic has at most seven sub-headings: the primary and at most two more A pages, such as the docs, the model card or a release, up to three B sources, and up to two C sources, one per venue.
     - At most ten bullets for the primary source, one to four for any other B or A source, one or two for community reaction, and at most thirty for the topic; a source that adds nothing gets one bullet that says what it confirms, or a place on the Also-read line.
     - A bullet is one sentence of at most about 110 em of display width (about 200 Latin or 110 Japanese characters), never nested.
     - Pages read beyond the sub-headings go on one Also-read line (label in [templates/README.md](./templates/README.md)) of at most ten links and no bullets, and supply no fact to the topic: a fact the topic needs from such a page earns that page a sub-heading, in place of a weaker source when the topic is full, or is left out.
@@ -83,7 +83,7 @@ Research note (`templates/<lang>/research.md`):
     - It cites only the sources with a sub-heading, and background older than 30 days, which is cited inline rather than under a sub-heading.
     - The ideas section holds at most five bullets on what the reader might try or produce, and the continuation section at most two on what changed since the earlier topic.
     - Their bullets follow the rule for source bullets, one sentence of at most about 110 em, never nested, and the sections hold nothing but bullets.
-    - `mise run lint` enforces the caps on the sources on notes dated 2026-10-17 or later, and all of these caps on notes dated 2026-10-18 or later and on `work/sections/` (rule R4).
+    - `mise run lint` enforces the caps on the sources on notes dated 2026-10-17 or later, and all of these caps on notes dated 2026-10-18 or later and on `work/sections/`, together with the width of a note's topic headings (rule R4).
 - Depth follows priority: a topic that will make the report gets its sources read, each sub-heading saying what that source adds; a dropped topic gets its feed items, its scores and a one-line reason.
 - Dropped topics that came close get a heading each; the other dropped items go under two headings at the end, other one-off items and out of scope.
 - Notes written before 2026-10-18 stay as the record and are not a model for later notes: the ones before 2026-10-09 keep exhaustive, quote-heavy bullets for every source, the ones up to 2026-10-15 read about eighteen sources per topic with long, nested bullets, and the one of 2026-10-17 moved what its source caps cut into long, nested notes.
@@ -112,7 +112,7 @@ Report (`templates/<lang>/report.md`):
 - A topic is one event or one piece of work, together with the coverage that continues it.
     - Events: a release, an announcement, an incident, a paper, a decision, or a new tool that practitioners have started to adopt.
     - Pieces of work: a technical write-up, such as a hands-on test, a benchmark or a technique.
-    - A topic is described in one sentence, never as a bare keyword such as "MCP" or "agents".
+    - A topic is described in one sentence of at most about 110 em (about 200 Latin or 110 Japanese characters), never as a bare keyword such as "MCP" or "agents".
 - Two items belong to the same topic only when one could be folded into the other's write-up as an update, a supplement or a reaction without changing its headline.
   Items that merely share a keyword, a product or a vendor are separate topics, the way a news page lists them as related articles.
 - Score and select each topic on its own; dropped topics are grouped only when they are written up.

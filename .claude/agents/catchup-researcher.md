@@ -39,7 +39,7 @@ For each topic:
     - Prefer the sources in `sources.yaml`; add others when they are clearly reputable.
 - Grade each source as `sources.yaml` does: look its host up there (`grep -n <host> sources.yaml`).
     - A source that is not listed is A when it is the vendor's or the author's own page, B when it is established media or a known practitioner, otherwise C.
-- Give a sub-heading to at most seven sources per topic, as AGENTS.md caps them: the primary and at most one more A page, up to three B sources, up to two C sources, one per venue.
+- Give a sub-heading to at most seven sources per topic, as AGENTS.md caps them: the primary and at most two more A pages, up to three B sources, up to two C sources, one per venue.
     - Each sub-heading names one page and its one URL; for a docs set, cite the page that holds the facts.
     - Pages you read beyond those go on the Also-read line, at most ten links, and supply no fact: when the topic needs a fact from one, give that page a sub-heading in place of a weaker source, or leave the fact out.
     - Background older than 30 days is cited inline in the notes section.

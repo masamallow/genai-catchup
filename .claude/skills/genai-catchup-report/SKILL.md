@@ -48,7 +48,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - Drop items outside the scope in AGENTS.md.
     - Sort the items into topics as AGENTS.md defines them: one event or one piece of work with the coverage that continues it.
       A shared keyword, product or vendor does not make two items one topic.
-    - Name each topic in one concrete sentence.
+    - Name each topic in one concrete sentence of at most about 110 em (about 200 Latin characters), the width the lint allows a topic heading.
     - Check eligibility against `topics` in the front matter of the notes of the last 30 days.
       A topic selected there returns only as a new development, with the continuation section of step 5.
     - An event from before the window is eligible when this run is the first to see it; note the item that surfaced it.

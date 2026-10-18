@@ -8,7 +8,7 @@ candidates: 0             # number of items in work/candidates.md
 topics:                   # selected topics only, in rank order
   - id: 1
     emoji: "🧭"
-    title: "トピック 1 の見出し (1 つの出来事か 1 つの成果物を 1 文で)"
+    title: "トピック 1 の見出し (1 つの出来事か 1 つの成果物を 110 em 以内の 1 文で)"
     kind: release         # release | change | incident | research | hands-on | analysis
     areas: [models, api-cloud]   # 1 or 2 of: models, api-cloud, coding-agents, agent-dev, security, evals-ops
     impact: 2             # 0-2, see AGENTS.md

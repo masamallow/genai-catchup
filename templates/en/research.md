@@ -8,7 +8,7 @@ candidates: 0             # number of items in work/candidates.md
 topics:                   # selected topics only, in rank order
   - id: 1
     emoji: "🧭"
-    title: "Topic 1 heading (one event or one piece of work, in one sentence)"
+    title: "Topic 1 heading (one event or one piece of work, in one sentence of at most about 110 em)"
     kind: release         # release | change | incident | research | hands-on | analysis
     areas: [models, api-cloud]   # 1 or 2 of: models, api-cloud, coding-agents, agent-dev, security, evals-ops
     impact: 2             # 0-2, see AGENTS.md

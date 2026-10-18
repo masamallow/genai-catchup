@@ -16,14 +16,15 @@ R3  Slide density (reports/ directories only): a topic slide column holds at mos
     0.55), a summary slide holds at most 5 cards, and an Other topics slide holds 2 to 4
     cards with at most 6, 3 or 2 list items each (for 2, 3 or 4 cards) of the same width.
 R4  Note density (research/ notes dated 2026-10-17 or later, and work/sections/): a topic
-    has at most 7 source sub-headings ("#### [A|B|C] ..."), at most 2 A, 3 B and 2 C, and
+    has at most 7 source sub-headings ("#### [A|B|C] ..."), at most 3 A, 3 B and 2 C, and
     at most 30 bullets under them; the first source (the primary) has at most 10 bullets,
     a later A or B source 4 and a C source 2; a source bullet is never nested and is at
     most 110 em wide (one sentence). Notes dated 2026-10-18 or later and work/sections/
     also name one URL per source, hold at most 10 links on the Also-read lines of a topic,
     and hold nothing but such bullets in a topic's sections, at most 2 in the continuation,
     10 in the notes and 5 in the ideas; the "###" section headings and the Also-read label
-    of each edition come from templates/<lang>/research.md.
+    of each edition come from templates/<lang>/research.md. A numbered topic heading of
+    such a note is at most 110 em wide, the one sentence that names the topic.
 R5  Topic anchors (research/ directories only): every numbered "## N. ..." heading ends
     with <a id="topic-N"></a>, the anchor that slide and continuation links use and that
     GitHub and the site both honour.
@@ -101,11 +102,12 @@ LIST_ITEM_RE = re.compile(r"^\s*([-*+]|\d+\.)\s+(.*)$")
 R4_SINCE = "2026-10-17"  # earlier notes stay as the record (AGENTS.md, "The two documents")
 R4_WHOLE_TOPIC_SINCE = "2026-10-18"  # the 2026-10-17 note moved what the source caps cut into its other sections
 MAX_SOURCES_PER_TOPIC = 7
-MAX_SOURCES_PER_GRADE = {"A": 2, "B": 3, "C": 2}  # the primary counts in its own grade
+MAX_SOURCES_PER_GRADE = {"A": 3, "B": 3, "C": 2}  # the primary counts in its own grade
 MAX_BULLETS_PRIMARY = 10  # the first source of a topic
 MAX_BULLETS_PER_SOURCE = {"A": 4, "B": 4, "C": 2}  # every later source
 MAX_BULLETS_PER_TOPIC = 30
 MAX_TOPIC_BULLET_WIDTH_EM = 110.0  # one sentence: about 200 Latin or 110 Japanese characters
+MAX_TOPIC_HEADING_WIDTH_EM = 110.0  # the one-sentence description of a topic, as wide as a bullet
 MAX_ALSO_READ_LINKS = 10
 TOPIC_SECTION_ROLES = ("continued", "collected", "notes", "ideas")  # the "###" headings of a topic template, in order
 MAX_SECTION_BULLETS = {"continued": 2, "notes": 10, "ideas": 5}
@@ -122,11 +124,13 @@ def display_width(text: str) -> float:
     return sum(1.0 if unicodedata.east_asian_width(ch) in ("W", "F") else 0.55 for ch in text)
 
 
-def item_width_problem(path: Path, lineno: int, item: str, limit: float = MAX_ITEM_WIDTH_EM, rule: str = "R3") -> list[str]:
+def item_width_problem(
+    path: Path, lineno: int, item: str, limit: float = MAX_ITEM_WIDTH_EM, rule: str = "R3", what: str = "list item"
+) -> list[str]:
     plain = INLINE_CODE_RE.sub(lambda c: c.group(0).strip("`"), LINK_RE.sub(r"\1", item))
     width = display_width(plain)
     if width > limit:
-        return [f"{path}:{lineno}: {rule} list item is about {width:.0f} em wide (max {limit:.0f})"]
+        return [f"{path}:{lineno}: {rule} {what} is about {width:.0f} em wide (max {limit:.0f})"]
     return []
 
 
@@ -265,6 +269,9 @@ def lint_note_density(path: Path, lines: list[str], start: int, kinds: list[str 
         if line.startswith("## "):
             close_topic()
             topic_at, role = i, None
+            if whole_topic and NUMBERED_H2_RE.match(line):
+                title = NUMBERED_H2_RE.sub("", TOPIC_ANCHOR_RE.sub("", line)).strip()
+                problems += item_width_problem(path, i + 1, title, MAX_TOPIC_HEADING_WIDTH_EM, "R4", "topic heading")
             continue
         if line.startswith("### "):
             close_section()
