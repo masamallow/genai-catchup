@@ -40,6 +40,10 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
     - `source-id` MM-DD [項目のタイトル](URL) — はてなブックマーク 120 users (取得時点)
     - `source-id` MM-DD [項目のタイトル](URL)
 
+### 前回からの継続
+
+- 以前のトピックの続きのときだけ、[YYYY-MM-DD のトピック N](./YYYY-MM-DD.md#topic-N) とその後に変わったことを 2 項目までで書く。
+
 ### 収集した情報
 
 #### [A] 発行元 — タイトル (YYYY-MM-DD)
@@ -65,11 +69,11 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 
 ### メモ
 
-- 情報源どうしの食い違い、未確認の主張、次回に持ち越す疑問。
+- 上の情報源どうしの食い違い、未確認の主張、未解決の疑問、この実行で確かめたことを 1 項目に 1 つずつ、上の情報源と背景だけを引いて 10 項目まで。
 
 ### 実践やアウトプットの提案
 
-- 何を、どの規模で、何を確かめるために試すか。
+- 何を、どの規模で、何を確かめるために試すかを 5 項目まで。
 
 ## 3. 🧪 見送りトピックの見出し <a id="topic-3"></a>
 

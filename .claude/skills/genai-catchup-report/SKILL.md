@@ -83,7 +83,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - Do not write the report's sections (key points, perspectives and debates, technical details) in the note; that synthesis happens in the report.
     - When a topic directly continues one from an earlier note, its continuation section links `[topic N of YYYY-MM-DD](./YYYY-MM-DD.md#topic-N)` and says what changed since.
     - `uv run scripts/lint_md.py content/en/research/<date>.md` must report 0 problems; fix a problem at the line it names (`sed -n`) without reading the rest.
-      An R4 problem (too many sources or bullets in a topic) goes back to that topic's researcher (SendMessage), who cuts its section.
+      An R4 problem (a topic over one of its caps) goes back to that topic's researcher (SendMessage), who cuts its section.
 6. Write the report (the synthesis), English edition.
     - Start a `catchup-writer` for the English report, with the run date and the path of the note, once the note passes lint.
       It reads the note and the rest itself, and writes the deck by the rules below.
@@ -109,7 +109,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
     - `mise run lint` must report 0 problems; fix the Markdown, not the linter.
       Fix a problem at the line it names, or resume the writer of that file (SendMessage) when the fix needs its context.
     - `mise run build` must exit 0.
-      The lint's R3 rule keeps the slides inside the frame and R4 keeps the notes within their source and bullet caps; if R3 complains, cut words rather than sections.
+      The lint's R3 rule keeps the slides inside the frame and R4 keeps each topic of a note within its caps; if R3 complains, cut words rather than sections.
 9. Mark candidates as seen: `mise run mark-seen`.
 10. Commit and stop.
     - `git add content state && git commit -m "docs(content): add <date> catch-up"`.

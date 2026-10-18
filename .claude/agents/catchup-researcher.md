@@ -40,7 +40,9 @@ For each topic:
 - Grade each source as `sources.yaml` does: look its host up there (`grep -n <host> sources.yaml`).
     - A source that is not listed is A when it is the vendor's or the author's own page, B when it is established media or a known practitioner, otherwise C.
 - Give a sub-heading to at most seven sources per topic, as AGENTS.md caps them: the primary and at most one more A page, up to three B sources, up to two C sources, one per venue.
-    - Pages you read beyond those go on the Also-read line with their links; background older than 30 days is cited inline in the notes section.
+    - Each sub-heading names one page and its one URL; for a docs set, cite the page that holds the facts.
+    - Pages you read beyond those go on the Also-read line, at most ten links, and supply no fact: when the topic needs a fact from one, give that page a sub-heading in place of a weaker source, or leave the fact out.
+    - Background older than 30 days is cited inline in the notes section.
 - Extract the technical details: identifiers, stack, platform or service, pricing or limits when stated, specs or protocols.
 - Note what the reader could try or produce.
 - Cite only URLs you opened in this run, or whose content you confirmed in search results; mark anything else as unverified in the template's wording.
@@ -50,17 +52,18 @@ For each topic:
 
 - Write one file per topic, `work/sections/<slug>.md`, with the slug the orchestrator gave you.
 - The orchestrator writes the topic's heading, status line and feed items; your file holds the rest of the topic, in this order:
-    - `### Continued from`, only when the orchestrator names an earlier topic: its link as given, then in one or two bullets what changed since.
-    - `### Collected information`, with one `#### [A|B|C] Publisher — Title (YYYY-MM-DD)` per source that earns a sub-heading, its URL in angle brackets on its own line, short bullets of what the source adds, as "The two documents" in AGENTS.md describes them, and the Also-read line last, as the template shows.
+    - `### Continued from`, only when the orchestrator names an earlier topic: its link as given and what changed since, in at most two bullets.
+    - `### Collected information`, with one `#### [A|B|C] Publisher — Title (YYYY-MM-DD)` per source that earns a sub-heading, the primary first, its one URL in angle brackets on its own line, short bullets of what the source adds, as "The two documents" in AGENTS.md describes them, and the Also-read line last, as the template shows.
         - One fact or view per bullet, in one sentence of your own words, with numbers, names, identifiers and code exact; never nest a bullet, and keep each under about 110 em (about 200 Latin characters).
         - Keep what the report's three sections or the notes could use; leave out marketing lines, background the reader knows, details that change nothing a GenAI engineer builds or decides, and facts an earlier source already gave.
-        - At most ten bullets for the primary source, four for a B source, two for a C source and thirty for the topic: the reader opens the URL for the rest.
-    - `### Notes`: contradictions between sources, unverified claims, open questions.
-    - `### Ideas for practice and output`.
+        - At most ten bullets for the primary source, four for any other A or B source, two for a C source and thirty for the topic: the reader opens the URL for the rest.
+    - `### Notes`: at most ten bullets on contradictions between the sources, unverified claims, open questions and checks you ran in this run, citing only the sources with a sub-heading and background.
+    - `### Ideas for practice and output`: at most five bullets.
 - Never write the report's sections (key points, perspectives and debates, technical details).
 - Write in English.
     - A quotation keeps its wording only when the source is in English; anything else is paraphrased with numbers and names verbatim.
-- Follow the writing rules of AGENTS.md: one sentence per line, the extra sentences of a bullet nested one level as flat bullets, and two trailing spaces on a prose line that continues on the next.
+- Follow the writing rules of AGENTS.md: one sentence per line and two trailing spaces on a prose line that continues on the next.
+    - In your sections every bullet is one sentence of at most about 110 em, none is nested, and nothing but bullets follows a heading, apart from each source's URL and the Also-read line.
 - `uv run scripts/lint_md.py work/sections/<slug>.md` must report 0 problems before you finish; its rule R4 checks the caps above.
 - Write nothing outside `work/sections/` and `work/pages/`.
 

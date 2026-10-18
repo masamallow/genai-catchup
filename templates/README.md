@@ -15,7 +15,7 @@ The build discovers `content/<lang>/` on its own and reads `templates/<lang>/sit
 ## Adding a language
 
 1. Copy `en/` to `<code>/` and translate the headings, labels and placeholders.
-   Keep the structure, the front-matter keys, the HTML classes and the `lang` directive.
+   Keep the structure, the front-matter keys, the HTML classes and the `lang` directive, and keep the four `###` headings of a topic in `research.md` in their order: the lint learns each edition's section names and Also-read label from them (rule R4).
 2. Fill in `site.yaml`.
 3. Ask for the edition with `languages: en, <code>`.
 

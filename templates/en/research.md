@@ -40,6 +40,10 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
     - `source-id` MM-DD [item title](URL) — 120 Hatena Bookmark users when fetched
     - `source-id` MM-DD [item title](URL)
 
+### Continued from
+
+- Only when the topic continues an earlier one: [topic N of YYYY-MM-DD](./YYYY-MM-DD.md#topic-N) and what changed since, in at most two bullets.
+
 ### Collected information
 
 #### [A] Publisher — Title (YYYY-MM-DD)
@@ -65,11 +69,11 @@ Also read: [Title](URL), [Title](URL).
 
 ### Notes
 
-- Contradictions between sources, unverified claims, questions to carry into the next run.
+- A contradiction between the sources above, an unverified claim, an open question or a check run in this run, one per bullet; at most ten bullets, citing only the sources above and background.
 
 ### Ideas for practice and output
 
-- What to try, at what scale, and what it would verify.
+- What to try, at what scale, and what it would verify; at most five bullets.
 
 ## 3. 🧪 Dropped topic heading <a id="topic-3"></a>
 
