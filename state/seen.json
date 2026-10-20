@@ -19,8 +19,16 @@
   "first_seen": "2026-09-29",
   "source": "hn-llm"
  },
+ "https://arxiv.org/abs/2610.18861": {
+  "first_seen": "2026-10-20",
+  "source": "hn-llm"
+ },
  "https://ascii.jp/elem/000/004/441/4441372": {
   "first_seen": "2026-10-10",
+  "source": "hatena-llm"
+ },
+ "https://ascii.jp/elem/000/004/443/4443584": {
+  "first_seen": "2026-10-20",
   "source": "hatena-llm"
  },
  "https://atmarkit.itmedia.co.jp/ait/articles/2609/25/news048.html": {
@@ -163,8 +171,16 @@
   "first_seen": "2026-10-08",
   "source": "aws-whats-new"
  },
+ "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-grok-4-7-govcloud": {
+  "first_seen": "2026-10-20",
+  "source": "aws-whats-new"
+ },
  "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-reasoning-summaries-openai": {
   "first_seen": "2026-10-10",
+  "source": "aws-whats-new"
+ },
+ "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-cloudwatch-omni-8-regions": {
+  "first_seen": "2026-10-20",
   "source": "aws-whats-new"
  },
  "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-mwaa-ai-agent-skills": {
@@ -399,6 +415,10 @@
   "first_seen": "2026-10-10",
   "source": "aws-ml-blog-bedrock"
  },
+ "https://aws.amazon.com/blogs/machine-learning/pegasus-1-5-from-twelvelabs-is-now-available-in-amazon-bedrock": {
+  "first_seen": "2026-10-20",
+  "source": "aws-ml-blog-bedrock"
+ },
  "https://aws.amazon.com/blogs/machine-learning/query-claims-in-natural-language-with-amazon-bedrock-knowledge-bases": {
   "first_seen": "2026-10-01",
   "source": "aws-ml-blog-bedrock"
@@ -409,6 +429,10 @@
  },
  "https://aws.amazon.com/blogs/machine-learning/scaling-cloud-migrations-with-agentic-ai-on-amazon-bedrock-agentcore": {
   "first_seen": "2026-10-03",
+  "source": "aws-ml-blog-bedrock"
+ },
+ "https://aws.amazon.com/blogs/machine-learning/structured-outputs-for-anthropic-claude-models-on-amazon-bedrock": {
+  "first_seen": "2026-10-20",
   "source": "aws-ml-blog-bedrock"
  },
  "https://aws.amazon.com/blogs/machine-learning/supercharge-regulated-workloads-with-claude-code-and-amazon-bedrock": {
@@ -427,6 +451,10 @@
   "first_seen": "2026-09-28",
   "source": "aws-jp-weekly-genai"
  },
+ "https://aws.amazon.com/jp/blogs/news/build-secure-network-architectures-for-generative-ai-applications-using-aws-services": {
+  "first_seen": "2026-10-20",
+  "source": "aws-jp-weekly-genai"
+ },
  "https://aws.amazon.com/jp/blogs/news/configuring-your-ai-vulnerability-harness-part-2-the-steering-file": {
   "first_seen": "2026-10-10",
   "source": "aws-jp-weekly-genai"
@@ -439,6 +467,10 @@
   "first_seen": "2026-10-10",
   "source": "aws-jp-weekly-genai"
  },
+ "https://aws.amazon.com/jp/blogs/news/securing-amazon-bedrock-api-keys-best-practices-for-implementation-and-management": {
+  "first_seen": "2026-10-20",
+  "source": "aws-jp-weekly-genai"
+ },
  "https://aws.amazon.com/jp/blogs/news/weekly-genai-20260914": {
   "first_seen": "2026-09-28",
   "source": "aws-jp-weekly-genai"
@@ -449,6 +481,10 @@
  },
  "https://aws.amazon.com/jp/blogs/news/weekly-genai-20261005": {
   "first_seen": "2026-10-15",
+  "source": "aws-jp-weekly-genai"
+ },
+ "https://aws.amazon.com/jp/blogs/news/weekly-genai-20261012": {
+  "first_seen": "2026-10-20",
   "source": "aws-jp-weekly-genai"
  },
  "https://bestmodelforyourbudget.terrydjony.com/": {
@@ -631,6 +667,14 @@
   "first_seen": "2026-10-17",
   "source": "claude-code-changelog"
  },
+ "https://code.claude.com/docs/en/changelog#2-1-303": {
+  "first_seen": "2026-10-20",
+  "source": "claude-code-changelog"
+ },
+ "https://code.claude.com/docs/en/changelog#2-1-304": {
+  "first_seen": "2026-10-20",
+  "source": "claude-code-changelog"
+ },
  "https://code.visualstudio.com/blogs/2026/09/16/building-the-github-copilot-inline-suggestions-model-part-one": {
   "first_seen": "2026-09-28",
   "source": "vscode-updates"
@@ -803,6 +847,14 @@
   "first_seen": "2026-10-17",
   "source": "classmethod-claude-code"
  },
+ "https://dev.classmethod.jp/articles/20261017-cc-updates-v2-1-302": {
+  "first_seen": "2026-10-20",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/20261018-agent-toolkit-for-aws-amazon-sagemaker-ai": {
+  "first_seen": "2026-10-20",
+  "source": "classmethod-claude-code"
+ },
  "https://dev.classmethod.jp/articles/aws-devops-agent-claude-code-agent-toolkit-setup": {
   "first_seen": "2026-09-29",
   "source": "classmethod-claude-code"
@@ -915,8 +967,16 @@
   "first_seen": "2026-09-28",
   "source": "classmethod-claude-code"
  },
+ "https://dev.classmethod.jp/articles/looker-try-data-apps": {
+  "first_seen": "2026-10-20",
+  "source": "classmethod-claude-code"
+ },
  "https://dev.classmethod.jp/articles/love-clawd-claude-code": {
   "first_seen": "2026-10-01",
+  "source": "classmethod-claude-code"
+ },
+ "https://dev.classmethod.jp/articles/playwright-cli-wsl-setup": {
+  "first_seen": "2026-10-20",
   "source": "classmethod-claude-code"
  },
  "https://dev.classmethod.jp/articles/reona-pulls-review-try": {
@@ -926,6 +986,10 @@
  "https://dev.classmethod.jp/articles/xcode-agent-skills-claude-code": {
   "first_seen": "2026-10-01",
   "source": "classmethod-claude-code"
+ },
+ "https://devblogs.microsoft.com/foundry/browser-automation-tool-ga": {
+  "first_seen": "2026-10-20",
+  "source": "microsoft-foundry-blog"
  },
  "https://devblogs.microsoft.com/foundry/choosing-azure-document-intelligence-and-content-understanding": {
   "first_seen": "2026-10-08",
@@ -1033,6 +1097,10 @@
  },
  "https://developers.googleblog.com/reproducing-olmo-3-7b-pre-training-in-maxtext-case-study-of-large-scale-training-on-tpus": {
   "first_seen": "2026-09-29",
+  "source": "google-developers-blog"
+ },
+ "https://developers.googleblog.com/step-by-step-guide-build-a-voice-agent-that-never-goes-silent-using-adk": {
+  "first_seen": "2026-10-20",
   "source": "google-developers-blog"
  },
  "https://developers.googleblog.com/supercharge-your-development-with-the-google-developer-knowledge-api-ecosystem": {
@@ -1215,6 +1283,10 @@
   "first_seen": "2026-10-13",
   "source": "gcp-vertex-ai-release-notes"
  },
+ "https://docs.cloud.google.com/vertex-ai/docs/release-notes#October_19_2026": {
+  "first_seen": "2026-10-20",
+  "source": "gcp-vertex-ai-release-notes"
+ },
  "https://docs.cloud.google.com/vertex-ai/docs/release-notes#September_13_2026": {
   "first_seen": "2026-09-28",
   "source": "gcp-vertex-ai-release-notes"
@@ -1247,6 +1319,14 @@
   "first_seen": "2026-10-01",
   "source": "hn-mcp"
  },
+ "https://engineering.dena.com/blog/2026/10/ai-agent-onboarding": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-claude-code"
+ },
+ "https://fd-x.co.jp/insights/41-what-is-ontology": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-ai-agent"
+ },
  "https://forbesjapan.com/articles/detail/104911": {
   "first_seen": "2026-10-08",
   "source": "hatena-llm"
@@ -1278,6 +1358,10 @@
  "https://gigazine.net/news/20261016-linus-torvalds-claude-code": {
   "first_seen": "2026-10-17",
   "source": "hatena-claude-code"
+ },
+ "https://gigazine.net/news/20261017-agentsview": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-llm"
  },
  "https://giginet.hateblo.jp/entry/2026/09/22/114642": {
   "first_seen": "2026-10-08",
@@ -1419,6 +1503,18 @@
   "first_seen": "2026-10-17",
   "source": "github-changelog-copilot"
  },
+ "https://github.blog/changelog/2026-10-19-copilot-model-policy-api-for-enterprise-orgs-and-teams": {
+  "first_seen": "2026-10-20",
+  "source": "github-changelog-copilot"
+ },
+ "https://github.blog/changelog/2026-10-19-github-copilot-models-deprecated-on-october-19-2026": {
+  "first_seen": "2026-10-20",
+  "source": "github-changelog-copilot"
+ },
+ "https://github.com/IsuruMaduranga/harness-engineering-101": {
+  "first_seen": "2026-10-20",
+  "source": "hn-llm"
+ },
  "https://github.com/anuj0456/OpenArch": {
   "first_seen": "2026-09-28",
   "source": "hn-llm"
@@ -1450,6 +1546,10 @@
  "https://joisino.hatenablog.com/entry/filler": {
   "first_seen": "2026-10-08",
   "source": "hatena-llm"
+ },
+ "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on": {
+  "first_seen": "2026-10-20",
+  "source": "hn-llm"
  },
  "https://kiro.dev/changelog/cli/2-22": {
   "first_seen": "2026-09-28",
@@ -1519,6 +1619,10 @@
   "first_seen": "2026-10-17",
   "source": "kiro-changelog"
  },
+ "https://kiro.dev/changelog/ide/1-4": {
+  "first_seen": "2026-10-20",
+  "source": "kiro-changelog"
+ },
  "https://kiro.dev/changelog/models/claude-fable-5-1-for-enterprise": {
   "first_seen": "2026-09-28",
   "source": "kiro-changelog"
@@ -1558,6 +1662,10 @@
  "https://labo.hatenastaff.com/entry/2026/09/30/151500": {
   "first_seen": "2026-10-01",
   "source": "hatena-llm"
+ },
+ "https://llmspeed.dev/": {
+  "first_seen": "2026-10-20",
+  "source": "hn-llm"
  },
  "https://lucumr.pocoo.org/2026/10/6/codemode": {
   "first_seen": "2026-10-08",
@@ -1639,6 +1747,10 @@
   "first_seen": "2026-09-28",
   "source": "hn-llm"
  },
+ "https://news.yahoo.co.jp/articles/2c807564e567a7a66e8718bce6ebd38538c605e8": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-llm"
+ },
  "https://newsletter.pragmaticengineer.com/p/ai-skills-with-matt-pocock": {
   "first_seen": "2026-09-28",
   "source": "pragmatic-engineer"
@@ -1715,6 +1827,10 @@
   "first_seen": "2026-09-29",
   "source": "hatena-llm"
  },
+ "https://note.com/npaka/n/ndb4b0f424ced": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-claude-code"
+ },
  "https://note.com/shi3zblog/n/ncb38d2978074": {
   "first_seen": "2026-10-15",
   "source": "hatena-claude-code"
@@ -1726,6 +1842,10 @@
  "https://note.com/takahiroanno/n/n27e77cc9bb80": {
   "first_seen": "2026-10-15",
   "source": "hatena-llm"
+ },
+ "https://note.com/yukiedu/n/n4d25f5e1d590": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-claude-code"
  },
  "https://ollaya.dev/": {
   "first_seen": "2026-09-28",
@@ -1835,6 +1955,10 @@
   "first_seen": "2026-10-10",
   "source": "openai-news"
  },
+ "https://openai.com/index/low-resource-programming-languages": {
+  "first_seen": "2026-10-20",
+  "source": "openai-news"
+ },
  "https://openai.com/index/new-chatgpt-ads-format-and-measurement": {
   "first_seen": "2026-10-06",
   "source": "openai-news"
@@ -1923,6 +2047,10 @@
   "first_seen": "2026-10-10",
   "source": "hatena-llm"
  },
+ "https://pc.watch.impress.co.jp/docs/news/2149045.html": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-llm"
+ },
  "https://pc.watch.impress.co.jp/docs/topic/feature/2144262.html": {
   "first_seen": "2026-10-01",
   "source": "hatena-ai-agent"
@@ -2009,6 +2137,10 @@
  },
  "https://portalshit.net/2026/10/03/ai-is-eating-product-management": {
   "first_seen": "2026-10-06",
+  "source": "hatena-llm"
+ },
+ "https://qiita.com/ebichan_88/items/f7c44c74e437875b1399": {
+  "first_seen": "2026-10-20",
   "source": "hatena-llm"
  },
  "https://qiita.com/kikuziro/items/6191b5ad83520d181f38": {
@@ -2211,9 +2343,17 @@
   "first_seen": "2026-09-28",
   "source": "anthropic-news"
  },
+ "https://www.anthropic.com/news/public-benefit-fund": {
+  "first_seen": "2026-10-20",
+  "source": "anthropic-news"
+ },
  "https://www.anthropic.com/news/singapore-office-opening": {
   "first_seen": "2026-10-15",
   "source": "anthropic-news"
+ },
+ "https://www.anthropic.com/research/employment-at-anthropic": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-claude-code"
  },
  "https://www.assbench.com/": {
   "first_seen": "2026-09-28",
@@ -2265,6 +2405,10 @@
  },
  "https://www.langchain.com/blog/deep-agents-deploy-an-open-alternative-to-claude-managed-agents": {
   "first_seen": "2026-10-15",
+  "source": "langchain-blog"
+ },
+ "https://www.langchain.com/blog/how-numan-built-an-eval-first-ai-health-coach-with-langgraph-and-langsmith": {
+  "first_seen": "2026-10-20",
   "source": "langchain-blog"
  },
  "https://www.langchain.com/blog/how-orange-business-built-live-intelligence-on-langchain-and-langsmith": {
@@ -2365,6 +2509,10 @@
  },
  "https://www.latent.space/p/ainews-here-are-6-clones-of-jev-in": {
   "first_seen": "2026-09-28",
+  "source": "ainews"
+ },
+ "https://www.latent.space/p/ainews-high-taste-testers-ep-1": {
+  "first_seen": "2026-10-20",
   "source": "ainews"
  },
  "https://www.latent.space/p/ainews-meta-connect-2026-muse-glasses": {
@@ -2515,6 +2663,10 @@
   "first_seen": "2026-10-01",
   "source": "publickey"
  },
+ "https://www.ryuzee.com/contents/blog/14627": {
+  "first_seen": "2026-10-20",
+  "source": "hatena-llm"
+ },
  "https://www.sbbit.jp/article/cont1/186367": {
   "first_seen": "2026-09-28",
   "source": "hatena-claude-code"
@@ -2529,6 +2681,10 @@
  },
  "https://zenn.dev/85store/articles/574a1a07233283": {
   "first_seen": "2026-10-03",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/95nm/articles/article_reading_cd": {
+  "first_seen": "2026-10-20",
   "source": "zenn-trending"
  },
  "https://zenn.dev/ababup1192/articles/77b844dcfc1529": {
@@ -2571,6 +2727,10 @@
   "first_seen": "2026-10-17",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/ara_jlu/articles/per-task-review-dropped": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/attakei/articles/introduce-nim-confutils": {
   "first_seen": "2026-10-15",
   "source": "zenn-trending"
@@ -2595,6 +2755,10 @@
   "first_seen": "2026-10-10",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/bocek/articles/5e1ba6fae7e7d6": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/boy_techblog/articles/connecting-trace-serverless": {
   "first_seen": "2026-10-17",
   "source": "zenn-trending"
@@ -2607,6 +2771,10 @@
   "first_seen": "2026-10-01",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/castingone_dev/articles/typesafe_query_key_converter": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/chot/articles/362b7a2420ef1a": {
   "first_seen": "2026-10-03",
   "source": "zenn-trending"
@@ -2615,12 +2783,20 @@
   "first_seen": "2026-10-10",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/cscloud_blog/articles/f4ce99ffeb8ee3": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/dalab/articles/9ba129c4647844": {
   "first_seen": "2026-10-10",
   "source": "zenn-trending"
  },
  "https://zenn.dev/desktopgame/articles/372d43b8e0777b": {
   "first_seen": "2026-10-17",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/dress_code/articles/4a76f1b88e360d": {
+  "first_seen": "2026-10-20",
   "source": "zenn-trending"
  },
  "https://zenn.dev/dyoshikawa/articles/do-you-desicion": {
@@ -2645,6 +2821,10 @@
  },
  "https://zenn.dev/finatext/articles/swtt2026-snow-waf-datamanagement": {
   "first_seen": "2026-10-15",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/fusic/articles/snowflake-ai-parse-document-minutes": {
+  "first_seen": "2026-10-20",
   "source": "zenn-trending"
  },
  "https://zenn.dev/genda_jp/articles/haiku-5-5-subagent-roles": {
@@ -2835,6 +3015,14 @@
   "first_seen": "2026-09-28",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/pksha/articles/0f9c11d1daea2e": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/project_arca/articles/unity-forest-rendering-diagnosis-001": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/qnighy/articles/json-ambiguity": {
   "first_seen": "2026-10-06",
   "source": "zenn-trending"
@@ -2843,12 +3031,20 @@
   "first_seen": "2026-10-17",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/rea9r/articles/littles-law-capacity-planning": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/rinngo0302/articles/intern-cybozu": {
   "first_seen": "2026-10-01",
   "source": "zenn-trending"
  },
  "https://zenn.dev/riochin/articles/mixi2-intern-2026": {
   "first_seen": "2026-10-17",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/rkawajiri/books/frepple-tutorial-ja": {
+  "first_seen": "2026-10-20",
   "source": "zenn-trending"
  },
  "https://zenn.dev/ryoya_cre8tor/articles/0cdc8623498f11": {
@@ -2923,6 +3119,10 @@
   "first_seen": "2026-10-17",
   "source": "zenn-trending"
  },
+ "https://zenn.dev/takyshu98/articles/915702cf8c84f3": {
+  "first_seen": "2026-10-20",
+  "source": "zenn-trending"
+ },
  "https://zenn.dev/tawachan/articles/japan-data-breach-rush-2026-statistics": {
   "first_seen": "2026-10-08",
   "source": "zenn-trending"
@@ -2953,6 +3153,10 @@
  },
  "https://zenn.dev/tosuri13/articles/64f17d8c75e147": {
   "first_seen": "2026-10-15",
+  "source": "zenn-trending"
+ },
+ "https://zenn.dev/tsukulink/articles/fea41a6e4113cf": {
+  "first_seen": "2026-10-20",
   "source": "zenn-trending"
  },
  "https://zenn.dev/tyasuakwa/articles/3f6a1394323275": {
