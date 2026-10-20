@@ -75,12 +75,13 @@ Research note (`templates/<lang>/research.md`):
     - A topic has at most seven sub-headings: the primary and at most two more A pages, such as the docs, the model card or a release, up to three B sources, and up to two C sources, one per venue.
     - At most ten bullets for the primary source, one to four for any other B or A source, one or two for community reaction, and at most thirty for the topic; a source that adds nothing gets one bullet that says what it confirms, or a place on the Also-read line.
     - A bullet is one sentence of at most about 110 em of display width (about 200 Latin or 110 Japanese characters), never nested.
-    - Pages read beyond the sub-headings go on one Also-read line (label in [templates/README.md](./templates/README.md)) of at most ten links and no bullets, and supply no fact to the topic: a fact the topic needs from such a page earns that page a sub-heading, in place of a weaker source when the topic is full, or is left out.
+    - Pages read beyond the sub-headings go on one Also-read line (label in [templates/README.md](./templates/README.md)) of at most ten links and no bullets, and supply no fact to the topic, apart from the notes' one exception below: a fact the topic needs from such a page earns that page a sub-heading, in place of a weaker source when the topic is full, or is left out.
     - Paraphrase, keeping numbers, names, identifiers and code exact.
     - Quote only where the wording itself matters, such as a claim, a commitment or a contested statement: one sentence at most, and one quotation per source.
 - Then the notes section and the ideas section, inside the topic, never in a separate section at the end.
     - The notes section holds at most ten bullets: contradictions between the sources, unverified claims, open questions and checks run in this run.
     - It cites only the sources with a sub-heading, and background older than 30 days, which is cited inline rather than under a sub-heading.
+    - The one exception is an independent measurement on a page of the Also-read line, such as a third party's benchmark score, that contradicts a claim of the collected information: it gets one bullet per page, which states the claim and the measured result and links the page inline.
     - The ideas section holds at most five bullets on what the reader might try or produce, and the continuation section at most two on what changed since the earlier topic.
     - Their bullets follow the rule for source bullets, one sentence of at most about 110 em, never nested, and the sections hold nothing but bullets.
     - `mise run lint` enforces the caps on the sources on notes dated 2026-10-17 or later, and all of these caps on notes dated 2026-10-18 or later and on `work/sections/`, together with the width of a note's topic headings (rule R4).

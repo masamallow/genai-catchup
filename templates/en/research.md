@@ -69,7 +69,7 @@ Also read: [Title](URL), [Title](URL).
 
 ### Notes
 
-- A contradiction between the sources above, an unverified claim, an open question or a check run in this run, one per bullet; at most ten bullets, citing only the sources above and background.
+- A contradiction between the sources above, an unverified claim, an open question or a check run in this run, one per bullet; at most ten bullets, citing only the sources above, background and an Also-read page whose independent measurement contradicts a claim above.
 
 ### Ideas for practice and output
 

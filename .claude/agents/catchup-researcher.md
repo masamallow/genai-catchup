@@ -42,6 +42,7 @@ For each topic:
 - Give a sub-heading to at most seven sources per topic, as AGENTS.md caps them: the primary and at most two more A pages, up to three B sources, up to two C sources, one per venue.
     - Each sub-heading names one page and its one URL; for a docs set, cite the page that holds the facts.
     - Pages you read beyond those go on the Also-read line, at most ten links, and supply no fact: when the topic needs a fact from one, give that page a sub-heading in place of a weaker source, or leave the fact out.
+    - The one exception is an independent measurement on such a page that contradicts a claim of your collected information, such as a third party's benchmark score against the vendor's: give it one notes bullet per page that states the claim and the measured result and links the page inline.
     - Background older than 30 days is cited inline in the notes section.
 - Extract the technical details: identifiers, stack, platform or service, pricing or limits when stated, specs or protocols.
 - Note what the reader could try or produce.
@@ -57,7 +58,7 @@ For each topic:
         - One fact or view per bullet, in one sentence of your own words, with numbers, names, identifiers and code exact; never nest a bullet, and keep each under about 110 em (about 200 Latin characters).
         - Keep what the report's three sections or the notes could use; leave out marketing lines, background the reader knows, details that change nothing a GenAI engineer builds or decides, and facts an earlier source already gave.
         - At most ten bullets for the primary source, four for any other A or B source, two for a C source and thirty for the topic: the reader opens the URL for the rest.
-    - `### Notes`: at most ten bullets on contradictions between the sources, unverified claims, open questions and checks you ran in this run, citing only the sources with a sub-heading and background.
+    - `### Notes`: at most ten bullets on contradictions between the sources, unverified claims, open questions and checks you ran in this run, citing only the sources with a sub-heading, background and the contradicting measurements described above.
     - `### Ideas for practice and output`: at most five bullets.
 - Never write the report's sections (key points, perspectives and debates, technical details).
 - Write in English.
