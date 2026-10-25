@@ -29,7 +29,8 @@ R5  Topic anchors (research/ directories only): every numbered "## N. ..." headi
     with <a id="topic-N"></a>, the anchor that slide and continuation links use and that
     GitHub and the site both honour.
 
-Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments.
+Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments;
+without a PATH, also what git ignores or a nested worktree holds (node_modules/, .claude/worktrees/).
 Usage: uv run scripts/lint_md.py [PATH ...]   (default: content, templates and the rule documents)
 """
 
@@ -37,6 +38,7 @@ from __future__ import annotations
 
 import functools
 import re
+import subprocess
 import sys
 import unicodedata
 from pathlib import Path
@@ -386,10 +388,19 @@ def lint_file(path: Path) -> list[str]:
     return problems
 
 
+def default_files() -> list[Path]:
+    """The Markdown files of DEFAULT_TARGETS that git tracks or would add, so none that it ignores and none of a nested worktree."""
+    listing = subprocess.run(
+        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", *DEFAULT_TARGETS],
+        cwd=ROOT, stdout=subprocess.PIPE, encoding="utf-8", check=True,
+    ).stdout
+    paths = {ROOT / name for name in listing.split("\0") if name.endswith(".md")}
+    return sorted(path for path in paths if path.is_file())  # the index keeps a deleted file until the deletion is staged
+
+
 def main(argv: list[str]) -> int:
-    targets = [ROOT / a for a in argv] if argv else [ROOT / t for t in DEFAULT_TARGETS]
-    files: list[Path] = []
-    for target in targets:
+    files = [] if argv else default_files()
+    for target in (ROOT / a for a in argv):
         if target.is_dir():
             files += sorted(target.rglob("*.md"))
         elif target.suffix == ".md":
