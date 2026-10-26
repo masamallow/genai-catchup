@@ -36,11 +36,18 @@ feed: the fetcher narrows the search to the window, asks for one page of hits an
 them into entries, with the story's URL as the link and the thread's points and
 comments in the summary. Every request is tried once more after a pause when it times
 out or gets a 429 or 5xx, the way hnrss.org and GitHub feeds fail intermittently.
+
+A source with `page` instead of `feed` is a Markdown or text page whose dated sections
+are the items, such as a changelog with no feed. Each section is offered once, keyed by
+its heading and a hash of its text, so an entry added under an existing date or an
+edited one comes back as new, and a section dated before the window is skipped like an
+old feed entry.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import re
@@ -79,6 +86,24 @@ TRACKING_PARAMS = {
 SEEN_TTL_DAYS = 180
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
+MD_LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+MD_INLINE_RE = re.compile(r"[`*]+")
+MD_MARKER_RE = re.compile(r"^\s*(?:[-+*]|\d+\.)\s+|^\s*>\s?|^\s*#+\s*", re.M)
+YEAR_RE = re.compile(r"\b(20\d{2})\b")
+ISO_DATE_RE = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
+MONTH_DAY_YEAR_RE = re.compile(r"\b([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})\b")
+DAY_MONTH_YEAR_RE = re.compile(r"\b(\d{1,2})\s+([A-Za-z]{3,9})\.?,?\s+(\d{4})\b")
+MONTH_DAY_RE = re.compile(r"\b([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b")
+MONTH_NUMBERS = {
+    name: number
+    for number, names in enumerate([
+        ("january", "jan"), ("february", "feb"), ("march", "mar"), ("april", "apr"), ("may",), ("june", "jun"),
+        ("july", "jul"), ("august", "aug"), ("september", "sep", "sept"), ("october", "oct"), ("november", "nov"),
+        ("december", "dec"),
+    ], 1)
+    for name in names
+}
 
 
 @dataclass
@@ -278,6 +303,82 @@ def hn_entries(result: dict) -> list[dict]:
     return entries
 
 
+def strip_markdown(text: str) -> str:
+    """Plain text of a Markdown fragment: link text without its URL, no emphasis or code marks, no list or quote markers."""
+    return strip_html(MD_MARKER_RE.sub(" ", MD_INLINE_RE.sub("", MD_LINK_RE.sub(r"\1", text))))
+
+
+def clip(text: str, limit: int) -> str:
+    """`text` cut at a word boundary within `limit` characters, with an ellipsis when something was cut."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0]
+    return (cut or text[:limit]).rstrip(" ,;:") + "…"
+
+
+def heading_date(text: str, year_hint: int | None, today: date) -> tuple[date | None, bool]:
+    """The date a heading names, if any, and whether the heading is nothing but that date.
+
+    A day without a year ("Oct 22") takes the year of the heading above it ("October, 2026"), else the current one.
+    """
+    for pattern, order in ((ISO_DATE_RE, "ymd"), (MONTH_DAY_YEAR_RE, "mdy"), (DAY_MONTH_YEAR_RE, "dmy"), (MONTH_DAY_RE, "md")):
+        m = pattern.search(text)
+        if not m:
+            continue
+        try:
+            if order == "ymd":
+                found = date(int(m[1]), int(m[2]), int(m[3]))
+            elif order == "mdy":
+                found = date(int(m[3]), MONTH_NUMBERS[m[1].lower()], int(m[2]))
+            elif order == "dmy":
+                found = date(int(m[3]), MONTH_NUMBERS[m[2].lower()], int(m[1]))
+            else:
+                year = year_hint or today.year
+                found = date(year, MONTH_NUMBERS[m[1].lower()], int(m[2]))
+                if year_hint is None and found > today + timedelta(days=1):
+                    found = found.replace(year=year - 1)
+        except (KeyError, ValueError):
+            continue
+        rest = text[: m.start()] + text[m.end():]
+        return found, re.search(r"[A-Za-z0-9]", rest) is None
+    return None, False
+
+
+def page_entries(text: str, base_url: str, today: date) -> list[dict]:
+    """Feed-like entries from the dated sections of a Markdown or text page, such as a changelog with no feed.
+
+    A section is the text under one heading up to the next; its date comes from the heading, its link is the page
+    (the text version, which the research agents can read) with a fragment made of the heading and a hash of the
+    text. Sections without a date count only when no section has one, and a heading with nothing under it, such
+    as a month that groups the days, is no entry.
+    """
+    sections: list[tuple[str, list[str]]] = []
+    for line in text.splitlines():
+        m = HEADING_RE.match(line)
+        if m:
+            sections.append((m[2], []))
+        elif sections:
+            sections[-1][1].append(line)
+    entries, year_hint = [], None
+    for heading, lines in sections:
+        if year := YEAR_RE.search(heading):
+            year_hint = int(year[1])
+        body = strip_markdown("\n".join(lines))
+        if not body:
+            continue
+        found, date_only = heading_date(heading, year_hint, today)
+        slug = re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-")[:60] or "section"
+        entries.append((found, {
+            "title": clip(body, 120) if date_only else strip_markdown(heading),
+            "link": f"{base_url}#{slug}-{hashlib.sha1(body.encode('utf-8')).hexdigest()[:8]}",
+            "published_parsed": local_midnight(found).utctimetuple() if found else None,
+            "summary": body[:320],
+        }))
+    if any(found for found, _ in entries):
+        entries = [(found, entry) for found, entry in entries if found]
+    return [entry for _, entry in entries]
+
+
 def fetch_entries(feed: str, client: httpx.Client, since: datetime) -> list:
     """The entries of a feed, or of a Hacker News search when `feed` is on hn.algolia.com."""
     if urlsplit(feed).netloc == HN_SEARCH_HOST:
@@ -290,7 +391,10 @@ def fetch_entries(feed: str, client: httpx.Client, since: datetime) -> list:
 
 def fetch_one(src: dict, client: httpx.Client, since: datetime, seen: dict):
     try:
-        entries = fetch_entries(src["feed"], client, since)
+        if src.get("page"):
+            entries = page_entries(get_with_retry(client, src["page"]).text, src["page"], date.today())
+        else:
+            entries = fetch_entries(src["feed"], client, since)
     except FeedError as exc:
         return src, [], str(exc)
     except Exception as exc:  # noqa: BLE001 - a failing source must not stop the run

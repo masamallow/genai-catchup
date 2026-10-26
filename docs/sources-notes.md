@@ -78,6 +78,8 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 - The Hacker News sources are searches on the HN Search API (`hn.algolia.com`, `search_by_date` with `tags=story` and `numericFilters=points>=100`), which the fetcher narrows to the window.
     - `hnrss.org`, a wrapper of the same API, answered 502 or timed out in 8 of the 12 scheduled runs of October 2026 and is no longer used.
     - Each search sets `typoTolerance=false`, since the index applies typo tolerance to three-letter words: `MCP` matched Map and MPs, and `LLM` matched unrelated URLs.
+- A `page` source keys each section by its heading and a hash of its text, so an entry added under an existing date inside the window, or an edited one, comes back as new, and one dated before the window is skipped like an old feed entry.
+    - A day without a year in its heading (`### Oct 22`) takes the year of the heading above it (`## October, 2026`).
 - The fetcher tries every request once more after 10 seconds when it times out or gets a 429 or 5xx, the way GitHub `releases.atom` feeds answer 504 at times.
     - A source that fails twice is listed under Failed sources in `work/candidates.md` and fetched again on the next run.
 - `https://github.com/anthropics/claude-code/releases.atom` answered 504 twice on 2026-09-18; the official changelog RSS is enough.

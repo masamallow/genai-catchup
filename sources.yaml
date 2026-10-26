@@ -9,6 +9,9 @@
 #   feed         the URL fetched: a feed, or a Hacker News search on hn.algolia.com (search_by_date with
 #                tags=story, a points filter and typoTolerance=false, since the index applies typos to short
 #                words: MCP matched Map); the fetcher narrows a search to the window and asks for 100 hits.
+#   page         instead of feed: a Markdown or text page whose dated sections are the items, such as a
+#                changelog with no feed; each section is offered once, keyed by its heading and its text,
+#                and the item links to the page (readable as text, unlike a rendered site) with that key as the fragment.
 #   tier         1 = must-follow / low noise, 2 = weekly skim, 3 = monthly or on demand
 #   kind         vendor | spec | analysis | media | aggregator
 #   lang         optional, default en: language of the source's content (ja, ...)
