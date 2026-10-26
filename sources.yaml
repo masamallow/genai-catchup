@@ -253,7 +253,8 @@ sources:
     track: both
     role: changelog
     filter:
-      any: [API, developer, agent, Codex, model, GPT, o-series, research, safety]
+      category: [Product, Engineering, Research, Publication, Security, Safety, Company, API]
+    note: Announcements carry one of these categories (API only on older posts), while customer stories are untagged or tagged Startup; 58 candidates in 13 runs with 4 cited before this filter (2026-10-27).
 
   - id: google-developers-blog
     name: Google Developers Blog
