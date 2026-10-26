@@ -28,6 +28,9 @@ R4  Note density (research/ notes dated 2026-10-17 or later, and work/sections/)
 R5  Topic anchors (research/ directories only): every numbered "## N. ..." heading ends
     with <a id="topic-N"></a>, the anchor that slide and continuation links use and that
     GitHub and the site both honour.
+R6  No alerts (research/, reports/ and sections/ directories, and templates/<lang>/): the
+    notes, the decks and their templates hold no GitHub alert ("> [!NOTE]" and the like);
+    alerts belong to the docs written for people, such as README.md and docs/.
 
 Skipped: YAML front matter, fenced code, tables, lines that are HTML tags or comments;
 without a PATH, also what git ignores or a nested worktree holds (node_modules/, .claude/worktrees/).
@@ -339,6 +342,20 @@ def lint_topic_anchors(path: Path, lines: list[str], start: int, kinds: list[str
     return problems
 
 
+def r6_applies(path: Path) -> bool:
+    """R6 covers what a run writes (notes, decks, section files) and the templates it writes them from."""
+    return path.parent.name in ("research", "reports", "sections") or path.parent.parent.name == "templates"
+
+
+def lint_alerts(path: Path, kinds: list[str | None]) -> list[str]:
+    """R6: no GitHub alert in a note, a deck or their templates; alerts belong to the docs written for people."""
+    return [
+        f"{path}:{i + 1}: R6 alert in a note, deck or template -> alerts belong to the docs written for people"
+        for i, k in enumerate(kinds)
+        if k == "alert"
+    ]
+
+
 def lint_file(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8").split("\n")
     problems: list[str] = []
@@ -385,6 +402,8 @@ def lint_file(path: Path) -> list[str]:
         problems += lint_note_density(path, lines, start, kinds, r4_covers_whole_topic(path))
     if path.parent.name == "research":
         problems += lint_topic_anchors(path, lines, start, kinds)
+    if r6_applies(path):
+        problems += lint_alerts(path, kinds)
     return problems
 
 

@@ -18,7 +18,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
    A run writes extra editions only when asked (`languages: en, ja`); see "Languages and editions" below.
 4. Writing rules (checked by `mise run lint`).
    GitHub Flavored Markdown with semantic line breaks: one sentence per line, break right after `.` or `。`.  
-   GitHub alerts (`> [!NOTE]` and the like) belong only to the docs written for people (`README.md`, `docs/`, `templates/README.md`); research notes, reports and their templates never use them.  
+   GitHub alerts (`> [!NOTE]` and the like) belong only to the docs written for people (`README.md`, `docs/`, `templates/README.md`); research notes, reports and their templates never use them (rule R6).  
    A bullet with several sentences keeps the first sentence on the item line and nests the rest one level as flat bullets; the sections of a research-note topic take one-sentence bullets only.  
    A prose line that continues on the next prose line ends with two spaces.
 5. Commit, do not push.
