@@ -31,8 +31,11 @@ failed run does not hide items from the next one.
 (scripts/fetch_page.py) and the topic sections the researchers write: nothing an
 earlier run fetched can then be cited as fetched in this one.
 
-Every request is tried once more after a pause when it times out or gets a 429 or
-5xx, the way hnrss.org and GitHub feeds fail intermittently.
+A `feed` on hn.algolia.com is a Hacker News search (the HN Search API) rather than a
+feed: the fetcher narrows the search to the window, asks for one page of hits and turns
+them into entries, with the story's URL as the link and the thread's points and
+comments in the summary. Every request is tried once more after a pause when it times
+out or gets a 429 or 5xx, the way hnrss.org and GitHub feeds fail intermittently.
 """
 
 from __future__ import annotations
@@ -48,7 +51,7 @@ from dataclasses import asdict, dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from time import sleep
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 
 import feedparser
 import httpx
@@ -64,6 +67,9 @@ NOTE_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 CRON_DAY_NAMES = {"sun": 0, "mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6}
 USER_AGENT = "genai-catchup/1.0 (personal feed reader)"
 ACCEPT = "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"
+HN_SEARCH_HOST = "hn.algolia.com"  # a `feed` on this host is a Hacker News search, not a feed
+HN_SEARCH_PAGE_SIZE = 100
+HN_ITEM_URL = "https://news.ycombinator.com/item?id={}"
 RETRY_STATUS = {429, 502, 503, 504}
 RETRY_PAUSE_SECONDS = 10
 TRACKING_PARAMS = {
@@ -216,6 +222,10 @@ def matches_filter(src: dict, title: str, summary: str) -> bool:
     return any(str(k).lower() in haystack for k in keywords)
 
 
+class FeedError(Exception):
+    """A response that is not a usable feed."""
+
+
 def get_with_retry(client: httpx.Client, url: str) -> httpx.Response:
     """GET `url`, trying once more after a pause when the first try times out or gets a status in RETRY_STATUS."""
     try:
@@ -231,16 +241,50 @@ def get_with_retry(client: httpx.Client, url: str) -> httpx.Response:
     return resp
 
 
+def hn_search_url(feed: str, since: datetime) -> str:
+    """The search of a Hacker News source, narrowed to the window and asking for one full page of hits."""
+    parts = urlsplit(feed)
+    params = dict(parse_qsl(parts.query, keep_blank_values=True))
+    filters = [f for f in params.get("numericFilters", "").split(",") if f]
+    params["numericFilters"] = ",".join(filters + [f"created_at_i>={int(since.timestamp())}"])
+    params.setdefault("hitsPerPage", str(HN_SEARCH_PAGE_SIZE))
+    return urlunsplit(parts._replace(query=urlencode(params, quote_via=quote)))
+
+
+def hn_entries(result: dict) -> list[dict]:
+    """Feed-like entries from the hits of a Hacker News search: the story's URL is the link, the thread goes in the summary."""
+    entries = []
+    for hit in result.get("hits", []):
+        thread = HN_ITEM_URL.format(hit["objectID"])
+        entries.append({
+            "title": hit.get("title") or "",
+            "link": hit.get("url") or thread,
+            "published_parsed": datetime.fromisoformat(hit["created_at"]).utctimetuple(),
+            "summary": f"{hit.get('points') or 0} points, {hit.get('num_comments') or 0} comments on Hacker News: {thread}",
+        })
+    return entries
+
+
+def fetch_entries(feed: str, client: httpx.Client, since: datetime) -> list:
+    """The entries of a feed, or of a Hacker News search when `feed` is on hn.algolia.com."""
+    if urlsplit(feed).netloc == HN_SEARCH_HOST:
+        return hn_entries(get_with_retry(client, hn_search_url(feed, since)).json())
+    parsed = feedparser.parse(get_with_retry(client, feed).content)
+    if parsed.bozo and not parsed.entries:
+        raise FeedError(f"unparsable feed: {str(getattr(parsed, 'bozo_exception', ''))[:140]}")
+    return parsed.entries
+
+
 def fetch_one(src: dict, client: httpx.Client, since: datetime, seen: dict):
     try:
-        parsed = feedparser.parse(get_with_retry(client, src["feed"]).content)
+        entries = fetch_entries(src["feed"], client, since)
+    except FeedError as exc:
+        return src, [], str(exc)
     except Exception as exc:  # noqa: BLE001 - a failing source must not stop the run
         return src, [], f"{type(exc).__name__}: {' '.join(str(exc).split())[:140]}"
-    if parsed.bozo and not parsed.entries:
-        return src, [], f"unparsable feed: {str(getattr(parsed, 'bozo_exception', ''))[:140]}"
 
     items: list[Item] = []
-    for entry in parsed.entries:
+    for entry in entries:
         link = (entry.get("link") or "").strip()
         if not link or normalize_url(link) in seen:
             continue

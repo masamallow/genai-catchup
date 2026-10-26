@@ -50,7 +50,7 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 | Feed | Narrowed by | Sources |
 | --- | --- | --- |
 | Category terms or the vendor's own product names describe what to keep | `filter.any` | `aws-whats-new`, `aws-jp-weekly-genai`, `openai-news`, `google-developers-blog`, `publickey` |
-| The site offers a search feed | A category term in the query (`LLM`) | `hatena-llm`, `hn-llm` |
+| The site offers a search feed or API | A category term in the query (`LLM`) | `hatena-llm`, `hn-llm` |
 | Posts name tools and techniques rather than categories, and the feed is small | Nothing; the run drops what is out of scope ([SKILL.md](../.claude/skills/genai-catchup-report/SKILL.md) step 3) | `zenn-trending` (20 items) |
 
 - Keywords are category terms or long-lived names: platforms and tools the scope names, major model vendors and their models, or a vendor's own products in its own feed.
@@ -63,7 +63,9 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 ## Operational caveats
 
 - Large feeds: learn.chatgpt.com changelog (about 1 MB), Latent Space (about 0.9 MB).
-- `hnrss.org` answers 502 intermittently; a failure there is expected noise.
+- The Hacker News sources are searches on the HN Search API (`hn.algolia.com`, `search_by_date` with `tags=story` and `numericFilters=points>=100`), which the fetcher narrows to the window.
+    - `hnrss.org`, a wrapper of the same API, answered 502 or timed out in 8 of the 12 scheduled runs of October 2026 and is no longer used.
+    - Each search sets `typoTolerance=false`, since the index applies typo tolerance to three-letter words: `MCP` matched Map and MPs, and `LLM` matched unrelated URLs.
 - The fetcher tries every request once more after 10 seconds when it times out or gets a 429 or 5xx, the way GitHub `releases.atom` feeds answer 504 at times.
     - A source that fails twice is listed under Failed sources in `work/candidates.md` and fetched again on the next run.
 - `https://github.com/anthropics/claude-code/releases.atom` answered 504 twice on 2026-09-18; the official changelog RSS is enough.

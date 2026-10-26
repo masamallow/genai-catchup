@@ -5,6 +5,9 @@
 #
 # Fields
 #   id           stable identifier, referenced from research notes (sources_used)
+#   feed         the URL fetched: a feed, or a Hacker News search on hn.algolia.com (search_by_date with
+#                tags=story, a points filter and typoTolerance=false, since the index applies typos to short
+#                words: MCP matched Map); the fetcher narrows a search to the window and asks for 100 hits.
 #   tier         1 = must-follow / low noise, 2 = weekly skim, 3 = monthly or on demand
 #   kind         vendor | spec | analysis | media | aggregator
 #   lang         optional, default en: language of the source's content (ja, ...)
@@ -324,19 +327,19 @@ sources:
   - id: hn-claude-code
     name: Hacker News (Claude Code, 100+ points)
     url: https://news.ycombinator.com/
-    feed: https://hnrss.org/newest?q=Claude+Code&points=100
+    feed: https://hn.algolia.com/api/v1/search_by_date?query=Claude%20Code&tags=story&numericFilters=points>=100&typoTolerance=false
     tier: 2
     kind: aggregator
     reliability: C
     track: coding-ai
     role: digest
     max_items: 10
-    note: hnrss returns 502 intermittently; a failure here is not a problem.
+    note: Queried through the HN Search API; hnrss.org, which wraps the same API, failed in 8 of the 12 scheduled runs of October 2026.
 
   - id: hn-mcp
     name: Hacker News (MCP, 100+ points)
     url: https://news.ycombinator.com/
-    feed: https://hnrss.org/newest?q=MCP&points=100
+    feed: https://hn.algolia.com/api/v1/search_by_date?query=MCP&tags=story&numericFilters=points>=100&typoTolerance=false
     tier: 2
     kind: aggregator
     reliability: C
@@ -434,7 +437,7 @@ sources:
   - id: hn-llm
     name: Hacker News (LLM, 100+ points)
     url: https://news.ycombinator.com/
-    feed: https://hnrss.org/newest?q=LLM&points=100
+    feed: https://hn.algolia.com/api/v1/search_by_date?query=LLM&tags=story&numericFilters=points>=100&typoTolerance=false
     tier: 2
     kind: aggregator
     reliability: C
