@@ -4,13 +4,15 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 
 ## No machine-readable feed
 
-- Anthropic News, Engineering and claude.com/blog have no official feed.
-  `sources.yaml` uses a community-generated feed (Olshansk/rss-feeds); verify on anthropic.com before citing.
+- Anthropic News, Engineering and claude.com (`/resources/articles`, where claude.com/blog redirects) have no official feed.
+  `sources.yaml` uses community-generated feeds (Olshansk/rss-feeds); verify on anthropic.com or claude.com before citing.
+- claude.dev, the Claude Code team's blog, has an official feed at `https://claude.dev/rss.xml` (`claude-dev-blog`, found 2026-10-27).
 - OpenAI API changelog: fetch `https://developers.openai.com/api/docs/changelog.md` and diff.
 - Gemini API changelog: fetch `https://ai.google.dev/gemini-api/docs/changelog.md.txt` and diff.
 - Thoughtworks Technology Radar: e-mail only; the insights feed is the whole blog (3 MB).
 - Benchmarks (SWE-bench, SWE-bench Pro, Terminal-Bench, Arena, Artificial Analysis, OpenRouter): no feeds, monthly manual look.
   METR has `https://metr.org/feed.xml`.
+    - Artificial Analysis still had no feed on 2026-10-27; its measurements are cited through web search, as five runs of October 2026 did.
 - The Batch and Every: e-mail only.
 
 ## Moved or renamed
@@ -31,6 +33,12 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 - news.smol.ai RSS lags; AINews now lives in the Latent Space section feed.
 - Weekly AI Agents News (SpeakerDeck): stopped 2025-03; successor is the `masamasa59/ai-agent-papers` repository.
 - Chip Huyen's blog: last post 2025-01.
+
+## Not added
+
+- Unite.AI and hyper.ai rewrite the primary source with AI, as three runs (Unite.AI) and one run (hyper.ai) of October 2026 found; cite the primary instead.
+- GIGAZINE posts about 45 items a day and its feed holds 30, under a day, so a 2–3 day window cannot be fetched.
+    - Its articles reach the runs through Hatena Bookmark.
 
 ## Momentum coverage
 
@@ -59,10 +67,11 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
     - A list of names cannot know the next new one, and routine runs do not edit `sources.yaml`, so an added name outlives its topic.
     - Fix the class of the miss instead: a category term that did not match, a missing source, or a feed that should not be filtered.
 - Keywords match as case-insensitive substrings of the title and the summary, so a short keyword such as `AI` also matches `available` or `email`.
+    - On an AI-only feed a bare `AI` keeps everything (ITmedia AI+: 19 of 20), so the Japanese media feeds share a list of scope terms instead (`&ja-media-scope`).
 
 ## Operational caveats
 
-- Large feeds: learn.chatgpt.com changelog (about 1 MB), Latent Space (about 0.9 MB).
+- Large feeds: learn.chatgpt.com changelog (about 1 MB), Latent Space (about 0.9 MB), gihyo.jp (about 0.5 MB, a year of entries).
 - The Hacker News sources are searches on the HN Search API (`hn.algolia.com`, `search_by_date` with `tags=story` and `numericFilters=points>=100`), which the fetcher narrows to the window.
     - `hnrss.org`, a wrapper of the same API, answered 502 or timed out in 8 of the 12 scheduled runs of October 2026 and is no longer used.
     - Each search sets `typoTolerance=false`, since the index applies typo tolerance to three-letter words: `MCP` matched Map and MPs, and `LLM` matched unrelated URLs.

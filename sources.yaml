@@ -1,6 +1,7 @@
 # Curated feed sources for the GenAI catch-up routine.
 #
-# Every feed listed here was fetched and confirmed to return XML/JSON on 2026-09-18
+# Every feed listed here was fetched and confirmed to return XML/JSON on 2026-09-18, or on
+# 2026-10-27 for the sources added in the first monthly review
 # (see docs/sources-notes.md for what died, moved, or has no feed).
 #
 # Fields
@@ -20,6 +21,7 @@
 #                major model vendors and their models, a vendor's own products in its own feed),
 #                never a product added to catch one missed item.
 #                For when a feed stays unfiltered, see docs/sources-notes.md ("Keyword filters").
+#                A list shared by several feeds is written once with a YAML anchor (&name) and reused as *name.
 #   max_items    optional per-source cap (default below)
 #   enabled      optional, default true. Tier 3 sources ship disabled; enable them one by one.
 
@@ -71,6 +73,28 @@ sources:
     track: both
     role: read
     note: Same caveat as anthropic-news.
+
+  - id: claude-blog
+    name: claude.com articles (community-generated feed)
+    url: https://claude.com/resources/articles
+    feed: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_claude.xml
+    tier: 1
+    kind: vendor
+    reliability: A
+    track: both
+    role: changelog
+    note: Same caveat as anthropic-news. Carries the product announcements anthropic.com/news skips (the OpenTelemetry export of 2026-10-14 was missed for that reason) and some engineering posts, which seen.json dedupes.
+
+  - id: claude-dev-blog
+    name: claude.dev blog (Claude Code team)
+    url: https://claude.dev/
+    feed: https://claude.dev/rss.xml
+    tier: 1
+    kind: vendor
+    reliability: A
+    track: coding-ai
+    role: read
+    note: Asked for in three runs; its code-review post of 2026-10-15 (233 Hacker News points) reached the run only through a manual search.
 
   - id: openai-chatgpt-codex-changelog
     name: OpenAI ChatGPT and Codex changelog
@@ -324,6 +348,31 @@ sources:
     track: genai-eng
     role: read
 
+  - id: the-new-stack-ai
+    name: The New Stack (AI category)
+    url: https://thenewstack.io/ai/
+    feed: https://thenewstack.io/ai/feed/
+    tier: 2
+    kind: media
+    reliability: B
+    track: both
+    role: read
+    max_items: 8
+    note: Proposed in 6 of the 12 runs up to 2026-10-24 as the most useful independent analysis. About 12 posts a week in this category; the run drops the infrastructure and GPU stories.
+
+  - id: the-decoder
+    name: The Decoder
+    url: https://the-decoder.com/
+    feed: https://the-decoder.com/feed/
+    tier: 2
+    kind: media
+    reliability: B
+    track: genai-eng
+    role: digest
+    filter:
+      any: [model, agent, benchmark, coding, open-source, open source, LLM]
+    note: Proposed in 5 runs for model releases few others covered. The feed holds 10 posts of about 5 a day, so the oldest day of a 3-day window is lost; the filter keeps the technical stories and drops industry news.
+
   - id: hn-claude-code
     name: Hacker News (Claude Code, 100+ points)
     url: https://news.ycombinator.com/
@@ -406,6 +455,36 @@ sources:
     track: coding-ai
     role: read
     max_items: 5
+
+  - id: gihyo
+    name: gihyo.jp
+    url: https://gihyo.jp/
+    feed: https://gihyo.jp/feed/atom
+    tier: 2
+    kind: media
+    lang: ja
+    reliability: B
+    track: both
+    role: digest
+    max_items: 8
+    filter:
+      any: &ja-media-scope [生成AI, LLM, 大規模言語モデル, エージェント, Claude, Codex, Copilot, Gemini, Cursor, OpenAI, Anthropic, Bedrock, MCP, GPT]
+    note: Large feed (about 0.5 MB, a year of entries). Proposed in 3 runs; reports tool releases in Japanese on the day.
+
+  - id: sbbit
+    name: ビジネス+IT (Business+IT)
+    url: https://www.sbbit.jp/
+    feed: https://www.sbbit.jp/rss/HotTopics.rss
+    tier: 2
+    kind: media
+    lang: ja
+    reliability: B
+    track: both
+    role: digest
+    max_items: 5
+    filter:
+      any: *ja-media-scope
+    note: Proposed in 4 runs for same-day Japanese coverage of vendor news. The comparison and analysis sections are members-only; cite what the open part states.
 
   # community momentum and practitioner write-ups (reliability C: evidence of discussion or supplement,
   # but a technical write-up they surface is the primary of its own topic, as AGENTS.md says)
@@ -553,13 +632,16 @@ sources:
     name: ITmedia AI+
     url: https://www.itmedia.co.jp/aiplus/
     feed: https://rss.itmedia.co.jp/rss/2.0/aiplus.xml
-    tier: 3
+    tier: 2
     kind: media
     lang: ja
     reliability: B
     track: both
     role: digest
-    enabled: false
+    max_items: 10
+    filter:
+      any: *ja-media-scope
+    note: Cited through web search in 5 of the 13 notes up to 2026-10-24 while disabled. About 6 posts a day and 20 in the feed; a bare AI keyword keeps all of them, so the filter uses scope terms.
 
   - id: zenn-claudecode
     name: Zenn topic claudecode
