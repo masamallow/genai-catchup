@@ -214,12 +214,25 @@ def load_seen() -> dict:
     return {}
 
 
-def matches_filter(src: dict, title: str, summary: str) -> bool:
-    keywords = (src.get("filter") or {}).get("any")
-    if not keywords:
-        return True
-    haystack = f"{title} {summary}".lower()
-    return any(str(k).lower() in haystack for k in keywords)
+def entry_categories(entry) -> list[str]:
+    """The categories a feed gives an entry (feedparser's tags), by term or label."""
+    return [str(t.get("term") or t.get("label") or "") for t in (entry.get("tags") or [])]
+
+
+def matches_filter(src: dict, title: str, summary: str, categories: list[str]) -> bool:
+    """`filter.any`: a keyword in the title or summary; `filter.category`: one of the entry's categories; both when both are set."""
+    flt = src.get("filter") or {}
+    keywords = flt.get("any")
+    if keywords:
+        haystack = f"{title} {summary}".lower()
+        if not any(str(k).lower() in haystack for k in keywords):
+            return False
+    wanted = flt.get("category")
+    if wanted:
+        have = {c.strip().lower() for c in categories}
+        if not any(str(c).strip().lower() in have for c in wanted):
+            return False
+    return True
 
 
 class FeedError(Exception):
@@ -293,7 +306,7 @@ def fetch_one(src: dict, client: httpx.Client, since: datetime, seen: dict):
         if published and published < since:
             continue
         summary = entry_summary(entry)
-        if not matches_filter(src, title, summary):
+        if not matches_filter(src, title, summary, entry_categories(entry)):
             continue
         items.append(Item(
             source_id=src["id"], title=title, link=link,

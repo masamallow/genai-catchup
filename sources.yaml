@@ -22,6 +22,9 @@
 #                never a product added to catch one missed item.
 #                For when a feed stays unfiltered, see docs/sources-notes.md ("Keyword filters").
 #                A list shared by several feeds is written once with a YAML anchor (&name) and reused as *name.
+#   filter.category
+#                optional category names (whole names, case-insensitive); an item must carry one of them as a
+#                feed category, so an untagged item is dropped. With filter.any, both must hold.
 #   max_items    optional per-source cap (default below)
 #   enabled      optional, default true. Tier 3 sources ship disabled; enable them one by one.
 

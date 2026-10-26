@@ -51,13 +51,14 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 
 ## Keyword filters
 
-- `filter.any` in [sources.yaml](../sources.yaml) keeps a feed to the scope in [AGENTS.md](../AGENTS.md); it does not find what is new.
+- `filter.any` and `filter.category` in [sources.yaml](../sources.yaml) keep a feed to the scope in [AGENTS.md](../AGENTS.md); they do not find what is new.
     - What is new and popular comes from the aggregators' own ranking (Zenn trending, Hatena Bookmark 30 users+, Hacker News 100 points+) and from the momentum check.
 - How a feed is narrowed depends on whether category terms or the vendor's own product names can describe what it should keep.
 
 | Feed | Narrowed by | Sources |
 | --- | --- | --- |
-| Category terms or the vendor's own product names describe what to keep | `filter.any` | `aws-whats-new`, `aws-jp-weekly-genai`, `openai-news`, `google-developers-blog`, `publickey` |
+| Category terms or the vendor's own product names describe what to keep | `filter.any` | `aws-whats-new`, `aws-jp-weekly-genai`, `google-developers-blog`, `publickey` |
+| The feed tags its items with categories, and the noise is untagged or tagged apart | `filter.category` | `openai-news` |
 | The site offers a search feed or API | A category term in the query (`LLM`) | `hatena-llm`, `hn-llm` |
 | Posts name tools and techniques rather than categories, and the feed is small | Nothing; the run drops what is out of scope ([SKILL.md](../.claude/skills/genai-catchup-report/SKILL.md) step 3) | `zenn-trending` (20 items) |
 
