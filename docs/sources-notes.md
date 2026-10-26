@@ -64,7 +64,8 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 
 - Large feeds: learn.chatgpt.com changelog (about 1 MB), Latent Space (about 0.9 MB).
 - `hnrss.org` answers 502 intermittently; a failure there is expected noise.
-- GitHub `releases.atom` feeds sometimes answer 504; retry on the next run.
+- The fetcher tries every request once more after 10 seconds when it times out or gets a 429 or 5xx, the way GitHub `releases.atom` feeds answer 504 at times.
+    - A source that fails twice is listed under Failed sources in `work/candidates.md` and fetched again on the next run.
 - `https://github.com/anthropics/claude-code/releases.atom` answered 504 twice on 2026-09-18; the official changelog RSS is enough.
 - Zenn topic feeds return the newest 20 items with no popularity signal; keep them disabled unless a downstream popularity filter exists.
 

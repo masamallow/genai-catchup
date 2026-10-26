@@ -30,6 +30,9 @@ failed run does not hide items from the next one.
 `fetch` starts a run, so it also empties work/pages/ and work/sections/, the page cache
 (scripts/fetch_page.py) and the topic sections the researchers write: nothing an
 earlier run fetched can then be cited as fetched in this one.
+
+Every request is tried once more after a pause when it times out or gets a 429 or
+5xx, the way hnrss.org and GitHub feeds fail intermittently.
 """
 
 from __future__ import annotations
@@ -44,6 +47,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
+from time import sleep
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import feedparser
@@ -60,6 +64,8 @@ NOTE_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 CRON_DAY_NAMES = {"sun": 0, "mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6}
 USER_AGENT = "genai-catchup/1.0 (personal feed reader)"
 ACCEPT = "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"
+RETRY_STATUS = {429, 502, 503, 504}
+RETRY_PAUSE_SECONDS = 10
 TRACKING_PARAMS = {
     "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "utm_id",
     "ref", "fbclid", "gclid", "mc_cid", "mc_eid",
@@ -210,11 +216,24 @@ def matches_filter(src: dict, title: str, summary: str) -> bool:
     return any(str(k).lower() in haystack for k in keywords)
 
 
+def get_with_retry(client: httpx.Client, url: str) -> httpx.Response:
+    """GET `url`, trying once more after a pause when the first try times out or gets a status in RETRY_STATUS."""
+    try:
+        resp = client.get(url)
+        if resp.status_code not in RETRY_STATUS:
+            resp.raise_for_status()
+            return resp
+    except httpx.TransportError:
+        pass
+    sleep(RETRY_PAUSE_SECONDS)
+    resp = client.get(url)
+    resp.raise_for_status()
+    return resp
+
+
 def fetch_one(src: dict, client: httpx.Client, since: datetime, seen: dict):
     try:
-        resp = client.get(src["feed"])
-        resp.raise_for_status()
-        parsed = feedparser.parse(resp.content)
+        parsed = feedparser.parse(get_with_retry(client, src["feed"]).content)
     except Exception as exc:  # noqa: BLE001 - a failing source must not stop the run
         return src, [], f"{type(exc).__name__}: {' '.join(str(exc).split())[:140]}"
     if parsed.bozo and not parsed.entries:
