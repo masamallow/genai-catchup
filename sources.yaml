@@ -128,7 +128,8 @@ sources:
     role: changelog
     max_items: 20
     filter:
-      any: [bedrock, agentcore, kiro, "amazon nova", "amazon q developer", sagemaker ai, strands, "model context protocol", agent]
+      any: [bedrock, agentcore, kiro, "amazon nova", "amazon q developer", sagemaker ai, strands, "model context protocol", "generative ai", "foundation model", agentic, "ai agent", "aws transform"]
+    note: A bare `agent` keyword matched Amazon Connect agents, the CloudWatch agent and SSM (9 of 100 items on 2026-10-27) and added nothing in scope, so category terms replaced it.
 
   - id: mcp-blog
     name: Model Context Protocol blog
@@ -311,12 +312,14 @@ sources:
     name: AWS Machine Learning Blog (Bedrock category)
     url: https://aws.amazon.com/blogs/machine-learning/category/artificial-intelligence/amazon-machine-learning/amazon-bedrock/
     feed: https://aws.amazon.com/blogs/machine-learning/category/artificial-intelligence/amazon-machine-learning/amazon-bedrock/feed/
-    tier: 2
+    tier: 3
     kind: vendor
     reliability: A
     track: genai-eng
     role: read
     max_items: 8
+    enabled: false
+    note: 59 candidates in the 13 runs up to 2026-10-24, 4 of them cited and none after 2026-10-08; the rest were customer and partner stories. Enable for one run to re-check.
 
   - id: armin-ronacher
     name: Armin Ronacher

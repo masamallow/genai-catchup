@@ -68,6 +68,8 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
     - Fix the class of the miss instead: a category term that did not match, a missing source, or a feed that should not be filtered.
 - Keywords match as case-insensitive substrings of the title and the summary, so a short keyword such as `AI` also matches `available` or `email`.
     - On an AI-only feed a bare `AI` keeps everything (ITmedia AI+: 19 of 20), so the Japanese media feeds share a list of scope terms instead (`&ja-media-scope`).
+- `openai-news` cannot be narrowed by `filter.any`, since its customer stories use the same words as its announcements.
+    - The feed tags announcements with a category (Product, Engineering, Research, Publication, Security, Safety, Company) and leaves customer stories untagged or tagged Startup, so a category filter in the fetcher would remove them.
 
 ## Operational caveats
 
