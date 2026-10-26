@@ -91,6 +91,17 @@ sources:
     role: changelog
     note: Same caveat as anthropic-news. Carries the product announcements anthropic.com/news skips (the OpenTelemetry export of 2026-10-14 was missed for that reason) and some engineering posts, which seen.json dedupes.
 
+  - id: openai-api-changelog
+    name: OpenAI API changelog
+    url: https://developers.openai.com/api/docs/changelog
+    page: https://developers.openai.com/api/docs/changelog.md
+    tier: 1
+    kind: vendor
+    reliability: A
+    track: genai-eng
+    role: changelog
+    note: No feed; the Markdown page's dated sections are the items (asked for in three runs of October 2026, which found the Decisions API beta and the Agents API here first).
+
   - id: claude-dev-blog
     name: claude.dev blog (Claude Code team)
     url: https://claude.dev/
@@ -270,6 +281,17 @@ sources:
     role: changelog
     filter:
       any: [Gemini, agent, ADK, A2A, AI]
+
+  - id: gemini-api-changelog
+    name: Gemini API changelog
+    url: https://ai.google.dev/gemini-api/docs/changelog
+    page: https://ai.google.dev/gemini-api/docs/changelog.md.txt
+    tier: 2
+    kind: vendor
+    reliability: A
+    track: genai-eng
+    role: changelog
+    note: No feed; the text page's dated sections are the items. One section per day holds several bullets, so a day that gains a bullet comes back as new.
 
   - id: deepmind-blog
     name: Google DeepMind blog

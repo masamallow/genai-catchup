@@ -7,8 +7,7 @@ What a naive feed list gets wrong as of 2026-09-18, and how to review sources.
 - Anthropic News, Engineering and claude.com (`/resources/articles`, where claude.com/blog redirects) have no official feed.
   `sources.yaml` uses community-generated feeds (Olshansk/rss-feeds); verify on anthropic.com or claude.com before citing.
 - claude.dev, the Claude Code team's blog, has an official feed at `https://claude.dev/rss.xml` (`claude-dev-blog`, found 2026-10-27).
-- OpenAI API changelog: fetch `https://developers.openai.com/api/docs/changelog.md` and diff.
-- Gemini API changelog: fetch `https://ai.google.dev/gemini-api/docs/changelog.md.txt` and diff.
+- OpenAI API changelog and Gemini API changelog: no feed, so `sources.yaml` lists their Markdown pages as `page` sources (`openai-api-changelog`, `gemini-api-changelog`) and the fetcher offers each dated section once.
 - Thoughtworks Technology Radar: e-mail only; the insights feed is the whole blog (3 MB).
 - Benchmarks (SWE-bench, SWE-bench Pro, Terminal-Bench, Arena, Artificial Analysis, OpenRouter): no feeds, monthly manual look.
   METR has `https://metr.org/feed.xml`.
