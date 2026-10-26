@@ -11,6 +11,10 @@ English (`content/en/`) is always written; other editions such as `content/ja/` 
 GitHub Actions turns the decks and notes into HTML and publishes them on GitHub Pages, one tree per language under `/<lang>/`.  
 Only Markdown is committed; the site is a build artifact.
 
+> [!CAUTION]
+> This repository and its site are public, and a push publishes the whole history.  
+> Never commit non-public information: employer, clients, colleagues, internal projects, credentials, personal data.
+
 ## Pipeline
 
 ```mermaid
@@ -127,6 +131,7 @@ Add `languages: en, ja` to the request for an extra edition in that language.
 - GitHub Flavored Markdown with semantic line breaks: one sentence per line, break right after `.` or `。`.
   Multi-sentence bullets keep the first sentence on the item line and nest the rest.  
   `mise run lint` enforces this.
+- GitHub alerts (`> [!NOTE]` and the like) appear only in the docs written for people (this README, `docs/`, `templates/README.md`) and never in the notes, the decks or their skeletons.
 - Every claim has a source that was actually opened during the run.
   Reliability grades: A primary, B reputable independent analysis, C community or opinion (supplement only).
 

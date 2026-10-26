@@ -12,10 +12,14 @@ Everything that depends on the language lives here; the rest of the repository i
 `content/en/` is always written; other editions are written when a run asks for them (`languages: en, ja`).  
 The build discovers `content/<lang>/` on its own and reads `templates/<lang>/site.yaml`; strings that are missing fall back to English.
 
+> [!IMPORTANT]
+> Every `research.md` keeps exactly four `###` headings, in this order: continuation, collected information, notes, ideas.  
+> The lint (rule R4) maps them to the sections of a topic by position, and reads the Also-read label from the template's Also-read line.
+
 ## Adding a language
 
 1. Copy `en/` to `<code>/` and translate the headings, labels and placeholders.
-   Keep the structure, the front-matter keys, the HTML classes and the `lang` directive, and keep the four `###` headings of a topic in `research.md` in their order: the lint learns each edition's section names and Also-read label from them (rule R4).
+   Keep the structure, the front-matter keys, the HTML classes and the `lang` directive.
 2. Fill in `site.yaml`.
 3. Ask for the edition with `languages: en, <code>`.
 

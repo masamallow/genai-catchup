@@ -21,8 +21,11 @@ Recommended settings:
 
 - Working folder: this repository.
 - Model: the default model of the session is fine; a stronger model improves the synthesis more than it costs.
-- Worktree isolation: off (the run must commit to the working copy).
 - Settings → Desktop app → General → **Keep computer awake** if 10:00 runs are often missed.
+
+> [!IMPORTANT]
+> Turn worktree isolation off: the run must commit to the working copy.  
+> With isolation on, its commits stay on the branch of a separate worktree, and `mise run publish` pushes only `main`.
 
 ## Prompt
 
