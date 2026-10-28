@@ -11,10 +11,6 @@ English (`content/en/`) is always written; other editions such as `content/ja/` 
 GitHub Actions turns the decks and notes into HTML and publishes them on GitHub Pages, one tree per language under `/<lang>/`.  
 Only Markdown is committed; the site is a build artifact.
 
-> [!CAUTION]
-> This repository and its site are public, and a push publishes the whole history.  
-> Never commit non-public information: employer, clients, colleagues, internal projects, credentials, personal data.
-
 ## Pipeline
 
 ```mermaid
