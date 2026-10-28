@@ -1,6 +1,7 @@
 # GenAI Catch-up
 
-A personal routine for staying current with generative AI: LLM application engineering and AI coding tools.
+A personal routine for staying current with generative AI: LLM application engineering and AI coding tools.  
+The reports and research notes are published at <https://masamallow.github.io/genai-catchup/>.
 
 On the days set in [schedule.yaml](./schedule.yaml), a scheduled Claude Code task fetches a curated set of feeds, keeps the topics worth catching up on for an engineer who leads generative-AI work (events and technical write-ups), deepens each one with several sources, and writes two files per language:
 
