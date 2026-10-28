@@ -1,5 +1,8 @@
 # GenAI Catch-up
 
+[![Deploy reports to GitHub Pages](https://github.com/masamallow/genai-catchup/actions/workflows/pages.yml/badge.svg)](https://github.com/masamallow/genai-catchup/actions/workflows/pages.yml)
+[![Last content update](https://img.shields.io/github/last-commit/masamallow/genai-catchup?path=content&label=content%20updated)](https://github.com/masamallow/genai-catchup/commits/main/content)
+
 A personal routine for staying current with generative AI: LLM application engineering and AI coding tools.  
 The reports and research notes are published at <https://masamallow.github.io/genai-catchup/>.
 
