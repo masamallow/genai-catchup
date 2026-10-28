@@ -122,15 +122,8 @@ Add `languages: en, ja` to the request for an extra edition in that language.
 
 ## 📝 Writing rules
 
-- Generated content is English by default.
-  Extra editions are written natively in their language from the same facts, never translated sentence by sentence (see AGENTS.md).  
-  Identifiers, code, comments and repository docs are English.
-- GitHub Flavored Markdown with semantic line breaks: one sentence per line, break right after `.` or `。`.
-  Multi-sentence bullets keep the first sentence on the item line and nest the rest.  
-  `mise run lint` enforces this.
-- GitHub alerts (`> [!NOTE]` and the like) appear only in the docs written for people (this README, `docs/`, `templates/README.md`) and never in the notes, the decks or their skeletons.
-- Every claim has a source that was actually opened during the run.
-  Reliability grades: A primary, B reputable independent analysis, C community or opinion (supplement only).
+The rules live in [AGENTS.md](./AGENTS.md); its Markdown writing rules also cover the docs written by hand, this README included.  
+`mise run lint` checks the measurable rules in `content/`, `templates/` and the rule documents.
 
 ## 📡 Sources
 
