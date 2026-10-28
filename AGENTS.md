@@ -28,7 +28,7 @@ Read this file first, then [.claude/skills/genai-catchup-report/SKILL.md](./.cla
 
 ## Scope
 
-- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, follows the field to know what changed and what it means for their team's decisions, and is asked about AI coding tools.
+- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, follows the field to know what changed and what it means for their team's decisions, and is asked about generative AI and AI coding tools, so they also need to know what the field is arguing about.
 - In scope: generative AI and LLMs.
     - Track `genai-eng`: building with LLMs — models and their pricing or availability, agents, RAG, evals, LLMOps, serving platforms (Bedrock, Vertex AI, Foundry), protocols (MCP, A2A, Agent Skills), and new model classes that change how LLM applications are built.
     - Track `coding-ai`: AI coding tools and workflows — Claude Code, Codex, Cursor, Copilot, Gemini CLI, Kiro.
@@ -86,7 +86,7 @@ Research note (`templates/<lang>/research.md`):
     - The ideas section holds at most five bullets on what the reader might try or produce, and the continuation section at most two on what changed since the earlier topic.
     - Their bullets follow the rule for source bullets, one sentence of at most about 110 em, never nested, and the sections hold nothing but bullets.
     - `mise run lint` enforces the caps on the sources on notes dated 2026-10-17 or later, and all of these caps on notes dated 2026-10-18 or later and on `work/sections/`, together with the width of a note's topic headings (rule R4).
-- Depth follows priority: a topic that will make the report gets its sources read, each sub-heading saying what that source adds; a dropped topic gets its feed items, its scores and a one-line reason.
+- Depth follows priority: a topic that will make the report gets its sources read, each sub-heading saying what that source adds; a dropped topic gets its feed items, its scores and a one-line reason that names the score that kept it out.
 - Dropped topics that came close get a heading each; the other dropped items go under two headings at the end, other one-off items and out of scope.
 - Notes written before 2026-10-18 stay as the record and are not a model for later notes: the ones before 2026-10-09 keep exhaustive, quote-heavy bullets for every source, the ones up to 2026-10-15 read about eighteen sources per topic with long, nested bullets, and the one of 2026-10-17 moved what its source caps cut into long, nested notes.
 
@@ -151,6 +151,7 @@ Report (`templates/<lang>/report.md`):
     - There is no upper limit, and a quiet window selects fewer topics, or none.
 - Notes written before 2026-10-08 score `importance` where later notes score `attention`; they stay as the record of that rubric.
 - Record the scored shortlist in the note's candidates-and-selection section: every selected topic with its anchor date and scores, and up to 5 notable dropped topics with their scores and a one-line reason, so the reader can overrule the selection next time.
+    - A reason opens with the score that kept the topic out and says what it lacks for that score, such as "impact 0: an analysis that changes nothing by itself" or "impact 1, attention 1: a change inside one ecosystem that one write-up covered"; it explains the score, not the reader's interest.
 - Every topic cites at least two sources including the primary one.
   For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.  
   Reliability grades follow `sources.yaml`: A primary, B reputable independent analysis, C community or opinion, used only as supplement.

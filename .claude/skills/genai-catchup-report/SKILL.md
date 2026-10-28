@@ -16,7 +16,7 @@ Follow [AGENTS.md](../../../AGENTS.md) for scope, languages, citations, section 
 - Languages: English is always written.
   When the request names extra languages (`languages: en, ja`), the same two files are also written under `content/<lang>/` from `templates/<lang>/`, following "Languages and editions" in AGENTS.md.
 - Scratch: `work/pages/`, the page cache through which every agent of the run reads web pages (`mise run page`), and `work/sections/`, the topic sections the researchers write; `mise run fetch` empties both.
-- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, follows the field to know what changed and what it means for their team's decisions, and is asked about AI coding tools.
+- Reader: an engineer in Japan who leads generative-AI engineering as a tech lead, follows the field to know what changed and what it means for their team's decisions, and is asked about generative AI and AI coding tools, so they also need to know what the field is arguing about.
   Headlines are not enough; each topic must carry technical substance.
 
 ## Agents
@@ -59,7 +59,7 @@ When the runtime cannot start these subagents, do their work yourself in the sam
         - Hatena Bookmark users: `curl -s 'https://bookmark.hatenaapis.com/count/entry?url=<url-encoded URL>'`.
         - Zenn likes: `liked_count` in `curl -s https://zenn.dev/api/articles/<slug>`.
     - Select as AGENTS.md says: every topic with a total of 4 or more, ranked by the total.
-    - Record the count of candidates, the selected topics with their anchor dates and scores, and up to 5 notable dropped topics with scores and a one-line reason each.
+    - Record the count of candidates, the selected topics with their anchor dates and scores, and up to 5 notable dropped topics with scores and a one-line reason each that opens with the score that kept it out.
 4. Deepen the selected topics with researchers.
     - Prime the page cache with the feed-item URLs of the selected topics: `mise run page -- <url> ...`.
       For a URL it reports as `failed` or `thin`, read the page with the browser tools when they are available and save its text with the Write tool as `work/pages/<name>.md`, under the header the fetcher writes, with `method: browser`.

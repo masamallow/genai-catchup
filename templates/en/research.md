@@ -28,8 +28,8 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
     1. Topic 1 heading (anchor MM-DD, impact 2 / potential 2 / attention 2).
     2. Topic 2 heading (anchor MM-DD, before the window, surfaced by `source-id`, 1 / 2 / 2).
 - Dropped (input for the next run's judgement):
-    3. Topic 3 heading (anchor MM-DD, 1 / 1 / 1) — why it falls short, in one sentence.
-    4. Topic 4 heading (anchor MM-DD, 1 / 2 / 0) — why it falls short, in one sentence.
+    3. Topic 3 heading (anchor MM-DD, 1 / 1 / 1) — the score that kept it out, then what it lacks, in one sentence.
+    4. Topic 4 heading (anchor MM-DD, 1 / 2 / 0) — the score that kept it out, then what it lacks, in one sentence.
     5. Other one-off items — listed below.
     6. Out of scope — listed below.
 
@@ -80,7 +80,7 @@ Also read: [Title](URL), [Title](URL).
 - Dropped / impact 1 / potential 1 / attention 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
 - Feed items in this topic:
     - `source-id` MM-DD [item title](URL)
-- Reason for dropping it: one sentence that says why it falls short, such as "a change for few teams that nobody outside the vendor has discussed yet".
+- Reason for dropping it: one sentence that opens with the score that kept the topic out and says what it lacks for that score, such as "impact 0: an analysis that changes nothing by itself" or "impact 1, attention 0: a change for few teams that nobody outside the vendor has discussed yet".
 
 ## 5. 📎 Other one-off items <a id="topic-5"></a>
 
