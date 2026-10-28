@@ -147,11 +147,15 @@ Report (`templates/<lang>/report.md`):
 - Vendor releases and practitioner write-ups are both valid topics.
   A single item from a reliability-B practitioner source is never dropped before one web search for further independent write-ups, which count toward its attention.
 - Select every topic whose scores add up to 4 or more, and rank the selected topics by that total; never pad.
+    - A topic with a total of 3 and attention 2 is also selected when it carries a claim about the field that the reader will be asked about: a measured or argued claim about the economics, capabilities or safety of models, or about how coding agents are used, typically in an analysis, a research piece, an incident or a hands-on.
+      The candidates-and-selection section states that claim in one sentence; a topic whose claim cannot be stated so, such as a popular tool, demo or setup write-up at that score, stays dropped.
     - Break ties by impact, then by attention, then by primary-source presence, then by the number of independent sources.
     - There is no upper limit, and a quiet window selects fewer topics, or none.
 - Notes written before 2026-10-08 score `importance` where later notes score `attention`; they stay as the record of that rubric.
+- Notes written before 2026-10-29 selected only at a total of 4 or more; a topic at 3 with attention 2 in their dropped lists was not weighed for its claim.
 - Record the scored shortlist in the note's candidates-and-selection section: every selected topic with its anchor date and scores, and up to 5 notable dropped topics with their scores and a one-line reason, so the reader can overrule the selection next time.
     - A reason opens with the score that kept the topic out and says what it lacks for that score, such as "impact 0: an analysis that changes nothing by itself" or "impact 1, attention 1: a change inside one ecosystem that one write-up covered"; it explains the score, not the reader's interest.
+    - A topic selected at a total of 3 carries the claim that selected it instead, in one sentence.
 - Every topic cites at least two sources including the primary one.
   For a technical write-up the write-up itself is the primary, and the second source can be the tool's own page, repository or paper.  
   Reliability grades follow `sources.yaml`: A primary, B reputable independent analysis, C community or opinion, used only as supplement.

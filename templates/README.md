@@ -48,7 +48,7 @@ The templates are the source of truth; this table lines them up.
 | Report: slide that gathers the thinner topics | Other topics | その他のトピック |
 | Report: back link in the header | ↑ Summary | ↑ 目次 |
 | Report: link to the topic in the note | Note | 調査ノート |
-| Labels | Selected, Dropped, Impact, Potential, Attention, Anchor, before the window, Kind, Areas, Background, unverified | 選定、見送り、影響度、将来性、注目度、起点、期間前の出来事、種別、領域、背景、未確認 |
+| Labels | Selected, Dropped, Impact, Potential, Attention, Anchor, before the window, Kind, Areas, Background, unverified, selected at 3 for its claim | 選定、見送り、影響度、将来性、注目度、起点、期間前の出来事、種別、領域、背景、未確認、合計 3 で選定した主張 |
 
 ## Tags on the summary cards
 

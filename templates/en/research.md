@@ -27,11 +27,12 @@ sources_used: [claude-code-changelog]   # ids from sources.yaml that contributed
 - Selected (go into the report):
     1. Topic 1 heading (anchor MM-DD, impact 2 / potential 2 / attention 2).
     2. Topic 2 heading (anchor MM-DD, before the window, surfaced by `source-id`, 1 / 2 / 2).
+    3. Topic 3 heading (anchor MM-DD, 0 / 1 / 2) — selected at 3 for its claim: the claim about the field that the reader will be asked about, in one sentence.
 - Dropped (input for the next run's judgement):
-    3. Topic 3 heading (anchor MM-DD, 1 / 1 / 1) — the score that kept it out, then what it lacks, in one sentence.
-    4. Topic 4 heading (anchor MM-DD, 1 / 2 / 0) — the score that kept it out, then what it lacks, in one sentence.
-    5. Other one-off items — listed below.
-    6. Out of scope — listed below.
+    4. Topic 4 heading (anchor MM-DD, 1 / 1 / 1) — the score that kept it out, then what it lacks, in one sentence.
+    5. Topic 5 heading (anchor MM-DD, 1 / 2 / 0) — the score that kept it out, then what it lacks, in one sentence.
+    6. Other one-off items — listed below.
+    7. Out of scope — listed below.
 
 ## 1. 🧭 Topic 1 heading <a id="topic-1"></a>
 
@@ -75,18 +76,18 @@ Also read: [Title](URL), [Title](URL).
 
 - What to try, at what scale, and what it would verify; at most five bullets.
 
-## 3. 🧪 Dropped topic heading <a id="topic-3"></a>
+## 4. 🧪 Dropped topic heading <a id="topic-4"></a>
 
 - Dropped / impact 1 / potential 1 / attention 1 / anchor MM-DD / kind: hands-on / areas: coding agents.
 - Feed items in this topic:
     - `source-id` MM-DD [item title](URL)
 - Reason for dropping it: one sentence that opens with the score that kept the topic out and says what it lacks for that score, such as "impact 0: an analysis that changes nothing by itself" or "impact 1, attention 0: a change for few teams that nobody outside the vendor has discussed yet".
 
-## 5. 📎 Other one-off items <a id="topic-5"></a>
+## 6. 📎 Other one-off items <a id="topic-6"></a>
 
 - Dropped / each scored on its own, none close to the threshold.
 - `source-id` MM-DD the item in a few words.
 
-## 6. 🚫 Out of scope <a id="topic-6"></a>
+## 7. 🚫 Out of scope <a id="topic-7"></a>
 
 - `source-id` MM-DD the item in a few words.

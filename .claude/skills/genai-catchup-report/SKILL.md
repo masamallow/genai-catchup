@@ -58,14 +58,14 @@ When the runtime cannot start these subagents, do their work yourself in the sam
         - Hacker News points are in the item's summary.
         - Hatena Bookmark users: `curl -s 'https://bookmark.hatenaapis.com/count/entry?url=<url-encoded URL>'`.
         - Zenn likes: `liked_count` in `curl -s https://zenn.dev/api/articles/<slug>`.
-    - Select as AGENTS.md says: every topic with a total of 4 or more, ranked by the total.
-    - Record the count of candidates, the selected topics with their anchor dates and scores, and up to 5 notable dropped topics with scores and a one-line reason each that opens with the score that kept it out.
+    - Select as AGENTS.md says: every topic with a total of 4 or more, and a topic at 3 with attention 2 when it carries a claim about the field that the reader will be asked about, ranked by the total.
+    - Record the count of candidates, the selected topics with their anchor dates and scores, the claim in one sentence for each topic selected at 3, and up to 5 notable dropped topics with scores and a one-line reason each that opens with the score that kept it out.
 4. Deepen the selected topics with researchers.
     - Prime the page cache with the feed-item URLs of the selected topics: `mise run page -- <url> ...`.
       For a URL it reports as `failed` or `thin`, read the page with the browser tools when they are available and save its text with the Write tool as `work/pages/<name>.md`, under the header the fetcher writes, with `method: browser`.
     - Group the topics so that each page is read by as few researchers as possible: topics announced at the same event or on the same page go to one researcher, or to two for a large event, and the other topics go one or two to a researcher.
     - Start one `catchup-researcher` per group, all in parallel.
-      Give each the run date, the window, the edition languages, and for each of its topics: a slug for the file name, the one-sentence title, the kind and areas, the scores with a one-line reason each, the feed items, and the earlier topic it continues as `[topic N of YYYY-MM-DD](./YYYY-MM-DD.md#topic-N)`, if any.  
+      Give each the run date, the window, the edition languages, and for each of its topics: a slug for the file name, the one-sentence title, the kind and areas, the scores with a one-line reason each, the claim for a topic selected at 3, the feed items, and the earlier topic it continues as `[topic N of YYYY-MM-DD](./YYYY-MM-DD.md#topic-N)`, if any.  
       The definition holds the research method: primary source first, one to three independent perspectives, grades from `sources.yaml`, citations only of pages opened in this run.
     - Work from their final messages.
       Re-score a topic when a message gives a reason, and re-rank.  
