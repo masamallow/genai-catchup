@@ -1,4 +1,4 @@
-# GenAI Catch-up 
+# GenAI Catch-up
 
 A personal routine for staying current with generative AI: LLM application engineering and AI coding tools.
 
@@ -11,7 +11,7 @@ English (`content/en/`) is always written; other editions such as `content/ja/` 
 GitHub Actions turns the decks and notes into HTML and publishes them on GitHub Pages, one tree per language under `/<lang>/`.  
 Only Markdown is committed; the site is a build artifact.
 
-## Pipeline
+## 🔄 Pipeline
 
 ```mermaid
 flowchart TB
@@ -56,7 +56,7 @@ Colours mark who writes or runs each node: green the human, blue scripts and the
     - Every page is read once into the page cache `work/pages/`, so all agents quote the same exact text.
 - The human reads the report, decides whether to publish (`git push`), and picks up the ideas in their own notes.
 
-## Layout
+## 📁 Layout
 
 ```text
 .
@@ -91,7 +91,7 @@ Colours mark who writes or runs each node: green the human, blue scripts and the
 └── .github/workflows/pages.yml
 ```
 
-## Setup
+## 🔧 Setup
 
 1. Tools: `mise trust` (once per checkout location), `mise install`, then `pnpm install`.
    `uv` installs the Python dependencies declared inline in each script on first run.
@@ -103,7 +103,7 @@ Colours mark who writes or runs each node: green the human, blue scripts and the
 5. First run: press **Run now**, watch for permission prompts, and choose "always allow" for each.
    `.claude/settings.json` already pre-approves the commands the skill uses.
 
-## Running by hand
+## 💻 Running by hand
 
 ```bash
 mise run fetch       # feeds published since the previous run -> work/candidates.md (`--since YYYY-MM-DD` or `--days N` to override)
@@ -119,7 +119,7 @@ mise run publish     # git push origin main -> GitHub Actions deploys
 To run the whole cycle interactively, open the folder in Claude Code and ask for "Make today's GenAI catch-up report"; the `genai-catchup-report` skill drives the run.  
 Add `languages: en, ja` to the request for an extra edition in that language.
 
-## Writing rules
+## 📝 Writing rules
 
 - Generated content is English by default.
   Extra editions are written natively in their language from the same facts, never translated sentence by sentence (see AGENTS.md).  
@@ -131,14 +131,14 @@ Add `languages: en, ja` to the request for an extra edition in that language.
 - Every claim has a source that was actually opened during the run.
   Reliability grades: A primary, B reputable independent analysis, C community or opinion (supplement only).
 
-## Sources
+## 📡 Sources
 
 `sources.yaml` is curated by hand.  
 Tier 1 and 2 are fetched on every run; tier 3 ships disabled and can be switched on per source.  
 Once a month run `mise run stats`: enabled sources that never get cited are demotion candidates, and sources that keep appearing in web research but are not listed are promotion candidates.  
 Known gaps (no feed, moved, dead) are tracked in [docs/sources-notes.md](./docs/sources-notes.md).
 
-## Design decisions
+## 🧭 Design decisions
 
 - No RSS reader app.
   The fetcher is the reader; it is deterministic, deduplicates, and caps volume so the agent starts from a bounded list.
